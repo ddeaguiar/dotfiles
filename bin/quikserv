@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby -w
+require 'webrick'
+include WEBrick
+Port = 2000 
+puts "Starting HTTP Server on port #{Port}\nDocument root: #{ARGV.first}\n\n"
+s = HTTPServer.new(:Port => Port, :DocumentRoot => ARGV.first)
+trap("INT"){ s.shutdown }
+s.start

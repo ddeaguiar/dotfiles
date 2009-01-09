@@ -1,0 +1,6 @@
+set show-author = yes
+set show-date = yes
+set show-rev-graph = yes
+set show-line-numbers = yes
+set line-number-interval = 5
+set tab-size = 2

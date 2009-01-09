@@ -1,0 +1,5 @@
+export PATH="/usr/share/ant/bin:$HOME/bin:/Applications/STk/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/opt/local/bin:/opt/local/lib/mysql5/bin/:$HOME/lib/glassfish/bin:/usr/local/lib/apache-maven-2.0.8/bin:$HOME/lib/ec2/bin:$PATH"
+# Setting PATH for MacPython 2.5
+# The orginal version is saved in .bash_login.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/Current/bin:${PATH}"
+export PATH

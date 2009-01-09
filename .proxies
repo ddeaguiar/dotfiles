@@ -1,0 +1,16 @@
+# This file exports the actual http_proxy and credentials
+# ex: christian:secret@proxy.example.org:8080
+
+if [ -f $HOME/.creds ]; then
+  source $HOME/.creds
+fi
+
+export http_proxy=http://$CREDS
+export HTTP_PROXY=$http_proxy
+export ftp_proxy=$http_proxy
+export FTP_PROXY=$ftp_proxy
+export RSYNC_PROXY=rsync://$CREDS
+
+# Update the aliases to use the proxy settings
+alias gi="sudo gem install -p $http_proxy"
+alias gu="sudo gem update -p $http_proxy"
