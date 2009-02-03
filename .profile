@@ -13,6 +13,7 @@ if [ -f $HOME/.bash_aliases_mac ]; then
     source $HOME/.bash_aliases_mac
 fi 
 
+source $HOME/.exports
 source $HOME/.path
 source $HOME/.bash_aliases
 source $HOME/.bash_completion/*
@@ -22,25 +23,9 @@ source $HOME/bin/vcs_prompt
 
 #source $HOME/.bashrc
 
-# Grep
-export GREP_OPTIONS='--color=auto' 
-export GREP_COLOR='6;35'
-
-# *NIX Editors
-export EDITOR="vi"
-export GIT_EDITOR="mate -w"
-export SVN_EDITOR="mate -w"
-
-# Evented Mongrel
-export EVENT=1
-
 # Bash History Control
-export HISTCONTROL=erasedups
-export HISTSIZE=5000
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-
-export LC_CTYPE=en_US.UTF-8
 
 
 # Misc Bash Functions
@@ -62,4 +47,11 @@ function git-doc-up() {
 	sudo tar xjv -C /usr/share/man -f git-manpages-$1.tar.bz2
 	rm git-manpages*bz2
 	echo "Be sure to run 'sudo periodic weekly'"
+}
+
+function sw-ec2() {
+	rm .ec2
+	ln -s $1 .ec2
+	source .profile
+	echo "ec2 link switched to $1"
 }
