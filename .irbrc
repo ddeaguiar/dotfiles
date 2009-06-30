@@ -1,11 +1,25 @@
-[
-  'rubygems',
-  'irb/completion',
-  'net/http',
-  'wirble',
-  'map_by_method',
-  'what_methods'
-].each {|lib| require lib}
+# The following gems are required: 
+# cldwalker-hirb, wirble, what_methods, map_by_method, irb-history
+[ 'pp', 'rubygems', 'wirble', 'hirb', 'irb/completion', 
+  'irb/ext/save-history', 'map_by_method', 
+  'what_methods'].each do |library|
+  begin
+    require library
+    case library
+    when 'hirb'
+      Hirb.enable 
+      self.extend(Hirb::Console)
+    when 'wirble'
+      if ENV['IRB_COLOR']
+        Wirble.init
+        Wirble.colorize
+      end  
+    end    
+  rescue
+    puts "Error loading #{library}"
+    next
+  end  
+end
 
 def log
   ActiveRecord::Base.clear_active_connections!
@@ -17,23 +31,6 @@ def mate *args
   `mate #{flattened_args}`
   nil
 end
-
-def pastie
-  url = URI.parse("http://pastie.caboo.se/pastes/create")
-  parameters = {}
-  IO.popen('pbpaste') do |clipboard|
-    parameters["paste[body]"] = clipboard.read
-  end
-  parameters["paste_parser"] = "ruby"
-  parameters["paste[authorization]"] = "burger"
-  pastie_url = Net::HTTP.post_form(url, parameters).body.match(/href="([^\"]+)"/)[1]
-  IO.popen('pbcopy', 'w+') do |clipboard|
-    clipboard.write(pastie_url)
-  end
-  pastie_url
-end
-
-alias :pst :pastie
 
 unless self.class.const_defined? "IRB_RC_HAS_LOADED"
   HISTFILE = "~/.irb.hist"
@@ -93,7 +90,7 @@ unless self.class.const_defined? "IRB_RC_HAS_LOADED"
         puts "History file '%s' was empty or non-existant." %
           histfile if $DEBUG || $VERBOSE
       end
-  
+
       Kernel::at_exit {
         lines = Readline::HISTORY.to_a.reverse.uniq.reverse
         lines = lines[ -MAXHISTSIZE, MAXHISTSIZE ] if lines.nitems > MAXHISTSIZE
@@ -172,14 +169,6 @@ unless self.class.const_defined? "IRB_RC_HAS_LOADED"
       to_eval.each {|l| Readline::HISTORY << l}
     end
   end
-  
-  false and begin # Colorize results
-    require 'rubygems'
-    require 'wirble'
-    Wirble.init
-    Wirble.colorize
-  rescue
-  end
 
   begin # Utility methods
     def pm(obj, *options) # Print methods
@@ -212,13 +201,7 @@ unless self.class.const_defined? "IRB_RC_HAS_LOADED"
       data.size
     end
   end
-  
-  ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
-  IRB_RC_HAS_LOADED = true
-end
 
-class String
-  def blank?
-    self.nil? || self.size.zero?
-  end
+  ARGV.concat [ "--readline" ]
+  IRB_RC_HAS_LOADED = true
 end
