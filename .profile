@@ -1,4 +1,8 @@
 # Include aliases, completion, prompt, and app-specific settings
+if [ -s ~/.rvm/scripts/rvm ] ; then 
+	source ~/.rvm/scripts/rvm ;
+fi
+
 if [ -f $HOME/.passwd ]; then
   source $HOME/.passwd
 fi
@@ -29,6 +33,14 @@ PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 
 # Misc Bash Functions
+function encrypt() {
+	openssl des3 -salt -in "$1" -out "$2"
+}
+
+function decrypt() {
+	openssl des3 -d -salt -in "$1" -out "$2"
+}
+
 function clip() {
   cat $1 | pbcopy
 }
