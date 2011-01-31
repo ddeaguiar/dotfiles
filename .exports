@@ -5,7 +5,7 @@ export GREP_COLOR='6;35'
 export IRB_COLOR=true
 # *NIX Editors
 export EDITOR="vim"
-export GIT_EDITOR="vim"
+export GIT_EDITOR="mate -w"
 #export SVN_EDITOR="mate -w"
 
 # Evented Mongrel
