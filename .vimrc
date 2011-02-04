@@ -1,5 +1,8 @@
 let mapleader = "\<SPACE>"
+call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+
+nnoremap ; :
 
 set nocompatible                  " Must come first because it changes other options.
 set t_Co=256
@@ -62,6 +65,57 @@ map <leader>tp :tabprevious<cr>
 map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
+
+" Taglist
+"nmap <silent> <leader>, :TlistToggle<CR>
+"nmap <leader>. :tag 
+
+" cscope
+if has("cscope")
+  set cscopetag
+  set csto=0
+
+  if filereadable("cscope.out")
+    cs reset
+    cs add cscope.out  
+  endif
+  
+  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+endif
+
+
+" Map Git
+"nmap <leader>gt :Gist
+"nmap <leader>gp :Gist -p
+nmap <leader>gi :Git 
+nmap <leader>gl :Glog<CR>
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>gb :Gblame<CR>
+nmap <leader>gc :Gcommit<CR>
+nmap <leader>gs :Gstatus<CR>
+
+" Fix searches
+nnoremap / /\v
+vnoremap / /\v
+
+" Misc Mappings
+nnoremap <leader><space> :noh<cr>
+"nnoremap <leader>a :Ack 
+nnoremap <leader>b :buffers<CR>
+"nnoremap <leader>pt :!phake test<CR>
+nnoremap <silent> <leader>rn :set relativenumber<CR>
+cmap w!! w !sudo tee % >/dev/null
+
+
+
+
 
 " Uncomment to use Jamis Buck's file opening plugin
 "map <Leader>t :FuzzyFinderTextMate<Enter>
