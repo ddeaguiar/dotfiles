@@ -25,14 +25,44 @@ source $HOME/.javarc
 source $HOME/.oraclerc
 source $HOME/bin/vcs_prompt
 
-#source $HOME/.bashrc
-
 # Bash History Control
 shopt -s histappend
 PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-
 # Misc Bash Functions
+
+function parse_git_branch() {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+function proml {
+	local        BLUE="\[\033[0;34m\]"
+	local         RED="\[\033[0;31m\]"
+	local   LIGHT_RED="\[\033[1;31m\]"
+	local       GREEN="\[\033[0;32m\]"
+	local LIGHT_GREEN="\[\033[1;32m\]"
+	local       WHITE="\[\033[1;37m\]"
+	local  LIGHT_GRAY="\[\033[0;37m\]"
+	local      YELLOW="\[\033[0;33m\]"
+	local  LIGHT_BLUE="\[\033[0;36m\]"
+	case $TERM in
+		xterm*)
+		#TITLEBAR='\[\033]0;\u@\h:\w\007\]'
+		TITLEBAR=''
+		;;
+		*)
+		TITLEBAR=""
+		;;
+	esac
+
+PS1="${TITLEBAR}\
+$LIGHT_BLUE\w $RED\$(parse_git_branch)\
+$GREEN > $YELLOW"
+PS2='> '
+PS4='+ '
+}
+
+
 function encrypt() {
 	openssl des3 -salt -in "$1" -out "$2"
 }
@@ -67,3 +97,14 @@ function sw-ec2() {
 	source .profile
 	echo "ec2 link switched to $1"
 }
+
+# Set prompt
+proml
+
+# -- start rip config -- #
+RIPDIR=/Users/ddeaguiar/.rip
+RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
+PATH="$PATH:$RIPDIR/active/bin"
+export RIPDIR RUBYLIB PATH
+# -- end rip config -- #
+if [[ -s /Users/ddeaguiar/.rvm/scripts/rvm ]] ; then source /Users/ddeaguiar/.rvm/scripts/rvm ; fi
