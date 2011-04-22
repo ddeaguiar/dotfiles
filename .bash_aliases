@@ -41,3 +41,6 @@ alias dcc="drush cc all -y"
 alias drush='drush -v -r ~/src/ncl/drupal -l http://local.ncl.com:8888'
 alias mdb="mongod run --config /usr/local/Cellar/mongodb/1.6.2-x86_64/mongod.conf"
 alias untar="tar xvzf"
+
+alias pa="git apply patches/*"
+alias rpa="git apply -R patches/*"
