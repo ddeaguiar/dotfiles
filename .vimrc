@@ -1,14 +1,28 @@
 let mapleader = "\<SPACE>"
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
 
 nnoremap ; :
 
 set nocompatible                  " Must come first because it changes other options.
-"set t_Co=256                     "commenting out since using solarized.
-syntax enable                     " Turn on syntax highlighting.
+
+filetype off                      " Required by vundle
+set rtp+=~/.vim/vundle.git/ 
+call vundle#rc()
+
+"Bundles
+Bundle 'tpope/vim-fugitive'
+Bundle 'wincent/Command-T'
+Bundle 'pangloss/vim-simplefold'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-surround'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'LustyExplorer'
+Bundle 'LustyJuggler'
+Bundle 'matchit.zip'
+
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
+syntax enable                     " Turn on syntax highlighting.
 
 
 runtime macros/matchit.vim        " Load the matchit plugin.
