@@ -16,9 +16,12 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'pangloss/vim-javascript'
 Bundle 'LustyExplorer'
 Bundle 'LustyJuggler'
 Bundle 'matchit.zip'
+Bundle 'open-browser.vim'
 
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
@@ -55,6 +58,7 @@ set visualbell                    " No beeping.
 
 set nobackup                      " Don't make a backup before overwriting a file.
 set nowritebackup                 " And again.
+set noswapfile                    " no swap files
 set directory=$HOME/.vim/tmp//,.  " Keep swap files in one location
 
 " UNCOMMENT TO USE
