@@ -245,9 +245,8 @@ nnoremap <leader>b :buffers<CR>
 nnoremap <silent> <leader>rn :set relativenumber<CR>
 cmap w!! w !sudo tee % >/dev/null
 
-
-
-
+autocmd FileType php set keywordprg=phpman
+nmap <leader>k :OpenBrowser <C-R>=expand("http://api.drupal.org/api/function/<cword>/6")<CR><CR>
 
 " Uncomment to use Jamis Buck's file opening plugin
 "map <Leader>t :FuzzyFinderTextMate<Enter>
