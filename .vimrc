@@ -88,6 +88,10 @@ map <leader>tm :tabmove
 "nmap <silent> <leader>, :TlistToggle<CR>
 "nmap <leader>. :tag 
 
+"split screen mappings
+map <leader>- :split<cr>
+map <leader>\ :vsplit<cr>
+
 " cscope
 if has("cscope")
   """"""""""""" Standard cscope/vim boilerplate
@@ -247,6 +251,19 @@ cmap w!! w !sudo tee % >/dev/null
 
 autocmd FileType php set keywordprg=phpman
 nmap <leader>k :OpenBrowser <C-R>=expand("http://api.drupal.org/api/function/<cword>/6")<CR><CR>
+
+if has('autocmd')
+  autocmd filetype python set expandtab
+  autocmd BufRead,BufNewFile *.scss set filetype=scss
+  autocmd FileType mail nmap <leader>A :w<CR>:!aspell -e -c %<CR>:e<CR>
+ 
+  augroup module
+    autocmd BufRead,BufNewFile *.install set filetype=php
+    autocmd BufRead,BufNewFile *.module set filetype=php
+    autocmd BufRead,BufNewFile *.inc set filetype=php
+  augroup END
+endif
+
 
 " Uncomment to use Jamis Buck's file opening plugin
 "map <Leader>t :FuzzyFinderTextMate<Enter>
