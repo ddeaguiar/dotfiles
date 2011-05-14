@@ -255,10 +255,14 @@ autocmd FileType php set keywordprg=phpman
 nmap <leader>k :OpenBrowser <C-R>=expand("http://api.drupal.org/api/function/<cword>/6")<CR><CR>
 
 if has('autocmd')
-  autocmd filetype python set expandtab
+  autocmd FileType python set expandtab
   autocmd BufRead,BufNewFile *.scss set filetype=scss
   autocmd FileType mail nmap <leader>A :w<CR>:!aspell -e -c %<CR>:e<CR>
- 
+  "dash rocket
+  autocmd FileType php,coffee imap <C-d> ->
+  "hash rocket
+  autocmd FileType php,coffee imap <C-f> =>
+
   augroup module
     autocmd BufRead,BufNewFile *.install set filetype=php
     autocmd BufRead,BufNewFile *.module set filetype=php
