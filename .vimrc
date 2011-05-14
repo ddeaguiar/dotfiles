@@ -18,10 +18,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'kchmck/vim-coffee-script'
 Bundle 'LustyExplorer'
 Bundle 'LustyJuggler'
 Bundle 'matchit.zip'
 Bundle 'open-browser.vim'
+Bundle 'The-NERD-Commenter'
 
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
