@@ -255,7 +255,7 @@ autocmd FileType php set keywordprg=phpman
 nmap <leader>k :OpenBrowser <C-R>=expand("http://api.drupal.org/api/function/<cword>/6")<CR><CR>
 
 if has('autocmd')
-  autocmd FileType python set expandtab
+  autocmd FileType python,coffee set expandtab
   autocmd BufRead,BufNewFile *.scss set filetype=scss
   autocmd FileType mail nmap <leader>A :w<CR>:!aspell -e -c %<CR>:e<CR>
   "dash rocket
