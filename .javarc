@@ -3,4 +3,4 @@ export JAVA_HOME=/Library/Java/Home
 export JUNIT_HOME=/usr/share/junit
 export ANT_OPTS="-Xms512M -Xmx512M -XX:+UseParallelGC"
 export JRE_HOME=$JAVA_HOME
-export CATALINA_HOME=$HOME/j2ee_containers/apache-tomcat-5.5.33
+export CATALINA_HOME=$HOME/j2ee_containers/apache-tomcat-6.0.32
