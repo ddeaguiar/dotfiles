@@ -15,10 +15,8 @@ export HISTSIZE=5000
 
 export LC_CTYPE=en_US.UTF-8
 export HOSTFILE='/etc/hosts'
-#export LD_LIBRARY_PATH=$ORACLE_HOME
-export ORACLE_HOME='/usr/local/Cellar/instantclient'
 export RC_ARCHS=x86_64
-export CDPATH=.:$HOME:$HOME/code/work/ncl:$HOME/ncl/code/svn:$HOME/ncl/code/svn/drupal/sites/all/themes:$HOME/ncl/code/svn/drupal/sites/all/modules
+export CDPATH=.:$HOME:$HOME/src/ncl:$HOME/src/ncl/drupal/sites/all/themes:$HOME/src/ncl/drupal/sites/all/modules
 export TM_DRUPAL_VERSION="6"
 export TM_DRUPAL_API="http://drupalcontrib.org"
 export NODE_PATH="/usr/local/lib/node"

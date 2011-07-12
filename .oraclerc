@@ -1,3 +1,8 @@
-export DYLD_LIBRARY_PATH=/usr/local/Cellar/instantclient/10.2
-export NLS_LANG="AMERICAN_AMERICA.UTF8"
-export PATH=$PATH:$DYLD_LIBRARY_PATH
+export ORACLE_HOME=/opt/local/oracle/instantclient_10_2
+export DYLD_LIBRARY_PATH=$ORACLE_HOME:$DYLD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$ORACLE_HOME
+export SQLPATH=$ORACLE_HOME
+export TNS_ADMIN=/opt/local/oracle/network/admin
+export NLS_LANG=AMERICAN_AMERICA.UTF8
+export PATH=$PATH:$DYLD_LIBRARY_PATH:$SQLPATH
+export RC_ARCHS=x86_64
