@@ -15,22 +15,31 @@ Bundle 'pangloss/vim-simplefold'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'godlygeek/tabular'
 Bundle 'LustyExplorer'
 Bundle 'LustyJuggler'
 Bundle 'matchit.zip'
 Bundle 'open-browser.vim'
 Bundle 'The-NERD-Commenter'
+Bundle 'ack.vim'
 
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
 syntax enable                     " Turn on syntax highlighting.
 
-
 runtime macros/matchit.vim        " Load the matchit plugin.
+
+nmap <silent> <leader>ev :e $MYVIMRC<CR>
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
 
 set showcmd                       " Display incomplete commands.
 set showmode                      " Display the mode you're in.
@@ -41,7 +50,7 @@ set hidden                        " Handle multiple buffers better.
 
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
-
+set wildignore=*.swp,*.bak,*.orig,*.jpg,*.gif,*.png,*.swf,*.fla,*.o,.git,.svn,files/**,sites/default/files/**,backup/modules/**,no-deploy/**,sites/all/modules/ncl_endeca/docs/**,sites/all/themes/norway/html_mockups/**
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
 
@@ -270,16 +279,19 @@ if has('autocmd')
   augroup END
 endif
 
+if exists(":Tabularize")
+  nmap <Leader>a= :Tabularize /=<CR>
+  vmap <Leader>a= :Tabularize /=<CR>
+  nmap <Leader>a: :Tabularize /:\zs<CR>
+  vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
-" Uncomment to use Jamis Buck's file opening plugin
-"map <Leader>t :FuzzyFinderTextMate<Enter>
-
-" Controversial...swap colon and semicolon for easier commands
-"nnoremap ; :
-"nnoremap : ;
-
-"vnoremap ; :
-"vnoremap : ;
+" Bubble single lines
+"nnoremap <C-Up> [e
+"nnoremap <C-Down> ]e
+"" Bubble multiple lines
+"vnoremap <C-Up> [egv
+"vnoremap <C-Down> ]egv
 
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
