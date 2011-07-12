@@ -32,6 +32,7 @@ alias scum='export RAILS_ENV=cucumber && script/cucumber'
 alias ass="export RAILS_ENV=test && script/autospec"
 alias at="export RAILS_ENV=test && rake"
 alias croute="sudo route -n add -net 10.5.0.0/16 -interface ppp0"
+alias nroute="sudo route -n add -net 192.168.200 -interface ppp0"
 alias cf='compass compile -q --force && compass watch -q'
 alias cw='compass watch -q'
 alias scrum="git log --oneline --author="ddeaguiar" HEAD@{yesterday}..HEAD"
