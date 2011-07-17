@@ -1,5 +1,7 @@
 let mapleader = "\<SPACE>"
 
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
+
 nnoremap ; :
 
 set nocompatible                  " Must come first because it changes other options.
@@ -27,6 +29,8 @@ Bundle 'matchit.zip'
 Bundle 'open-browser.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'ack.vim'
+Bundle 'VimClojure'
+Bundle 'taglist.vim'
 
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
@@ -96,8 +100,8 @@ map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
 " Taglist
-"nmap <silent> <leader>, :TlistToggle<CR>
-"nmap <leader>. :tag 
+nmap <silent> <leader>, :TlistToggle<CR>
+nmap <leader>. :tag 
 
 "split screen mappings
 map <leader>- :split<cr>
@@ -286,6 +290,13 @@ if exists(":Tabularize")
   vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
 
+let Tlist_Exit_OnlyWindow = 1
+
+let tlist_clojure_settings = 'lisp;f:function'
+let vimclojure#WantNailgun = 1
+let vimclojure#NailgunClient = '/usr/local/bin/ng'
+let vimclojure#HighlightBuiltins = 1 
+let vimclojure#ParenRainbow=1
 " Bubble single lines
 "nnoremap <C-Up> [e
 "nnoremap <C-Down> ]e
