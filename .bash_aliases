@@ -45,3 +45,6 @@ alias untar="tar xvzf"
 
 alias pa="git apply patches/*"
 alias rpa="git apply -R patches/*"
+
+alias pdstart="sudo pound -v -f /usr/local/etc/pound.cfg"
+alias pdstop="sudo killall -HUP pound"
