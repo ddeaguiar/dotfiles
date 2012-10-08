@@ -1,3 +1,6 @@
+behave xterm
+
+
 let mapleader = "\<SPACE>"
 
 let Tlist_Ctags_Cmd="/usr/local/bin/ctags"
@@ -85,6 +88,8 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P%{fugitive#statusline()}
 
+set t_Co=16
+let g:solarized_italic=0
 set background=dark
 colorscheme solarized 
 
@@ -293,8 +298,6 @@ endif
 let Tlist_Exit_OnlyWindow = 1
 
 let tlist_clojure_settings = 'lisp;f:function'
-let vimclojure#WantNailgun = 1
-let vimclojure#NailgunClient = '/usr/local/bin/ng'
 let vimclojure#HighlightBuiltins = 1 
 let vimclojure#ParenRainbow=1
 " Bubble single lines
