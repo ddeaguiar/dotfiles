@@ -49,3 +49,11 @@ alias rpa="git apply -R patches/*"
 
 alias pdstart="sudo pound -v -f /usr/local/etc/pound.cfg"
 alias pdstop="sudo killall -HUP pound"
+alias guard="nocorrect guard"
+alias redis-s="redis-server /usr/local/etc/redis.conf"
+alias datomic-free="~/.datomic-free/bin/datomic-free"
+
+alias es='emacs --daemon'
+alias em='emacsclient -c'
+alias ek='emacsclient -e "(kill-emacs)"'
+alias edc="es && em"
