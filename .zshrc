@@ -33,7 +33,10 @@ export HISTIGNORE="&:exit:reset:clear"
 export HISTSIZE=25000
 export HISTFILE=~/.zsh_history
 export SAVEHIST=10000
-
+# Allow emacsclient to fire up an emacs daemon if
+# one is not already running.
+export ALTERNATE_EDITOR=""
+export BUKKIT_PLUGINS_DIR="/Users/ddeaguiar/bukkit/plugins"
 # Load the theme
 source "$ZSH/themes/$ZSH_THEME.zsh-theme"
 
@@ -43,11 +46,11 @@ setopt extended_history
 setopt inc_append_history
 setopt hist_expire_dups_first
 setopt hist_ignore_space
-setopt hist_ignore_dups 
+setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 setopt hist_verify
-setopt share_history 
+setopt share_history
 setopt rm_star_wait
 setopt auto_pushd
 setopt pushd_ignore_dups
@@ -71,7 +74,7 @@ source $HOME/.path
 source $HOME/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
 
 # Ruby Version Manager
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm 
+[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
