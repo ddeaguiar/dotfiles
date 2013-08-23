@@ -57,3 +57,5 @@ alias es='emacs --daemon'
 alias em='emacsclient -c'
 alias ek='emacsclient -e "(kill-emacs)"'
 alias edc="es && em"
+
+alias tx="tmuxinator"
