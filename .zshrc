@@ -73,10 +73,5 @@ source $HOME/.path
 # Additional completions
 source $HOME/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
 
-# Ruby Version Manager
-[[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"

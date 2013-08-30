@@ -107,4 +107,3 @@ RUBYLIB="$RUBYLIB:$RIPDIR/active/lib"
 PATH="$PATH:$RIPDIR/active/bin"
 export RIPDIR RUBYLIB PATH
 # -- end rip config -- #
-if [[ -s /Users/ddeaguiar/.rvm/scripts/rvm ]] ; then source /Users/ddeaguiar/.rvm/scripts/rvm ; fi

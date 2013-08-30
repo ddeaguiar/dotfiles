@@ -3,7 +3,7 @@
 	url = http://github.com/gmarik/vundle.git
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
+	url = git@github.com:robbyrussell/oh-my-zsh.git
 [submodule ".emacs.d"]
 	path = .emacs.d
 	url = git@github.com:ddeaguiar/emacs-starter-kit.git
