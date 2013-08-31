@@ -16,7 +16,7 @@ autoload -U compinit
 compinit -i
 
 # Exports
-export ZSH_THEME="bira"
+export ZSH_THEME="ys"
 export CASE_SENSITIVE="true"
 export DISABLE_AUTO_UPDATE="false"
 export RUBYOPT="rubygems"
