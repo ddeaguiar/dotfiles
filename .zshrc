@@ -75,3 +75,6 @@ source $HOME/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### rbenv support
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
