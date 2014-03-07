@@ -8,4 +8,6 @@ export JRE_HOME=$JAVA_HOME
 export CATALINA_HOME=$HOME/j2ee_containers/apache-tomcat-6.0.32
 
 export CLOJURESCRIPT_HOME=$HOME/src/clojurescript
-export NXJ_HOME=/usr/local/leJOS
+
+export LEJOS_HOME=$HOME/src/lejos_2_1_0
+export NXJ_HOME=$LEJOS_HOME
