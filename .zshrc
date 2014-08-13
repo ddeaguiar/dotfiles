@@ -37,9 +37,6 @@ source $HOME/.javarc
 source $HOME/.oraclerc
 source $HOME/.path
 
-# Additional completions
-source $HOME/.oh-my-zsh/plugins/git-flow/git-flow.plugin.zsh
-
 # Racket completions
 source $HOME/lib/racket/racket-completions.zsh
 

@@ -24,6 +24,13 @@ export BUKKIT_PLUGINS_DIR="$HOME/bukkit/plugins"
 export EC2_HOME="$HOME/ec2-api-tools"
 export PLTCOLLECTS=":$HOME/Library/Racket/collections"
 export CS_HOME="$HOME/bin/cloud-search"
+export MONO_GAC_PREFIX="/usr/local"
+
+#https://github.com/sorin-ionescu/prezto/tree/master/modules/python
+export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+export PROJECT_HOME="$HOME/src/ps"
+
+export DOCKER_HOST=tcp://localhost:4243
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then

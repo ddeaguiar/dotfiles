@@ -28,4 +28,6 @@ PATH=/Applications/Racket/bin:$PATH
 
 PATH=$PATH:$CS_HOME/bin
 
+PATH=$PATH:$HOME/bin/terraform
+
 export PATH

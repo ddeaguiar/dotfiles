@@ -75,3 +75,5 @@ if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
 
+# DIRENV
+eval "$(direnv hook $0)"

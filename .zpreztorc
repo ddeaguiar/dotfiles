@@ -35,6 +35,8 @@ zstyle ':prezto:load' pmodule \
   'prompt' \
   'git' \
   'osx' \
+  'python' \
+  'ruby'  \
   'homebrew' \
   'syntax-highlighting' \
   'fasd'
