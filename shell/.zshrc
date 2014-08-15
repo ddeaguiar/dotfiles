@@ -38,7 +38,7 @@ source $HOME/.oraclerc
 source $HOME/.path
 
 # Racket completions
-source $HOME/lib/racket/racket-completions.zsh
+source $HOME/lib/zsh/racket-completions.zsh
 
 MTSSHKEYS="$HOME/.ssh/ec2-mtc.pem"
 
