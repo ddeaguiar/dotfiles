@@ -1,6 +1,8 @@
 #
 # Executes commands at the start of an interactive session.
 #
+fpath=($HOME/lib/zsh $fpath)
+#export FPATH="$HOME/lib/zsh:$FPATH"
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -32,8 +34,7 @@ source $HOME/.javarc
 source $HOME/.oraclerc
 source $HOME/.path
 
-source $HOME/lib/zsh/racket-completions.zsh
-source $HOME/lib/zsh/docker-completions.zsh
+# aws autocompletion file needs to be sourced
 source /usr/local/bin/aws_zsh_completer.sh
 
 ### Added by the Heroku Toolbelt
