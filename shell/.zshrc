@@ -27,51 +27,13 @@ unsetopt auto_name_dirs
 # Source scripts for specific tasks
 alias history="fc -l 1"
 source $HOME/.aliases
-if [ -d $HOME/.ec2 ]; then
-  if [ -f $HOME/.ec2/.ec2rc ]; then
-    source $HOME/.ec2/.ec2rc
-  fi
-fi
 source $HOME/.passwd
 source $HOME/.javarc
 source $HOME/.oraclerc
 source $HOME/.path
 
-# Racket completions
 source $HOME/lib/zsh/racket-completions.zsh
-
-MTSSHKEYS="$HOME/.ssh/ec2-mtc.pem"
-
-# Helper function that prepends the Amazon Linux AMI
-# user to a server name if it contains 'ec2'
-_mtprependuser() {
-  if [[ "$1" == *ec2* ]]; then
-    echo "ec2-user@$1"
-  else
-    echo "$1"
-  fi
-}
-
-mtssh() {
-  local server=$(_mtprependuser "$1")
-
-  if [ $# -gt 1 ]; then
-     local rest="\"${@:2}\""
-  fi
-
-  ssh -i $MTSSHKEYS $server $rest
-}
-
-
-mtscp() {
-  local source=$(_mtprependuser "$1")
-  local target=$(_mtprependuser "$2")
-
-  scp -i $MTSSHKEYS "$source" "$target"
-}
-
-
-# AWS
+source $HOME/lib/zsh/docker-completions.zsh
 source /usr/local/bin/aws_zsh_completer.sh
 
 ### Added by the Heroku Toolbelt
