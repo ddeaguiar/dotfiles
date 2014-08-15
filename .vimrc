@@ -10,31 +10,31 @@ nnoremap ; :
 set nocompatible                  " Must come first because it changes other options.
 
 filetype off                      " Required by vundle
-set rtp+=~/.vim/vundle.git/ 
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
-"Bundles
-Bundle 'tpope/vim-fugitive'
-Bundle 'wincent/Command-T'
-Bundle 'pangloss/vim-simplefold'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'godlygeek/tabular'
-Bundle 'LustyExplorer'
-Bundle 'LustyJuggler'
-Bundle 'matchit.zip'
-Bundle 'open-browser.vim'
-Bundle 'The-NERD-Commenter'
-Bundle 'ack.vim'
-Bundle 'VimClojure'
-Bundle 'taglist.vim'
+"Plugins
+Plugin 'tpope/vim-fugitive'
+Plugin 'wincent/Command-T'
+Plugin 'pangloss/vim-simplefold'
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'godlygeek/tabular'
+Plugin 'LustyExplorer'
+Plugin 'LustyJuggler'
+Plugin 'matchit.zip'
+Plugin 'open-browser.vim'
+Plugin 'The-NERD-Commenter'
+Plugin 'ack.vim'
+Plugin 'VimClojure'
+Plugin 'taglist.vim'
 
+call vundle#end()
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
 syntax enable                     " Turn on syntax highlighting.
@@ -91,7 +91,7 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLo
 set t_Co=16
 let g:solarized_italic=0
 set background=dark
-colorscheme solarized 
+colorscheme solarized
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -106,7 +106,7 @@ map <leader>tm :tabmove
 
 " Taglist
 nmap <silent> <leader>, :TlistToggle<CR>
-nmap <leader>. :tag 
+nmap <leader>. :tag
 
 "split screen mappings
 map <leader>- :split<cr>
@@ -125,14 +125,14 @@ if has("cscope")
 
   " add any cscope database in current directory
   if filereadable("cscope.out")
-      cs add cscope.out  
-  " else add the database pointed to by environment variable 
+      cs add cscope.out
+  " else add the database pointed to by environment variable
   elseif $CSCOPE_DB != ""
       cs add $CSCOPE_DB
   endif
 
   " show msg when any other cscope db added
-  set cscopeverbose  
+  set cscopeverbose
 
 
   """"""""""""" My cscope/vim key mappings
@@ -171,17 +171,17 @@ if has("cscope")
   " To do the first type of search, hit 'CTRL-\', followed by one of the
   " cscope search types above (s,g,c,t,e,f,i,d).  The result of your cscope
   " search will be displayed in the current window.  You can use CTRL-T to
-  " go back to where you were before the search.  
+  " go back to where you were before the search.
   "
 
-  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>	
+  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
   nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>	
+  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 
   " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
@@ -190,19 +190,19 @@ if has("cscope")
   "
   " (Note: earlier versions of vim may not have the :scs command, but it
   " can be simulated roughly via:
-  "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>	
+  "    nmap <C-@>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-  nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
-  nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
-  nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
-  nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
+  nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+  nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 
-  " Hitting CTRL-space *twice* before the search type does a vertical 
+  " Hitting CTRL-space *twice* before the search type does a vertical
   " split instead of a horizontal one (vim 6 and up only)
   "
   " (Note: you may wish to put a 'set splitright' in your .vimrc
@@ -213,8 +213,8 @@ if has("cscope")
   nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
   nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
   nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-  nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
-  nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+  nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
   nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 endif
 
@@ -224,7 +224,7 @@ endif
 " You may find that too short with the above typemaps.  If so, you should
 " either turn off mapping timeouts via 'notimeout'.
 "
-"set notimeout 
+"set notimeout
 "
 " Or, you can keep timeouts, by uncommenting the timeoutlen line below,
 " with your own personal favorite value (in milliseconds):
@@ -237,7 +237,7 @@ set timeoutlen=2000
 " delays as vim waits for a keystroke after you hit ESC (it will be
 " waiting to see if the ESC is actually part of a key code like <F1>).
 "
-set ttimeout 
+set ttimeout
 "
 " personally, I find a tenth of a second to work well for key code
 " timeouts. If you experience problems and have a slow terminal or network
@@ -250,7 +250,7 @@ set ttimeoutlen=100
 " Map Git
 "nmap <leader>gt :Gist
 "nmap <leader>gp :Gist -p
-nmap <leader>gi :Git 
+nmap <leader>gi :Git
 nmap <leader>gl :Glog<CR>
 nmap <leader>gd :Gdiff<CR>
 nmap <leader>gb :Gblame<CR>
@@ -263,7 +263,7 @@ vnoremap / /\v
 
 " Misc Mappings
 nnoremap <leader><space> :noh<cr>
-"nnoremap <leader>a :Ack 
+"nnoremap <leader>a :Ack
 nnoremap <leader>b :buffers<CR>
 "nnoremap <leader>pt :!phake test<CR>
 nnoremap <silent> <leader>rn :set relativenumber<CR>
@@ -298,7 +298,7 @@ endif
 let Tlist_Exit_OnlyWindow = 1
 
 let tlist_clojure_settings = 'lisp;f:function'
-let vimclojure#HighlightBuiltins = 1 
+let vimclojure#HighlightBuiltins = 1
 let vimclojure#ParenRainbow=1
 " Bubble single lines
 "nnoremap <C-Up> [e
