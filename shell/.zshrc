@@ -29,6 +29,9 @@ source /usr/local/bin/aws_zsh_completer.sh
 # go
 export GOPATH=$HOME/gocode
 
+# add my bin dir to path
+export PATH="$HOME/bin:$PATH"
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
