@@ -1,4 +1,3 @@
-#
 # Executes commands at login pre-zshrc.
 #
 # Authors:
@@ -43,6 +42,7 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  $HOME/.cabal/bin
   /usr/local/{bin,sbin}
   $HOME/gocode/bin
   $path
