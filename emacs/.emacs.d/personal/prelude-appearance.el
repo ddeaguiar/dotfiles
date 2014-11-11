@@ -37,3 +37,6 @@
 (require 'linum)
 (global-linum-mode 1)
 (setq linum-format " %d ")
+
+;; Enable pretty symbols in all languages
+(global-prettify-symbols-mode +1)
