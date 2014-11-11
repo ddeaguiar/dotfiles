@@ -45,6 +45,7 @@ path=(
   $HOME/.cabal/bin
   /usr/local/{bin,sbin}
   $HOME/gocode/bin
+  /opt/homebrew-cask/Caskroom/racket/6.1/Racket\ v6.1/bin
   $path
 )
 

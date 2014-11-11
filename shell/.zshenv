@@ -30,7 +30,7 @@ export MONO_GAC_PREFIX="/usr/local"
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PROJECT_HOME="$HOME/src/ps"
 
-export DOCKER_HOST=tcp://localhost:4243
+export DOCKER_HOST=tcp://localhost:2375
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
