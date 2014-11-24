@@ -1,5 +1,5 @@
 set tree-view = line-number:no,interval=6 author:full file-size:units date:default id:no file-name
 set main-view = date:relative,width=0 author:abbreviated id:yes line-number:yes,interval=5 commit-title:graph=yes,refs=yes 
 set horizontal-scroll = 33%     # Scroll 33% of the view width
-set line-graphics = utf8        # Use nice line-graphics
+#set line-graphics = utf8        # Use nice line-graphics
 set tab-size = 2                # Use something reasonable
