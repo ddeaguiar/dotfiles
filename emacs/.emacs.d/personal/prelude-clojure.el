@@ -7,7 +7,7 @@
 (setq cider-repl-use-pretty-printing t)
 (setq nrepl-hide-special-buffers t)
 (setq cider-prefer-local-resources t)
-(setq cider-repl-pop-to-buffer-on-connect nil)
+;;(setq cider-repl-pop-to-buffer-on-connect nil)
 (setq cider-show-error-buffer nil)
 (setq cider-auto-select-error-buffer nil)
 (setq cider-prompt-save-file-on-load nil)
@@ -17,6 +17,8 @@
 (setq cider-repl-wrap-history t)
 (setq cider-repl-history-size 1000)
 (setq cider-repl-history-file "/tmp/cider-repl.history")
+
+(defvar clojure--prettify-symbols-alist nil)
 
 ;; Make fn look nice
 (add-hook 'clojure-mode-hook
