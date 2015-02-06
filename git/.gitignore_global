@@ -39,6 +39,7 @@
 .envrc
 .elc
 .externalToolBuilders/
+.floorc.json
 .idea/
 .javarc
 .lein-deps-sum
@@ -53,6 +54,7 @@
 .ruby-version
 .rbenv-gemsets
 .lein-repl-history
+.nrepl-history
 geiser-history.racket
 custom-configuration.el
 .settings/

@@ -30,9 +30,12 @@ export MONO_GAC_PREFIX="/usr/local"
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PROJECT_HOME="$HOME/src/ps"
 
-export DOCKER_HOST=tcp://localhost:2375
-
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+
+#Boot2docker
+export DOCKER_HOST=tcp://192.168.59.103:2376
+export DOCKER_CERT_PATH=/Users/ddeaguiar/.boot2docker/certs/boot2docker-vm
+export DOCKER_TLS_VERIFY=1

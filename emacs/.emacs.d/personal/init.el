@@ -10,8 +10,12 @@
    clojure-snippets
    datomic-snippets
    cljsbuild-mode
+   clj-refactor
    markdown-mode
-   restclient))
+   restclient
+   coffee-mode
+   emmet-mode
+   floobits))
 
 (setq user-email-address "ddeaguiar@pointslope.com")
 (setq user-full-name "Daniel De Aguiar")
