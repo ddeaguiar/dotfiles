@@ -37,3 +37,6 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 ### rbenv support
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/ddeaguiar/.gvm/bin/gvm-init.sh" ]] && source "/Users/ddeaguiar/.gvm/bin/gvm-init.sh"
