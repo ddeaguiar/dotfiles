@@ -14,14 +14,28 @@
 (setq org-todo-keywords
       '((type "NEW" "WIP" "BLOCKED" "PAUSED" "TESTING" "|" "DONE")))
 
+;; Run these, too
+(add-hook 'org-mode-hook
+          (lambda ()
+            (flyspell-mode)))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (writegood-mode)))
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (auto-fill-mode)))
 
 ;; Babel
-
+(require 'ob)
+(require 'ob-clojure)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
 (setq org-fontify-done-headline t)
 (setq org-src-fontify-natively t)
 (setq org-confirm-babel-evaluate nil)
 (setq org-src-window-setup 'current-window)
-
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -32,7 +46,12 @@
    (js         . t)
    (ruby       . t)
    (python     . t)
-   (R          . t)))
+   ;(R          . t)
+   ))
 
 (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
 (add-to-list 'org-babel-tangle-lang-exts '("js"      . "js"))
+
+(eval-after-load "org" '(require 'ox-md nil t))
+
+(provide 'prelude-org)

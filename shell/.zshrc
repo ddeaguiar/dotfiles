@@ -19,24 +19,9 @@ unsetopt auto_name_dirs
 # Source scripts for specific tasks
 alias history="fc -l 1"
 source $HOME/.aliases
-source $HOME/.passwd
-source $HOME/.javarc
-source $HOME/.oraclerc
 
 # aws autocompletion file needs to be sourced
 source /usr/local/bin/aws_zsh_completer.sh
 
-# go
-export GOPATH=$HOME/gocode
-
-# add my bin dir to path
-export PATH="$HOME/bin:$PATH"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
 ### rbenv support
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/ddeaguiar/.gvm/bin/gvm-init.sh" ]] && source "/Users/ddeaguiar/.gvm/bin/gvm-init.sh"
