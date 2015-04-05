@@ -20,7 +20,8 @@
       confirm-nonexistent-file-or-buffer nil
       query-replace-highlight t
       next-error-highlight t
-      next-error-highlight-no-select t)
+      next-error-highlight-no-select t
+      initial-scratch-message nil)
 
 ;; enable cua-mode for rectangular selections
 (require 'cua-base)
@@ -50,15 +51,45 @@
 ;; Work around a bug on OS X where system-name is a FQDN
 (setq system-name (car (split-string system-name "\\.")))
 
+;; Spelling
+(use-package flyspell-mode
+  :config
+  (progn
+    (setq flyspell-issue-welcome-flag nil)
+    (setq-default ispell-program-name "/usr/local/bin/aspell")
+    (setq-default ispell-list-command "list")
+    (diminish 'flyspell-mode " FSp")))
+
+;; Window management (ace-window)
+(use-package ace-jump-buffer
+  :bind
+  ("C-c J" . ace-jump-buffer))
+
+(use-package ace-window
+  :defer t
+  :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind ("C-c H" . ace-window))
+
+(use-package ace-isearch
+  :defer t
+  :config
+  (global-ace-isearch-mode 1))
+
+(use-package ace-jump-zap
+  :defer t
+  :bind
+  (("M-z" . ace-jump-zap-up-to-char-dwim)
+   ("M-Z" . ace-jump-zap-to-char-dwim)))
+
+
 ;; Enable arrow keys
 (defun disable-guru-mode ()
   (guru-mode -1))
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
-;; Don't be annoying
-(setq initial-scratch-message nil)
-
 ;; File handling
 (setq backup-directory-alist
       '(("." . "~/.emacs.backups")))
+
+(provide 'personal/prelude-general)
