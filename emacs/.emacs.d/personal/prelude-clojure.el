@@ -13,6 +13,11 @@
 (setq cider-show-error-buffer 'only-in-repl)
 (setq cider-auto-select-error-buffer nil)
 (setq cider-prompt-save-file-on-load nil)
+(setq cider-stacktrace-default-filters '(tooling dup))
+(setq cider-stacktrace-fill-column 80)
+
+(setq nrepl-buffer-name-show-port t)
+
 (setq cider-repl-result-prefix ";; => ")
 
 ;; Emacs complains about these being free variables
