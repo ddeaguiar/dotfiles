@@ -22,11 +22,16 @@
    
    ;; misc
    ack
-   markdown-mode
+   
+   ;; web
+   company-restclient
    restclient
+   markdown-mode
    coffee-mode
+   less-css-mode
    emmet-mode
-   floobits
+   web-mode
+   htmlize
 
    ;; ruby
    projectile-rails
