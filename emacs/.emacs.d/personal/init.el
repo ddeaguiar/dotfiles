@@ -1,7 +1,10 @@
 (require 'prelude-packages)
 
 (prelude-require-packages
- '(cyberpunk-theme
+ '(use-package
+   git-gutter-fringe+
+   powerline
+   cyberpunk-theme
    smart-mode-line
    writegood-mode
    geiser
@@ -25,6 +28,12 @@
    flymake-ruby
    projectile-rails
    rbenv))
+
+(eval-when-compile
+  (require 'use-package))
+
+(require 'diminish)
+(require 'bind-key)
 
 (add-to-list 'load-path "/Users/ddeaguiar/src/org-mode/lisp")
 
