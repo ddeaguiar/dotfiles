@@ -16,7 +16,8 @@
    datomic-snippets
    cljsbuild-mode
    clj-refactor
-
+   rainbow-identifiers
+   
    ;; Racket / Scheme
    geiser
    

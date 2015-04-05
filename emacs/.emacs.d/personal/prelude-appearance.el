@@ -2,13 +2,6 @@
 (menu-bar-mode -1)
 ;; (scroll-bar-mode -1)
 
-;; Appearance
-(disable-theme 'zenburn)
-(load-theme 'cyberpunk t)
-
-(require 'ansi-color)
-(ansi-color-for-comint-mode-on)
-
 ;; Whitespace, Indentation
 (setq-default tab-width 2)
 (setq-default c-basic-offset 2)
@@ -19,24 +12,44 @@
 
 ;; Highlights, Parens
 (setq global-hl-line-mode nil)
-(column-number-mode)
-(setq visible-bell t)
+(setq visible-bell nil)
+(setq load-prefer-newer t)
 
-;; Mode line
-;;(setq sml/theme 'respectful) ;; dark | light | respectful | automatic
-(setq sml/name-width 60)
-(setq sml/mode-width 'full)
-(setq sml/shorten-directory t) 
-(setq sml/shorten-modes nil)
+(use-package cyberpunk-theme
+  :init
+  (disable-theme 'zenburn)
+  (menu-bar-mode -1)
+  (line-number-mode t)
+  (column-number-mode t)
+  (whitespace-mode t)
+  (global-prettify-symbols-mode t)
+  :config
+  (load-theme 'cyberpunk)
+  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
-(sml/setup)
+;;; Mode Line
+(use-package powerline
+  :config
+  (powerline-center-theme)
+  (custom-set-faces
+   '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320" ))))
+   '(powerline-active2 ((t (:foreground "#b9d977" :background "#353a3d" ))))))
 
-(sml/apply-theme 'dark)
+;;; Line Numbers
+(use-package linum
+  :init
+  (setq linum-format " %d ")
+  :config
+  (global-linum-mode t))
 
-;; Line numbers
-(require 'linum)
-(global-linum-mode 1)
-(setq linum-format " %d ")
+(use-package ansi-color
+  :config
+  (ansi-color-for-comint-mode-on))
 
-;; Enable pretty symbols in all languages
-(global-prettify-symbols-mode +1)
+(diminish 'company-mode " ©")
+(diminish 'flycheck-mode " ✓")
+(diminish 'whitespace-mode " Ws")
+;(diminish 'helm-mode)
+(diminish 'prelude-mode)
+
+(provide 'personal/prelude-appearance)
