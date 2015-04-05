@@ -7,15 +7,19 @@
    cyberpunk-theme
    smart-mode-line
    writegood-mode
-   geiser
    ctags
    ctags-update
+
    ;; clojure
    clojure-mode
    clojure-snippets
    datomic-snippets
    cljsbuild-mode
    clj-refactor
+
+   ;; Racket / Scheme
+   geiser
+   
    ;; misc
    ack
    markdown-mode
@@ -23,11 +27,15 @@
    coffee-mode
    emmet-mode
    floobits
+
    ;; ruby
-   inf-ruby
-   flymake-ruby
    projectile-rails
-   rbenv))
+   flymake-ruby
+   rbenv
+   rspec-mode
+   rinari
+   bundler
+   robe))
 
 (eval-when-compile
   (require 'use-package))
