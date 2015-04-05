@@ -1,3 +1,4 @@
 .DS_Store
 emacs-external-packs
 vim/.vim/bundle
+credentials.clj*
