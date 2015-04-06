@@ -86,6 +86,6 @@
           (define-key key-translation-map (kbd (format "M-[ 34 ; %d ~" x)) (kbd (format "%s<f20>" tkey)))
 
           (setq x (+ x 1))
-          ))
-      )
-  )
+          ))))
+
+(provide 'personal/prelude-tmux)
