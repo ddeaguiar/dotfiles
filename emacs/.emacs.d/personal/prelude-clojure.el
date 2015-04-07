@@ -45,7 +45,8 @@
                    cider-repl-history-file "/tmp/cider-repl.history")
              :config
              (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-             (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode))
+             (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode))
 
 (use-package clojure-snippets)
 
