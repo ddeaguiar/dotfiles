@@ -5,13 +5,18 @@
    git-gutter-fringe+
    powerline
    cyberpunk-theme
+   flatland-theme
    smart-mode-line
    writegood-mode
    ctags
    ctags-update
+   indicators
+   unbound
+   dired+
 
    ;; clojure
-   clojure-mode
+   javadoc-lookup
+   clojure-cheatsheet
    clojure-snippets
    datomic-snippets
    cljsbuild-mode
