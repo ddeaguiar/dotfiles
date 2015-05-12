@@ -79,3 +79,6 @@ projectile-bookmarks.eld
 projectile.cache
 
 sonar-project.properties
+
+# Clojure
+.nrepl-port
