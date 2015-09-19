@@ -1,0 +1,13 @@
+# ~/.tmuxinator/orchestra.yml
+
+name: orchestra
+root: ~/src/mtc/orchestra
+
+pre: vagrant up
+
+windows:
+  - editor: emacs 
+  - shell:
+  - jmeter: ~/src/mtc/jmeter && jmeter
+  - vagrant: vagrant ssh
+  - fig: cd mtc && fig up

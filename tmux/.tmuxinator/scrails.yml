@@ -1,0 +1,22 @@
+# ~/.tmuxinator/scrails.yml
+
+name: scrails
+root: ~/src/scorbot/scrails
+
+# Optional tmux socket
+# socket_name: foo
+# Runs before everything. Use it to start daemons etc.
+pre:
+  - boot2docker up
+  #- tmux set-environment -gu RBENV_GEMSET_ALREADY
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: direnv allow
+
+startup_window: emacs
+
+windows:
+   - emacs: emacs
+   - shell:
+   - guard: guard
+   - docker: docker-compose up
+   - logs: tail -f log/development.log
