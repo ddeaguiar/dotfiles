@@ -1,5 +1,11 @@
 (require 'prelude-packages)
 
+(add-to-list 'package-archives `("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(setq package-pinned-packages
+      '((clojure-mode        . "melpa-stable")
+        (cider               . "melpa-stable")
+        (randbow-delimiters  . "melpa-stable")))
+
 (prelude-require-packages
  '(use-package
    git-gutter-fringe+
@@ -22,13 +28,13 @@
    cljsbuild-mode
    clj-refactor
    rainbow-identifiers
-   
+
    ;; Racket / Scheme
    geiser
-   
+
    ;; misc
    ack
-   
+
    ;; web
    company-restclient
    restclient
