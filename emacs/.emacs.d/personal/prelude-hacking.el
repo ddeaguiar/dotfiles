@@ -60,6 +60,11 @@
   :config
   (setq auto-mode-alist (cons '("\\.template$" . js-mode) auto-mode-alist)))
 
+;; Restclient
+(use-package restclient
+  :config
+  (setq auto-mode-alist (cons '("\\.http$" . restclient-mode) auto-mode-alist)))
+
 ;; Zen Coding
 (use-package web-mode
   :init
