@@ -28,7 +28,8 @@
    cljsbuild-mode
    clj-refactor
    rainbow-identifiers
-
+   align-cljlet
+   
    ;; Racket / Scheme
    geiser
 
