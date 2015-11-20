@@ -42,13 +42,11 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /bin
   $HOME/.rbenv/bin:$PATH
   $HOME/bin
-  $HOME/.cabal/bin
   /usr/local/{bin,sbin}
-  $HOME/gocode/bin
   /opt/homebrew-cask/Caskroom/racket/6.1/Racket\ v6.1/bin
-  $HOME/bin/cassandra/bin
   $PATH
 )
 
