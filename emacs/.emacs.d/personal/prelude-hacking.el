@@ -56,6 +56,13 @@
     (diminish 'projectile-mode " ℗")
     (add-hook 'projectile-mode-hook 'projectile-rails-on)))
 
+(use-package helm-mode
+  :diminish (helm-mode . "H")
+  :bind
+  (("M-y" . helm-show-kill-ring))
+  :config
+  (key-chord-define-global "yy" 'helm-show-kill-ring))
+
 (use-package js-mode
   :config
   (setq auto-mode-alist (cons '("\\.template$" . js-mode) auto-mode-alist)))

@@ -15,6 +15,9 @@
 (setq visible-bell nil)
 (setq load-prefer-newer t)
 
+(use-package rainbow-mode
+  :pin melpa-stable)
+
 (use-package cyberpunk-theme
   :init
   (add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-18"))
@@ -38,9 +41,9 @@
   :config
   (powerline-center-theme)
 
-  (custom-set-faces
-   '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320" ))))
-   '(powerline-active2 ((t (:foreground "#b9d977" :background "#353a3d" ))))))
+    (custom-set-faces
+     '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320"))))
+    '(powerline-active2 ((t (:foreground "#b9d977" :background "#353a3d"))))))
 
 ;;; Line Numbers
 (use-package linum
@@ -56,7 +59,6 @@
 (diminish 'company-mode " ©")
 (diminish 'flycheck-mode " ✓")
 (diminish 'whitespace-mode " Ws")
-;(diminish 'helm-mode)
 (diminish 'prelude-mode)
 
 (provide 'personal/prelude-appearance)

@@ -21,11 +21,12 @@
 
 ;; Buffer shortcuts
 (global-set-key (kbd "C-x p") 'print-buffer)
-(global-set-key (kbd "C-c y") 'bury-buffer)
-(global-set-key (kbd "C-c r") 'revert-buffer)
 
+;; Disable annoying key chords
+(key-chord-define-global "uu" nil)
+(key-chord-define-global "lj" nil)
 (use-package expand-region
-   :bind ("C-=" . er/expand-region))
+  :bind ("C-=" . er/expand-region))
 
 (use-package multiple-cursors
   :bind
@@ -61,7 +62,7 @@
     (diminish 'smartparens-mode " (Sm)"))
   :bind
   (("M-\\" . personal/delete-horizontal-space)
-   ("M-SPC" . personal-just-one-space))
+   ("M-SPC" . personal/just-one-space))
   :config
   (progn
     (require 'smartparens-config)

@@ -53,12 +53,12 @@
 
 ;; Spelling
 (use-package flyspell-mode
+  :diminish (flyspell-mode " FSp")
   :config
   (progn
     (setq flyspell-issue-welcome-flag nil)
     (setq-default ispell-program-name "/usr/local/bin/aspell")
-    (setq-default ispell-list-command "list")
-    (diminish 'flyspell-mode " FSp")))
+    (setq-default ispell-list-command "list")))
 
 ;; Window management (ace-window)
 (use-package ace-jump-buffer

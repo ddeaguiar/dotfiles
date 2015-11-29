@@ -1,10 +1,6 @@
 (require 'prelude-packages)
 
 (add-to-list 'package-archives `("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(setq package-pinned-packages
-      '((clojure-mode        . "melpa-stable")
-        (cider               . "melpa-stable")
-        (randbow-delimiters  . "melpa-stable")))
 
 (prelude-require-packages
  '(use-package
@@ -60,6 +56,7 @@
 
 (require 'diminish)
 (require 'bind-key)
+(require 'prelude-helm-everywhere)
 
 (add-to-list 'load-path "/Users/ddeaguiar/src/org-mode/lisp")
 

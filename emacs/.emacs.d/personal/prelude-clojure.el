@@ -7,18 +7,18 @@
              (("C-i" . align-cljlet))
              :config
              (progn
-               (add-hook 'clojure-mode-hook
-                         (lambda ()
-                           (push '("fn"  . ?λ) prettify-symbols-alist)
-                           (push '("=/=" . ?≢) prettify-symbols-alist)
-                           (push '("==" . ?≡) prettify-symbols-alist)
-                           (push '("not=" . ?≠) prettify-symbols-alist)
-                           ;(push '("->" . ?→) prettify-symbols-alist)
-                           ;(push '("->>" . ?⇉) prettify-symbols-alist)
-                           (push '("<=" . ?≤) prettify-symbols-alist)
-                           (push '(">=" . ?≥) prettify-symbols-alist)
-                           (push '(">!" . ?⤻) prettify-symbols-alist)
-                           (push '("<!" . ?⤺) prettify-symbols-alist)))
+               ;; (add-hook 'clojure-mode-hook
+               ;;           (lambda ()
+               ;;             (push '("fn"  . ?λ) prettify-symbols-alist)
+               ;;             (push '("=/=" . ?≢) prettify-symbols-alist)
+               ;;             (push '("==" . ?≡) prettify-symbols-alist)
+               ;;             (push '("not=" . ?≠) prettify-symbols-alist)
+               ;;             (push '("->" . ?→) prettify-symbols-alist)
+               ;;             (push '("->>" . ?⇉) prettify-symbols-alist)
+               ;;             (push '("<=" . ?≤) prettify-symbols-alist)
+               ;;             (push '(">=" . ?≥) prettify-symbols-alist)
+               ;;             (push '(">!" . ?⤻) prettify-symbols-alist)
+               ;;             (push '("<!" . ?⤺) prettify-symbols-alist)))
                (define-clojure-indent
                  (defroutes 'defun)
                  (GET 2)
@@ -27,7 +27,8 @@
                  (DELETE 2)
                  (HEAD 2)
                  (ANY 2)
-                 (context 2))))
+                 (context 2)))
+             :pin melpa-stable)
 
 (use-package cider-mode
              :init
@@ -48,7 +49,8 @@
              :config
              (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
              (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode))
+             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+             :pin melpa-stable)
 
 (use-package clojure-snippets)
 
@@ -57,6 +59,7 @@
              (add-hook 'clojure-mode-hook
                        (lambda ()
                          (clj-refactor-mode 1)
-                         (cljr-add-keybindings-with-prefix "C-c C-a"))))
+                         (cljr-add-keybindings-with-prefix "C-c C-a")))
+             :pin melpa-stable)
 
 (provide 'personal/prelude-clojure)
