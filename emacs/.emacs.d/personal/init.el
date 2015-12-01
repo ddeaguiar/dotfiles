@@ -1,6 +1,10 @@
 (require 'prelude-packages)
 
 (add-to-list 'package-archives `("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(setq package-pinned-packages
+      '((clojure-mode        . "melpa-stable")
+        (cider               . "melpa-stable")
+        (randbow-delimiters  . "melpa-stable")))
 
 (prelude-require-packages
  '(use-package
@@ -19,10 +23,8 @@
    ;; clojure
    javadoc-lookup
    clojure-cheatsheet
-   clojure-snippets
    datomic-snippets
    cljsbuild-mode
-   clj-refactor
    rainbow-identifiers
    align-cljlet
    

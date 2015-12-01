@@ -52,7 +52,9 @@
              (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
              :pin melpa-stable)
 
-(use-package clojure-snippets)
+(use-package clojure-snippets
+  :ensure t
+  :pin melpa-stable)
 
 (use-package clj-refactor
              :config
@@ -60,6 +62,7 @@
                        (lambda ()
                          (clj-refactor-mode 1)
                          (cljr-add-keybindings-with-prefix "C-c C-a")))
-             :pin melpa-stable)
+             :pin melpa-stable
+             :ensure t)
 
 (provide 'personal/prelude-clojure)
