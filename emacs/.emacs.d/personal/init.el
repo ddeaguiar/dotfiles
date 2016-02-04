@@ -4,7 +4,7 @@
 (setq package-pinned-packages
       '((clojure-mode        . "melpa-stable")
         (cider               . "melpa-stable")
-        (randbow-delimiters  . "melpa-stable")))
+        (rainbow-delimiters  . "melpa-stable")))
 
 (prelude-require-packages
  '(use-package

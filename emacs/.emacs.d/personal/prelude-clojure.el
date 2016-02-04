@@ -65,4 +65,10 @@
              :pin melpa-stable
              :ensure t)
 
+(defun reloaded-repl-reset ()
+  (interactive)
+  (projectile-save-project-buffers)
+  (cider-interactive-eval "(clojure.tools.namespace.repl/refresh)"
+                          (cider-insert-eval-handler (cider-current-connection))))
+
 (provide 'personal/prelude-clojure)

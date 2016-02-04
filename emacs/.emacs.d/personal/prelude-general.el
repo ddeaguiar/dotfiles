@@ -92,4 +92,7 @@
 (setq backup-directory-alist
       '(("." . "~/.emacs.backups")))
 
+;; Automatically tail log files
+(add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
+
 (provide 'personal/prelude-general)
