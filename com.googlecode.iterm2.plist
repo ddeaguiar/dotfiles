@@ -841,7 +841,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>-1481 24 924 485 -1920 0 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 15 1432 862 0 0 1440 877 </string>
+	<string>1920 547 745 501 1920 180 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_B2C4576B-19BA-4AD6-BD6C-D37FFE366561</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -3078,12 +3078,14 @@
 			<string>/Users/ddeaguiar</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveShownPromoWithId_4</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncTimeOfLastPromo</key>
-	<real>453249256.64596599</real>
+	<real>477931525.20089799</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>476131150.42024302</real>
+	<real>478218828.79266399</real>
 	<key>NotFirstRun</key>
 	<true/>
 	<key>OnlyWhenMoreTabs</key>
@@ -3152,7 +3154,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-02-02T18:38:58Z</date>
+	<date>2016-02-26T21:49:06Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
