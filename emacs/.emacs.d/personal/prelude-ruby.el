@@ -7,6 +7,7 @@
                (diminish 'projectile-rails-mode " ¶")))
 
 (use-package bundler :defer t)
+(use-package projectile-rails)
 
 (use-package robe
              :defer t

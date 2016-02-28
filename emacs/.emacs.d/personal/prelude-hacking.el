@@ -37,16 +37,6 @@
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
 
-;; Exuberant ctags 
-(use-package ctags
-  :init 
-  (setq path-to-ctags "/usr/local/bin/ctags"
-        projectile-tags-command "/usr/local/bin/ctags -Re %s %s"
-        tags-revert-without-query t)
-  :bind
-  (("<f7>" . ctags-create-or-update-tags-table)
-   ("M-." . ctags-search)))
-
 ;; Projectile
 (use-package projectile
   :config
@@ -67,42 +57,18 @@
   :config
   (setq auto-mode-alist (cons '("\\.template$" . js-mode) auto-mode-alist)))
 
-;; Restclient
-(use-package restclient
-  :config
-  (setq auto-mode-alist (cons '("\\.http$" . restclient-mode) auto-mode-alist)))
-
-;; Zen Coding
-(use-package web-mode
-  :init
-  (progn
-    (defun personal/disable-smartparens ()
-      (smartparens-mode 0))
-
-    (defun personal/sp-web-mode-is-code-context (id action context)
-      (when (and (eq action 'insert)
-                 (not (or (get-text-property (point) 'part-side)
-                          (get-text-property (point) 'block-side))))
-        t))
-    (defun personal/web-mode-hook ()
-      "Hooks for Web mode."
-      (setq web-mode-markup-indent-offset 2
-            web-mode-css-indent-offset 2
-            web-mode-code-indent-offset 2
-            web-mode-enable-auto-pairing t)
-      (add-to-list 'sp-ignore-modes-list 'web-mode)))
-  
-  :config
-  (setq auto-mode-alist (cons '("\\.php$" . web-mode) auto-mode-alist))
-  (add-hook 'web-mode-hook  'personal/web-mode-hook)
-  (add-hook 'web-mode-hook 'personal/disable-smartparens))
-
-(use-package emmet-mode
-  :config
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'web-mode-hook 'emmet-mode))
-
 ;; TAGS management
+(use-package ctags
+  :init 
+  (setq path-to-ctags "/usr/local/bin/ctags"
+        projectile-tags-command "/usr/local/bin/ctags -Re %s %s"
+        tags-revert-without-query t)
+  :bind
+  (("<f7>" . ctags-create-or-update-tags-table)
+   ("M-." . ctags-search)))
+
+(use-package ctags-update)
+
 (use-package ctags-auto-update-mode
   :diminish ctags-auto-update-mode
   :commands ctags-update
@@ -110,6 +76,7 @@
   (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
   (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode))
 
+;; Code analysis
 (use-package xcscope
   :config (add-hook 'ruby-mode-hook 'cscope-setup))
 

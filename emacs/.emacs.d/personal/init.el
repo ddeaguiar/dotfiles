@@ -8,52 +8,17 @@
 
 (prelude-require-packages
  '(use-package
-   git-gutter-fringe+
-   powerline
-   cyberpunk-theme
-   flatland-theme
-   smart-mode-line
-   writegood-mode
-   ctags
-   ctags-update
-   indicators
-   unbound
-   dired+
-   xcscope
-   
-
-   ;; clojure
-   javadoc-lookup
-   clojure-cheatsheet
-   datomic-snippets
-   cljsbuild-mode
-   rainbow-identifiers
-   align-cljlet
-   
-   ;; Racket / Scheme
-   geiser
-
-   ;; misc
-   ack
-
-   ;; web
-   company-restclient
-   restclient
-   markdown-mode
-   coffee-mode
-   less-css-mode
-   emmet-mode
-   web-mode
-   htmlize
-
-   ;; ruby
-   projectile-rails
-   flymake-ruby
-   rbenv
-   rspec-mode
-   rinari
-   bundler
-   robe))
+    git-gutter-fringe+
+    powerline
+    cyberpunk-theme
+    flatland-theme
+    smart-mode-line
+    writegood-mode
+    indicators
+    unbound
+    dired+
+    rainbow-identifiers
+    ack))
 
 (eval-when-compile
   (require 'use-package))

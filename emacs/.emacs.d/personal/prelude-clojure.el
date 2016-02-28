@@ -52,18 +52,24 @@
              (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
              :pin melpa-stable)
 
+(use-package clj-refactor
+  :config
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (clj-refactor-mode 1)
+              (cljr-add-keybindings-with-prefix "C-c C-a")))
+  :pin melpa-stable
+  :ensure t)
+
 (use-package clojure-snippets
   :ensure t
   :pin melpa-stable)
 
-(use-package clj-refactor
-             :config
-             (add-hook 'clojure-mode-hook
-                       (lambda ()
-                         (clj-refactor-mode 1)
-                         (cljr-add-keybindings-with-prefix "C-c C-a")))
-             :pin melpa-stable
-             :ensure t)
+(use-package javadoc-lookup)
+(use-package clojure-cheatsheet)
+(use-package datomic-snippets)
+(use-package cljsbuild-mode)
+(use-package align-cljlet)
 
 (setq cljr-warn-on-eval nil)
 
