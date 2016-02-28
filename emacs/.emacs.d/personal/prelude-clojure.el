@@ -65,6 +65,8 @@
              :pin melpa-stable
              :ensure t)
 
+(setq cljr-warn-on-eval nil)
+
 (defun reloaded-repl-reset ()
   (interactive)
   (projectile-save-project-buffers)

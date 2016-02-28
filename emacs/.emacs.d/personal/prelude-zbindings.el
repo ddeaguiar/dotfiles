@@ -45,9 +45,15 @@
 (global-set-key (kbd "C-c w f") 'buf-move-right)
 (global-set-key (kbd "C-c w -") 'shrink-window)
 (global-set-key (kbd "C-c w =") 'enlarge-window)
+(global-set-key (kbd "M-o") 'other-window)
 
 (global-set-key (kbd "M-y") 'browse-kill-ring)
 (global-set-key (kbd "M-p") 'fill-paragraph)
+(define-key prelude-mode-map (kbd "M-o") 'other-window)
+
+;; Frame Management
+(global-set-key (kbd "s-o") 'other-frame)
+(define-key prelude-mode-map (kbd "s-o") 'other-frame)
 
 (use-package smartparens
   :init

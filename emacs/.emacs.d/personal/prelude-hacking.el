@@ -110,4 +110,10 @@
   (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
   (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode))
 
+(use-package xcscope
+  :config (add-hook 'ruby-mode-hook 'cscope-setup))
+
+(use-package helm-cscope-mode
+  :config (add-hook 'ruby-mode-hook 'helm-cscope-mode))
+
 (provide 'personal/prelude-hacking)

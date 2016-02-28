@@ -19,6 +19,8 @@
    indicators
    unbound
    dired+
+   xcscope
+   
 
    ;; clojure
    javadoc-lookup
