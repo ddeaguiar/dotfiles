@@ -79,4 +79,4 @@ if [[ ! -d "$TMPPREFIX" ]]; then
 fi
 
 # DIRENV
-eval "$(direnv hook $0)"
+eval "$(direnv hook $SHELL)"

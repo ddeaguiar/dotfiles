@@ -31,7 +31,7 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 export PROJECT_HOME="$HOME/src/ps"
 
 #Java
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home
 export ANT_OPTS="-Xms512M -Xmx512M -XX:+UseParallelGC"
 export JRE_HOME=$JAVA_HOME
 
