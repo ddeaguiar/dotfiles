@@ -45,6 +45,7 @@
                    cider-repl-result-prefix ";; => "
                    cider-repl-wrap-history t
                    cider-repl-history-size 1000
+                   cider-repl-display-help-banner nil
                    cider-repl-history-file "/tmp/cider-repl.history")
              :config
              (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
