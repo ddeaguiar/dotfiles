@@ -8,7 +8,7 @@
 (setq-default js2-basic-offset 2)
 (setq-default js-indent-level 2)
 (setq-default indent-tabs-mode nil) ;; spaces
-(setq prelude-whitespace nil)
+(setq prelude-whitespace t)
 
 ;; Highlights, Parens
 (setq global-hl-line-mode nil)
