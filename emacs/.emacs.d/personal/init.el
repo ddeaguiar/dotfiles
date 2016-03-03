@@ -8,17 +8,18 @@
 
 (prelude-require-packages
  '(use-package
-    git-gutter-fringe+
-    powerline
-    cyberpunk-theme
-    flatland-theme
-    smart-mode-line
-    writegood-mode
-    indicators
-    unbound
-    dired+
-    rainbow-identifiers
-    ack))
+   git-gutter-fringe+
+   powerline
+   cyberpunk-theme
+   flatland-theme
+   smart-mode-line
+   writegood-mode
+   indicators
+   unbound
+   dired+
+   rainbow-identifiers
+   ack
+   hydra))
 
 (eval-when-compile
   (require 'use-package))

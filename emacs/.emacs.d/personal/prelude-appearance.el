@@ -28,7 +28,7 @@
   (whitespace-mode t)
   (global-prettify-symbols-mode t)
   :config
-  (load-theme 'cyberpunk)
+  (setq prelude-theme 'cyberpunk)
   (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
 
 ;;; Mode Line
