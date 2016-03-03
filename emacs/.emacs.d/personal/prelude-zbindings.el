@@ -1,4 +1,4 @@
-;;q Fix keybindings under iTerm2
+;;Fix keybindings under iTerm2
 (global-set-key "\e[1;9A" [M-up])
 (global-set-key "\e[1;9B" [M-down])
 (global-set-key "\e[1;9C" [M-right])
@@ -119,4 +119,34 @@
 
     (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)))
 
-(provide 'personal/prelude-zbindings.el)
+;; hydra
+(defhydra hydra-zoom (global-map "<f2>")
+  "zoom"
+  ("g" text-scale-increase "in")
+  ("l" text-scale-decrease "out"))
+
+(defhydra hydra-splitter (global-map "C-M-s")
+  "splitter"
+  ("h" hydra-move-splitter-left)
+  ("j" hydra-move-splitter-down)
+  ("k" hydra-move-splitter-up)
+  ("l" hydra-move-splitter-right))
+
+(defhydra hydra-apropos (:color blue
+                                :hint nil)
+  "
+_a_propos        _c_ommand
+_d_ocumentation  _l_ibrary
+_v_ariable       _u_ser-option
+^ ^          valu_e_"
+  ("a" apropos)
+  ("d" apropos-documentation)
+  ("v" apropos-variable)
+  ("c" apropos-command)
+  ("l" apropos-library)
+  ("u" apropos-user-option)
+  ("e" apropos-value))
+;; Recommended binding:
+(global-set-key (kbd "C-c H") 'hydra-apropos/body)
+
+(provide 'personal/prelude-zbindings)
