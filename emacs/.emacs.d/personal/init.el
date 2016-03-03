@@ -1,11 +1,3 @@
-(require 'prelude-packages)
-
-(add-to-list 'package-archives `("melpa-stable" . "http://stable.melpa.org/packages/") t)
-(setq package-pinned-packages
-      '((clojure-mode        . "melpa-stable")
-        (cider               . "melpa-stable")
-        (rainbow-delimiters  . "melpa-stable")))
-
 (prelude-require-packages
  '(use-package
    git-gutter-fringe+
@@ -19,7 +11,8 @@
    dired+
    rainbow-identifiers
    ack
-   hydra))
+   hydra
+   paradox))
 
 (eval-when-compile
   (require 'use-package))

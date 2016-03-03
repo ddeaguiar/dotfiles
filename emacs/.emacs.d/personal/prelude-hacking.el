@@ -44,7 +44,7 @@
     (setq projectile-enable-caching t)
     (projectile-global-mode t)
     (diminish 'projectile-mode " ℗")
-    (add-hook 'projectile-mode-hook 'projectile-rails-on)))
+    ))
 
 (use-package helm-mode
   :diminish (helm-mode . "H")
