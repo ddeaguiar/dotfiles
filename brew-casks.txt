@@ -7,7 +7,6 @@ gas-mask
 hipchat
 iterm2
 java
-java7
 libreoffice
 mactex
 omnigraffle
@@ -15,7 +14,6 @@ pgadmin3
 racket
 screenhero
 skype
-sublime-text3
 superduper
 transmit
 vagrant
