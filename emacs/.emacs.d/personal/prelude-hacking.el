@@ -18,7 +18,7 @@
     (let ((yas/fallback-behavior 'return-nil))
       (yas/expand)))
 
-  ;; bind to TAB in keybindings file 
+  ;; bind to TAB in keybindings file
   (defun tab-indent-or-complete ()
     (interactive)
     (if (minibufferp)
@@ -28,9 +28,6 @@
           (if (check-expansion)
               (company-complete-common)
             (indent-for-tab-command)))))
-  :bind
-  (("TAB" . tab-indent-or-complete)
-   ("<tab>" . tab-indent-or-complete))
 
   :config
   (add-to-list 'yas-snippet-dirs
@@ -51,6 +48,13 @@
   :bind
   (("M-y" . helm-show-kill-ring))
   :config
+  (helm-autoresize-mode t)
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (define-key helm-map (kbd "C-z")  'helm-select-action)
+  (setq helm-recentf-fuzzy-match    t
+        helm-M-x-fuzzy-match t
+        helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
+        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f")
   (key-chord-define-global "yy" 'helm-show-kill-ring))
 
 (use-package js-mode
@@ -59,7 +63,7 @@
 
 ;; TAGS management
 (use-package ctags
-  :init 
+  :init
   (setq path-to-ctags "/usr/local/bin/ctags"
         projectile-tags-command "/usr/local/bin/ctags -Re %s %s"
         tags-revert-without-query t)
