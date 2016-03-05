@@ -34,29 +34,6 @@
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
 
-;; Projectile
-(use-package projectile
-  :config
-  (progn
-    (setq projectile-enable-caching t)
-    (projectile-global-mode t)
-    (diminish 'projectile-mode " ℗")
-    ))
-
-(use-package helm-mode
-  :diminish (helm-mode . "H")
-  :bind
-  (("M-y" . helm-show-kill-ring))
-  :config
-  (helm-autoresize-mode t)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-z")  'helm-select-action)
-  (setq helm-recentf-fuzzy-match    t
-        helm-M-x-fuzzy-match t
-        helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f")
-  (key-chord-define-global "yy" 'helm-show-kill-ring))
-
 (use-package js-mode
   :config
   (setq auto-mode-alist (cons '("\\.template$" . js-mode) auto-mode-alist)))
