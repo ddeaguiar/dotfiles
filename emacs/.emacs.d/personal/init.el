@@ -12,7 +12,8 @@
    rainbow-identifiers
    ack
    hydra
-   paradox))
+   paradox
+   ggtags))
 
 (eval-when-compile
   (require 'use-package))

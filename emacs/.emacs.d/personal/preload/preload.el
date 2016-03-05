@@ -13,4 +13,5 @@
         (helm-descbinds      . "melpa-stable")
         (projectile          . "melpa-stable")
         (projectile-ruby     . "melpa-stable")
-        (rainbow-delimiters  . "melpa-stable"))) 
+        (rainbow-delimiters  . "melpa-stable")
+        (ggtags              . "melpa-stable")))
