@@ -34,10 +34,6 @@
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
 
-(use-package js-mode
-  :config
-  (setq auto-mode-alist (cons '("\\.template$" . js-mode) auto-mode-alist)))
-
 ;; TAGS management
 (use-package ctags
   :init
