@@ -11,6 +11,7 @@
    (quote
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(org-agenda-files nil)
+ '(paradox-github-token t)
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map
    (quote
