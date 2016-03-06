@@ -5,7 +5,8 @@
 
 (use-package multi-term
   :init
-  (setq prelude-term-buffer-name "multi"))
+  (setq prelude-term-buffer-name "multi")
+  (add-hook 'term-mode-hook (lambda () (yas-minor-mode -1))))
 
 (use-package yasnippet
   :diminish (yas-minor-mode . " Ŷ")
