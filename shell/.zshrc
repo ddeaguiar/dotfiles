@@ -9,6 +9,8 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
+TERM=xterm-256color
+
 # Shell options
 setopt rm_star_wait
 setopt auto_pushd

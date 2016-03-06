@@ -13,7 +13,8 @@
    ack
    hydra
    paradox
-   ggtags))
+   ggtags
+   multi-term))
 
 (eval-when-compile
   (require 'use-package))

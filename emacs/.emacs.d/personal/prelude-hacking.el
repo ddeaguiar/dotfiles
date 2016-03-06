@@ -3,6 +3,10 @@
 
 (add-hook 'after-init-hook 'global-company-mode)
 
+(use-package multi-term
+  :init
+  (setq prelude-term-buffer-name "multi"))
+
 (use-package yasnippet
   :diminish (yas-minor-mode . " Ŷ")
   :init
