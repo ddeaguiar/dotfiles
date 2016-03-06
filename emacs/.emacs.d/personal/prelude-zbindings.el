@@ -23,8 +23,9 @@
 (global-set-key (kbd "C-x p") 'print-buffer)
 
 ;; Disable annoying key chords
-(key-chord-define-global "uu" nil)
-(key-chord-define-global "lj" nil)
+;;(key-chord-define-global "uu" nil)
+;;(key-chord-define-global "lj" nil)
+
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 
@@ -78,7 +79,6 @@
     (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
     (sp-with-modes '(html-mode sgml-mode)
       (sp-local-pair "<" ">"))
-    
     (define-key sp-keymap (kbd "C-M-f") 'sp-forward-sexp)
     (define-key sp-keymap (kbd "C-M-b") 'sp-backward-sexp)
     (define-key sp-keymap (kbd "C-M-d") 'sp-down-sexp)

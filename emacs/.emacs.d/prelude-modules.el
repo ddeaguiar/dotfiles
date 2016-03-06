@@ -5,7 +5,7 @@
 (require 'prelude-ido) ;; Super charges Emacs completion for C-x C-f and more
 (require 'prelude-helm) ;; Interface for narrowing and search
 (require 'prelude-company)
-(require 'prelude-key-chord) ;; Binds useful features to key combinations
+;;(require 'prelude-key-chord) ;; Binds useful features to key combinations
 ;; (require 'prelude-mediawiki)
 ;; (require 'prelude-evil)
 
@@ -16,9 +16,9 @@
 (require 'prelude-common-lisp)
 (require 'prelude-css)
 (require 'prelude-emacs-lisp)
-(require 'prelude-erlang)
-(require 'prelude-go)
-(require 'prelude-haskell)
+;;(require 'prelude-erlang)
+;;(require 'prelude-go)
+;;(require 'prelude-haskell)
 (require 'prelude-js)
 ;; (require 'prelude-latex)
 (require 'prelude-lisp)

@@ -9,7 +9,6 @@
   (setq helm-recentf-fuzzy-match    t
         helm-M-x-fuzzy-match t
         helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f")
-  (key-chord-define-global "yy" 'helm-show-kill-ring))
+        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f"))
 
 (provide 'personal/prelude-helm)

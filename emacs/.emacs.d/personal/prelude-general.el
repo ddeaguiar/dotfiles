@@ -52,7 +52,7 @@
 (setq system-name (car (split-string system-name "\\.")))
 
 ;; Spelling
-(use-package flyspell-mode
+(use-package flyspell-prog-mode
   :diminish (flyspell-mode " FSp")
   :config
   (progn

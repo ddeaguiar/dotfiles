@@ -1,11 +1,6 @@
 (prelude-require-packages
- '(use-package
-   git-gutter-fringe+
+ '(git-gutter-fringe+
    powerline
-   cyberpunk-theme
-   flatland-theme
-   smart-mode-line
-   writegood-mode
    indicators
    unbound
    dired+
@@ -20,7 +15,7 @@
   (require 'use-package))
 
 (require 'diminish)
-(require 'bind-key)
+;;(require 'bind-key)
 (require 'prelude-helm-everywhere)
 
 (add-to-list 'load-path "/Users/ddeaguiar/src/org-mode/lisp")

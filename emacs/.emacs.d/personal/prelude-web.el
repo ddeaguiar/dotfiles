@@ -1,11 +1,16 @@
 ;; Packages
 
+(prelude-require-packages
+ '(restclient
+   company-restclient
+   emmet-mode
+   htmlize
+   less-css-mode))
+
 ;; Restclient
 (use-package restclient
   :config
   (setq auto-mode-alist (cons '("\\.http$" . restclient-mode) auto-mode-alist)))
-
-(use-package company-restclient)
 
 ;; Zen Coding
 (use-package web-mode
@@ -26,7 +31,7 @@
             web-mode-code-indent-offset 2
             web-mode-enable-auto-pairing t)
       (add-to-list 'sp-ignore-modes-list 'web-mode)))
-  
+
   :config
   (setq auto-mode-alist (cons '("\\.php$" . web-mode) auto-mode-alist))
   (add-hook 'web-mode-hook  'personal/web-mode-hook)
@@ -36,8 +41,3 @@
   :config
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'web-mode-hook 'emmet-mode))
-
-(use-package htmlize)
-(use-package markdown-mode)
-(use-package coffee-mode)
-(use-package less-css-mode)

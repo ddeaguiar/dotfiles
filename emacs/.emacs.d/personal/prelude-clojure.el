@@ -1,3 +1,10 @@
+(prelude-require-packages
+ '(javadoc-lookup
+   clojure-cheatsheet
+   datomic-snippets
+   cljsbuild-mode
+   align-cljlet))
+
 (use-package clojure-mode
              :init
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
@@ -6,16 +13,15 @@
              :bind
              (("C-i" . align-cljlet))
              :config
-             (progn
-               (define-clojure-indent
-                 (defroutes 'defun)
-                 (GET 2)
-                 (POST 2)
-                 (PUT 2)
-                 (DELETE 2)
-                 (HEAD 2)
-                 (ANY 2)
-                 (context 2))))
+             (define-clojure-indent
+               (defroutes 'defun)
+               (GET 2)
+               (POST 2)
+               (PUT 2)
+               (DELETE 2)
+               (HEAD 2)
+               (ANY 2)
+               (context 2)))
 
 (use-package cider-mode
              :init
@@ -49,12 +55,6 @@
 
 (use-package clojure-snippets
   :ensure t)
-
-(use-package javadoc-lookup)
-(use-package clojure-cheatsheet)
-(use-package datomic-snippets)
-(use-package cljsbuild-mode)
-(use-package align-cljlet)
 
 (setq cljr-warn-on-eval nil)
 

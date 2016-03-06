@@ -15,3 +15,5 @@
         (projectile-ruby     . "melpa-stable")
         (rainbow-delimiters  . "melpa-stable")
         (ggtags              . "melpa-stable")))
+
+(setq prelude-theme 'cyberpunk)

@@ -1,6 +1,3 @@
-;;; General programming and language settings not
-;;; deserving of their own files
-
 (add-hook 'after-init-hook 'global-company-mode)
 
 (use-package multi-term
@@ -39,7 +36,6 @@
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
 
-;; TAGS management
 (use-package ctags
   :init
   (setq path-to-ctags "/usr/local/bin/ctags"
@@ -49,7 +45,10 @@
   (("<f7>" . ctags-create-or-update-tags-table)
    ("M-." . ctags-search)))
 
-(use-package ctags-update)
+(prelude-require-packages
+ '(ctags-update
+   xcscope
+   helm-cscope-mode))
 
 (use-package ctags-auto-update-mode
   :diminish ctags-auto-update-mode
@@ -58,7 +57,6 @@
   (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
   (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode))
 
-;; Code analysis
 (use-package xcscope
   :config (add-hook 'ruby-mode-hook 'cscope-setup))
 

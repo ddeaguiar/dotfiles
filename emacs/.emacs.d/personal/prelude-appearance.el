@@ -1,6 +1,7 @@
-;; No stupid menu bar or scroll bar
-(menu-bar-mode -1)
-;; (scroll-bar-mode -1)
+;; Require themes
+(prelude-require-packages
+ '(cyberpunk-theme
+   flatland-theme))
 
 ;; Whitespace, Indentation
 (setq-default tab-width 2)
@@ -15,21 +16,10 @@
 (setq visible-bell nil)
 (setq load-prefer-newer t)
 
-(use-package rainbow-mode
-  :pin melpa-stable)
-
-(use-package cyberpunk-theme
-  :init
-  (add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-18"))
-  (disable-theme 'zenburn)
-  (menu-bar-mode -1)
-  (line-number-mode t)
-  (column-number-mode t)
-  (whitespace-mode t)
-  (global-prettify-symbols-mode t)
-  :config
-  (setq prelude-theme 'cyberpunk)
-  (add-hook 'prog-mode-hook 'rainbow-identifiers-mode))
+;; General niceties
+(global-prettify-symbols-mode t)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-18"))
 
 ;;; Mode Line
 (use-package powerline
@@ -40,9 +30,8 @@
   (setq powerline-arrow-shape 'arrow)
   :config
   (powerline-center-theme)
-
-    (custom-set-faces
-     '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320"))))
+  (custom-set-faces
+    '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320"))))
     '(powerline-active2 ((t (:foreground "#b9d977" :background "#353a3d"))))))
 
 ;;; Line Numbers
