@@ -64,6 +64,9 @@ custom-configuration.el
 /targets/
 TAGS
 .ctags
+GPATH
+GRTAGS
+GTAGS
 \#*\#
 auto-save-list
 atlassian-ide-plugin.xml
