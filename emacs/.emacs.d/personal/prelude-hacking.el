@@ -36,31 +36,10 @@
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
 
-(use-package ctags
-  :init
-  (setq path-to-ctags "/usr/local/bin/ctags"
-        projectile-tags-command "/usr/local/bin/ctags -Re %s %s"
-        tags-revert-without-query t)
-  :bind
-  (("<f7>" . ctags-create-or-update-tags-table)
-   ("M-." . ctags-search)))
-
-(prelude-require-packages
- '(ctags-update
-   xcscope
-   helm-cscope-mode))
-
-(use-package ctags-auto-update-mode
-  :diminish ctags-auto-update-mode
-  :commands ctags-update
-  :config
-  (add-hook 'c-mode-common-hook  'turn-on-ctags-auto-update-mode)
-  (add-hook 'emacs-lisp-mode-hook  'turn-on-ctags-auto-update-mode))
-
 (use-package xcscope
   :config (add-hook 'ruby-mode-hook 'cscope-setup))
 
-(use-package helm-cscope-mode
+(use-package helm-cscope
   :config (add-hook 'ruby-mode-hook 'helm-cscope-mode))
 
 (provide 'personal/prelude-hacking)
