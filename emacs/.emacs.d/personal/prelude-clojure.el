@@ -1,10 +1,3 @@
-(prelude-require-packages
- '(javadoc-lookup
-   clojure-cheatsheet
-   datomic-snippets
-   cljsbuild-mode
-   align-cljlet))
-
 (use-package clojure-mode
              :init
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
@@ -23,7 +16,7 @@
                (ANY 2)
                (context 2)))
 
-(use-package cider-mode
+(use-package cider
              :init
              (setq cider-repl-use-pretty-printing t
                    nrepl-hide-special-buffers t
@@ -50,11 +43,16 @@
   (add-hook 'clojure-mode-hook
             (lambda ()
               (clj-refactor-mode 1)
-              (cljr-add-keybindings-with-prefix "C-c C-a")))
-  :ensure t)
+              (cljr-add-keybindings-with-prefix "C-c C-a"))))
 
-(use-package clojure-snippets
-  :ensure t)
+(use-package clojure-snippets)
+(use-package javadoc-lookup)
+(use-package clojure-cheatsheet)
+(use-package datomic-snippets)
+(use-package cljsbuild-mode)
+(use-package align-cljlet)
+
+
 
 (setq cljr-warn-on-eval nil)
 

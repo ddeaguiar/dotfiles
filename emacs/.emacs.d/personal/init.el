@@ -19,6 +19,7 @@
 (require 'prelude-helm-everywhere)
 
 (add-to-list 'load-path "/Users/ddeaguiar/src/org-mode/lisp")
+(setq use-package-always-ensure t)
 
 (setq user-email-address "ddeaguiar@pointslope.com")
 (setq user-full-name "Daniel De Aguiar")

@@ -1,4 +1,4 @@
-(use-package helm-mode
+(use-package helm
   :diminish (helm-mode . "H")
   :bind
   (("M-y" . helm-show-kill-ring))

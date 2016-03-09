@@ -45,9 +45,15 @@
   :config
   (ansi-color-for-comint-mode-on))
 
-(diminish 'company-mode " ©")
-(diminish 'flycheck-mode " ✓")
-(diminish 'whitespace-mode " Ws")
+(use-package company
+  :diminish (company-mode . " ©"))
+
+(use-package flycheck
+  :diminish (flycheck-mode . " ✓"))
+
+(use-package whitespace
+  :diminish (whitespace-mode . " Ws"))
+
 (diminish 'prelude-mode)
 
 (provide 'personal/prelude-appearance)

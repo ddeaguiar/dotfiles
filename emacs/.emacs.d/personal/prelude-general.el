@@ -52,7 +52,7 @@
 (setq system-name (car (split-string system-name "\\.")))
 
 ;; Spelling
-(use-package flyspell-prog-mode
+(use-package flyspell
   :diminish (flyspell-mode " FSp")
   :config
   (progn
@@ -66,17 +66,14 @@
   ("C-c J" . ace-jump-buffer))
 
 (use-package ace-window
-  :defer t
   :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   :bind ("C-c H" . ace-window))
 
 (use-package ace-isearch
-  :defer t
   :config
   (global-ace-isearch-mode 1))
 
 (use-package ace-jump-zap
-  :defer t
   :bind
   (("M-z" . ace-jump-zap-up-to-char-dwim)
    ("M-Z" . ace-jump-zap-to-char-dwim)))

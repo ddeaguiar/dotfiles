@@ -1,4 +1,4 @@
-(use-package geiser-mode
+(use-package geiser
   :bind ("C-c M-g" . run-geiser)
   :config
   (setq geiser-active-implementations '(racket)
