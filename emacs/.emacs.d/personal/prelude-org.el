@@ -19,26 +19,4 @@
               (writegood-mode)
               (auto-fill-mode))))
 
-(use-package ob
-  :config
-  (require 'ob)
-  (require 'ob-clojure)
-  (require 'cider)
-  (setq org-babel-clojure-backend 'cider
-        org-fontify-done-headline t
-        org-src-fontify-natively t
-        org-confirm-babel-evaluate nil
-        org-src-window-setup 'current-window)
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . t)
-     (sh         . t)
-     (clojure    . t)
-     (java       . t)
-     (js         . t)
-     (ruby       . t)
-     (python     . t)))
-  (add-to-list 'org-babel-tangle-lang-exts '("clojure" . "clj"))
-  (add-to-list 'org-babel-tangle-lang-exts '("js"      . "js")))
-
 (provide 'personal/prelude-org)
