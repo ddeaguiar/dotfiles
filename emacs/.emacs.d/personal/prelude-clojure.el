@@ -22,7 +22,8 @@
                    nrepl-hide-special-buffers t
                    cider-prefer-local-resources t
                    nrepl-log-messages t
-                   cider-show-error-buffer 'only-in-repl
+                   cider-show-error-buffer 'except-in-repl
+                   cider-repl-pop-to-buffer-on-connect nil
                    cider-auto-select-error-buffer nil
                    cider-prompt-save-file-on-load nil
                    cider-stacktrace-default-filters '(tooling dup)
