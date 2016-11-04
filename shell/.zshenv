@@ -20,47 +20,12 @@ export SAVEHIST=10000
 # Allow emacsclient to fire up an emacs daemon if
 # one is not already running.
 export ALTERNATE_EDITOR=""
-export BUKKIT_PLUGINS_DIR="$HOME/bukkit/plugins"
-export EC2_HOME="$HOME/ec2-api-tools"
-export PLTCOLLECTS=":$HOME/Library/Racket/collections"
-export CS_HOME="$HOME/bin/cloud-search"
-export MONO_GAC_PREFIX="/usr/local"
 
-#https://github.com/sorin-ionescu/prezto/tree/master/modules/python
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-export PROJECT_HOME="$HOME/src/ps"
-
-#Java
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home
-export ANT_OPTS="-Xms512M -Xmx512M -XX:+UseParallelGC"
-export JRE_HOME=$JAVA_HOME
-
-#Oracle
-# export ORACLE_HOME=/opt/local/oracle/instantclient_10_2
-# export CLASSPATH=$ORACLE_HOME:$ORACLE_HOME/ojdbc14.jar:$CLASSPATH
-# export DYLD_LIBRARY_PATH=$ORACLE_HOME
-# export LD_LIBRARY_PATH=$ORACLE_HOME
-# export SQLPATH=$ORACLE_HOME
-# export TNS_ADMIN=/opt/local/oracle/network/admin
-# export NLS_LANG=AMERICAN_AMERICA.UTF8
-# export PATH=$PATH:$DYLD_LIBRARY_PATH:$SQLPATH
-# export RC_ARCHS=x86_64
 
 # Ensure that a non-login, non-interactive shell has a defined environment.
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-
-#Boot2docker
-#export DOCKER_HOST=tcp://192.168.59.103:2376
-#export DOCKER_CERT_PATH=/Users/ddeaguiar/.boot2docker/certs/boot2docker-vm
-#export DOCKER_TLS_VERIFY=1
-
-#Boot
-export BOOT_JVM_OPTIONS="-client -XX:+TieredCompilation -XX:TieredStopAtLevel=1 -Xmx2g -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Xverify:none"
-
-# go
-export GOPATH=$HOME/gocode
 
 # add my bin dir to path
 export PATH="$HOME/bin:$PATH"
