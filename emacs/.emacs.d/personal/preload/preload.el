@@ -4,7 +4,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (setq package-pinned-packages
-      '((clojure-mode        . "melpa-stable")
+      '(;;(clojure-mode        . "melpa-stable")
         (cider               . "melpa-stable")
         (company             . "melpa-stable")
         (helm                . "melpa-stable")
@@ -16,4 +16,5 @@
         (rainbow-delimiters  . "melpa-stable")
         (ggtags              . "melpa-stable")))
 
+;; uncomment after first install
 (setq prelude-theme 'cyberpunk)

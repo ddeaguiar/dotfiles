@@ -1,5 +1,6 @@
 (prelude-require-packages
- '(git-gutter-fringe+
+ '(use-package
+   git-gutter-fringe+
    powerline
    indicators
    unbound
