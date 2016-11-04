@@ -10,31 +10,6 @@ nnoremap ; :
 set nocompatible                  " Must come first because it changes other options.
 
 filetype off                      " Required by vundle
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
-
-"Plugins
-Plugin 'tpope/vim-fugitive'
-Plugin 'wincent/Command-T'
-Plugin 'pangloss/vim-simplefold'
-Plugin 'tpope/vim-git'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'godlygeek/tabular'
-Plugin 'LustyExplorer'
-Plugin 'LustyJuggler'
-Plugin 'matchit.zip'
-Plugin 'open-browser.vim'
-Plugin 'The-NERD-Commenter'
-Plugin 'ack.vim'
-Plugin 'VimClojure'
-Plugin 'taglist.vim'
-
-call vundle#end()
 filetype plugin indent on         " Turn on file type detection.
 set omnifunc=syntaxcomplete#Complete
 syntax enable                     " Turn on syntax highlighting.
@@ -86,7 +61,7 @@ set expandtab                    " Use spaces instead of tabs
 
 set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
-set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P%{fugitive#statusline()}
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
