@@ -85,6 +85,15 @@
 
 (add-hook 'prelude-prog-mode-hook 'disable-guru-mode t)
 
+(use-package markdown-mode
+;; markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;; File handling
 (setq backup-directory-alist
       '(("." . "~/.emacs.backups")))

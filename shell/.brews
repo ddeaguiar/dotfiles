@@ -4,7 +4,6 @@ direnv
 dos2unix
 git
 git-extras
-tig
 jenv
 jq
 leiningen
