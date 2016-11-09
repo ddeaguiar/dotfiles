@@ -70,6 +70,7 @@
    ("M-\\"             . personal/delete-horizontal-space)
    ("M-SPC"            . personal/just-one-space)
    :map smartparens-mode-map
+   ("C-k"              . sp-kill-hybrid-sexp)
    ("C-M-f"            . sp-forward-sexp)
    ("C-M-b"            . sp-backward-sexp)
    ("C-M-d"            . sp-down-sexp)
