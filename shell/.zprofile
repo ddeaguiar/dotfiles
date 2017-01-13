@@ -47,6 +47,7 @@ path=(
   $HOME/bin
   /usr/local/{bin,sbin}
   /opt/homebrew-cask/Caskroom/racket/6.1/Racket\ v6.1/bin
+  $HOME/datomic-pro/bin
   $PATH
 )
 
