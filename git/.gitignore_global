@@ -86,3 +86,5 @@ sonar-project.properties
 # Clojure
 .nrepl-port
 .lein-failures
+repl-history
+repl-port

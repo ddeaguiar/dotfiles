@@ -58,7 +58,7 @@
 
 (use-package smartparens
   :diminish (smartparens-mode . " (Sm)")
-  :init
+  :config
   (defun personal/delete-horizontal-space ()
     (interactive)
     (just-one-space -1)
