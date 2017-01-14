@@ -1,0 +1,52 @@
+{
+  "pedestal_log": {
+    "title": "Pedestal log format",
+    "description": "Default log format used for Pedestal apps",
+    "url": "",
+    "regex": {      
+      "pedestal": {
+        "pattern": "^(?<timestamp>\\d{2}:\\d{2}:\\d{2}\\.\\d{3}) \\[(?<function>\\w+[\\w-\\d]*?)\\]\\s+(?<alert_level>\\w+)\\s+(?<class>[\\w.]+)\\s+-\\s+(?<body>\\S.*)$"
+      }
+    },
+    "level-field": "alert_level",
+    "level": {
+      "error": "ERROR",
+      "warning": "WARN",
+      "debug": "DEBUG",
+      "info": "INFO",
+      "trace": "TRACE"
+    },
+    "value": {
+      "function": {
+        "kind": "string",
+        "identifier": true
+      },
+      "alert_level": {
+        "kind": "string"
+      },
+      "jvm_no": {
+        "kind": "integer"
+      },
+      "debug_level": {
+        "kind": "string"
+      },
+      "class": {
+        "kind": "string"
+      },
+      "body": {
+        "kind": "string"
+      },
+      "body": {
+        "kind": "string"
+      }
+    },
+    "sample": [
+      {
+        "line": "17:36:48.273 [nREPL-worker-0] INFO  org.eclipse.jetty.server.Server - Started @35481ms"
+      },
+      {
+        "line": "17:36:59.329 [qtp2075067241-52] INFO  io.pedestal.http.cors - {:msg \"cors request processing\", :origin \"\", :allowed true, :line 84}"
+      }
+    ]
+  }
+}
