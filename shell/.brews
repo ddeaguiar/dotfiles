@@ -1,3 +1,4 @@
+boot-clj
 cask
 ctags
 direnv
@@ -15,3 +16,4 @@ tmux
 tree
 watch
 wget
+lnav
