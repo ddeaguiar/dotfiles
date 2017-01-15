@@ -1,8 +1,0 @@
-autodetach on
-startup_message off
-pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
-
-defhstatus "screen: ^En (^Et)"
-defscrollback 1000
-
-shell -$SHELL
