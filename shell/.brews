@@ -3,6 +3,7 @@ cask
 ctags
 direnv
 dos2unix
+emacs
 entr
 git
 git-extras
