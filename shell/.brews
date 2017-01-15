@@ -3,12 +3,16 @@ cask
 ctags
 direnv
 dos2unix
+entr
 git
 git-extras
 jenv
 jq
 leiningen
+lnav
 maven
+python
+readline
 rlwrap
 stow
 tig
@@ -16,4 +20,3 @@ tmux
 tree
 watch
 wget
-lnav
