@@ -6,6 +6,8 @@
 	<true/>
 	<key>AllowClipboardAccess</key>
 	<false/>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>AnimateDimming</key>
 	<false/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -819,6 +821,8 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
+	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
 		<data>
@@ -830,18 +834,18 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>304</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
-	<key>NSWindow Frame NSFontPanel</key>
-	<string>673 155 445 77 0 0 1440 877 </string>
-	<key>NSWindow Frame Preferences</key>
-	<string>-1481 24 924 485 -1920 0 1920 1057 </string>
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>410 364 620 392 0 0 1440 877 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>206 316 918 512 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 916 745 501 0 0 2560 1417 </string>
+	<string>2560 554 1438 863 2560 540 1440 877 </string>
 	<key>NeverWarnAboutShortLivedSessions_B2C4576B-19BA-4AD6-BD6C-D37FFE366561</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -3849,14 +3853,32 @@
 			<string></string>
 		</dict>
 	</array>
-	<key>NoSyncHaveShownPromoWithId_4</key>
+	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
-	<key>NoSyncNeverRemindPrefsChangesCopy</key>
+	<key>NoSyncInstallationId</key>
+	<string>AF76673E-2793-4C05-89E4-0CFAB01BB665</string>
+	<key>NoSyncLastTipTime</key>
+	<real>502830919.22977102</real>
+	<key>NoSyncPermissionToShowTip</key>
 	<true/>
-	<key>NoSyncTimeOfLastPromo</key>
-	<real>477931525.20089799</real>
-	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>483209804.55050403</real>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>500082982.86852401</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
+		<string>0008</string>
+		<string>0009</string>
+	</array>
 	<key>NotFirstRun</key>
 	<true/>
 	<key>OnlyWhenMoreTabs</key>
@@ -3920,12 +3942,16 @@
 	<integer>3</integer>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
+	<key>SUFeedAlternateAppNameKey</key>
+	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=79</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-04-24T16:56:35Z</date>
+	<date>2017-01-14T22:44:58Z</date>
+	<key>SUSendProfileInfo</key>
+	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -3977,6 +4003,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.1.4</string>
+	<string>3.0.13</string>
 </dict>
 </plist>
