@@ -8,13 +8,9 @@
              :config
              (define-clojure-indent
                (defroutes 'defun)
-               (GET 2)
-               (POST 2)
-               (PUT 2)
-               (DELETE 2)
-               (HEAD 2)
-               (ANY 2)
-               (context 2)))
+               (handler 1)
+               (component 1)
+               (context 1)))
 
 (use-package cider
              :init
@@ -50,7 +46,6 @@
 (use-package clojure-cheatsheet)
 (use-package datomic-snippets)
 (use-package cljsbuild-mode)
-(use-package align-cljlet)
 
 
 
