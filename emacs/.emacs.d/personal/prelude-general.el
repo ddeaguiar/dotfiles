@@ -51,6 +51,8 @@
 ;; Work around a bug on OS X where system-name is a FQDN
 (setq system-name (car (split-string system-name "\\.")))
 
+(use-package aggressive-indent)
+
 ;; Spelling
 (use-package flyspell
   :diminish (flyspell-mode " FSp")

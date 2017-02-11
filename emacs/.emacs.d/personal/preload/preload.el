@@ -14,7 +14,8 @@
         (projectile          . "melpa-stable")
         (projectile-ruby     . "melpa-stable")
         (rainbow-delimiters  . "melpa-stable")
-        (ggtags              . "melpa-stable")))
+        (ggtags              . "melpa-stable")
+        (aggressive-indent   . "melpa-stable")))
 
 ;; uncomment after first install
 (setq prelude-theme 'cyberpunk)

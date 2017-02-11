@@ -7,10 +7,14 @@
              (("C-i" . align-cljlet))
              :config
              (define-clojure-indent
-               (defroutes 'defun)
-               (handler 1)
-               (component 1)
-               (context 1)))
+               (defroutes '(:defn))
+               (handler '(:form))
+               (component '(:form))
+               (context '(:form))
+               (with-link '(:form))
+               (with-embedded-coll '(:form))
+               (http-service-client '(:form)))
+             (add-hook 'clojure-mode-hook 'aggressive-indent-mode))
 
 (use-package cider
              :init
