@@ -116,7 +116,7 @@
   (show-smartparens-global-mode t)
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
-  (sp-with-modes '(html-mode cider-repl-mode)
+  (sp-with-modes '(clojure-mode cider-repl-mode)
     (sp-local-pair "`" nil :actions nil))
   (sp-with-modes '(html-mode sgml-mode)
     (sp-local-pair "<" ">")))
