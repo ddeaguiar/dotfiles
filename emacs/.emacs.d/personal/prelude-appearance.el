@@ -19,7 +19,7 @@
 ;; General niceties
 (global-prettify-symbols-mode t)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-18"))
+(add-to-list 'default-frame-alist '(font . "Source Code Pro Light-16"))
 
 ;;; Mode Line
 (use-package powerline
