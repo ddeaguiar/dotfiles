@@ -3,8 +3,6 @@
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.boot$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
-             :bind
-             (("C-i" . align-cljlet))
              :config
              (define-clojure-indent
                (defroutes '(:defn))
