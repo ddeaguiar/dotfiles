@@ -28,7 +28,7 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 # add my bin dir to path
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.jenv/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
@@ -40,3 +40,6 @@ if [ -x /usr/libexec/path_helper ]; then
     PATH=''
     eval `/usr/libexec/path_helper -s`
 fi
+
+export NVM_DIR="/Users/ddeaguiar/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
