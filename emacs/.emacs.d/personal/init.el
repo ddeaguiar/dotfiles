@@ -28,9 +28,7 @@
 ;; -- Appearance --
 
 ;; Require themes
-(prelude-require-packages
- '(cyberpunk-theme
-   flatland-theme))
+(use-package cyberpunk-theme)
 
 ;; Whitespace, Indentation
 (setq-default tab-width 2)
@@ -206,8 +204,6 @@
         helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
         helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f"))
 
-(prelude-require-packages '(projectile-direnv))
-
 (use-package projectile
   :diminish (projectile-mode . " ℗")
   :config
@@ -339,17 +335,15 @@
 
 ;; -- Web --
 
-(prelude-require-packages
- '(restclient
-   company-restclient
-   emmet-mode
-   htmlize
-   less-css-mode))
+(use-package htmlize)
+(use-package less-css-mode)
 
 ;; Restclient
 (use-package restclient
   :config
   (setq auto-mode-alist (cons '("\\.http$" . restclient-mode) auto-mode-alist)))
+
+(use-package company-restclient)
 
 ;; Zen Coding
 (use-package web-mode
