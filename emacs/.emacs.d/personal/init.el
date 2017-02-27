@@ -26,6 +26,12 @@
 
 ;; Require themes
 (use-package cyberpunk-theme)
+(use-package moe-theme
+  :config
+  (require 'powerline)
+  (moe-dark)
+  (moe-theme-set-color 'orange)
+  (powerline-moe-theme))
 
 ;; Whitespace, Indentation
 (setq-default tab-width 2)
@@ -43,20 +49,14 @@
 ;; General niceties
 (global-prettify-symbols-mode t)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-(add-to-list 'default-frame-alist '(font . "Source Code Pro Light-16"))
+(add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-16"))
 
 ;;; Mode Line
 (use-package powerline
   :init
-  ;; If you have font-rendering issues with powerline
-  ;; when running emacs in a terminal, you may need to change
-  ;; your Non-ASCII font. See http://input.fontbureau.com/workarounds/
   (setq powerline-arrow-shape 'arrow)
   :config
-  (powerline-center-theme)
-  (custom-set-faces
-    '(powerline-active1 ((t (:foreground "#e0e0e0" :background "#202320"))))
-    '(powerline-active2 ((t (:foreground "#b9d977" :background "#353a3d"))))))
+  (powerline-center-theme))
 
 ;;; Line Numbers
 (use-package linum

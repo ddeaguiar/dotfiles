@@ -16,6 +16,3 @@
         (rainbow-delimiters  . "melpa-stable")
         (ggtags              . "melpa-stable")
         (aggressive-indent   . "melpa-stable")))
-
-;; uncomment after first install
-(setq prelude-theme 'cyberpunk)
