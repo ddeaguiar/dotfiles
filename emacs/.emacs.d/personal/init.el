@@ -51,6 +51,26 @@
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-16"))
 
+(add-hook 'isearch-mode-end-hook 'recenter-top-bottom)
+
+(defadvice
+    isearch-forward
+    (after isearch-forward-recenter activate)
+  (recenter))
+(ad-activate 'isearch-forward)
+
+(defadvice
+    isearch-repeat-forward
+    (after isearch-repeat-forward-recenter activate)
+  (recenter))
+(ad-activate 'isearch-repeat-forward)
+
+(defadvice
+    isearch-repeat-backward
+    (after isearch-repeat-backward-recenter activate)
+  (recenter))
+(ad-activate 'isearch-repeat-backward)
+
 ;;; Mode Line
 (use-package powerline
   :init
@@ -283,7 +303,8 @@
                    cider-repl-history-file "/tmp/cider-repl.history")
              :config
              (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode))
+             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+             (advice-add 'cider-find-var :after #'recenter-top-bottom))
 
 (use-package clj-refactor
   :config
