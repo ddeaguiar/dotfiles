@@ -9,20 +9,17 @@
    ack
    hydra
    paradox
-   ggtags
-   multi-term))
+   ggtags))
 
 (eval-when-compile
   (require 'use-package))
 
 (require 'diminish)
-;;(require 'bind-key)
 (require 'prelude-helm-everywhere)
 
-(add-to-list 'load-path "/Users/ddeaguiar/src/org-mode/lisp")
 (setq use-package-always-ensure t)
 
-(setq user-email-address "ddeaguiar@pointslope.com")
+(setq user-email-address "ddeaguiar@gmail.com")
 (setq user-full-name "Daniel De Aguiar")
 
 ;; -- Appearance --
@@ -151,23 +148,13 @@
     (setq-default ispell-list-command "list")))
 
 ;; Window management (ace-window)
-(use-package ace-jump-buffer
-  :bind
-  ("C-c J" . ace-jump-buffer))
 
 (use-package ace-window
-  :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  :bind ("C-c H" . ace-window))
+  :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
 (use-package ace-isearch
   :config
   (global-ace-isearch-mode 1))
-
-(use-package ace-jump-zap
-  :bind
-  (("M-z" . ace-jump-zap-up-to-char-dwim)
-   ("M-Z" . ace-jump-zap-to-char-dwim)))
-
 
 ;; Enable arrow keys
 (defun disable-guru-mode ()
@@ -212,9 +199,10 @@
 
 (use-package projectile-direnv
   :config
-  (add-hook 'projectile-mode-hook 'projectile-direnv-export-variables))
+  (add-hook 'projectile-after-switch-project-hook 'projectile-direnv-export-variables))
 
-;; -- Hacking --
+;; With Prelude I typically want to edit personal/init.el.
+(setq user-init-file load-file-name)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -253,12 +241,6 @@
   (add-to-list 'yas-snippet-dirs
                (expand-file-name "snippets" prelude-personal-dir))
   (yas/global-mode 1))
-
-(use-package xcscope
-  :config (add-hook 'ruby-mode-hook 'cscope-setup))
-
-(use-package helm-cscope
-  :config (add-hook 'ruby-mode-hook 'helm-cscope-mode))
 
 ;; -- Clojure --
 
@@ -387,23 +369,11 @@
 (global-set-key "\e[1;9C" [M-right])
 (global-set-key "\e[1;9D" [M-left])
 
-(global-set-key (kbd "C-c <C-left>") 'windmove-left)
-(global-set-key (kbd "C-c <C-right>") 'windmove-right)
-(global-set-key (kbd "C-c <C-up>") 'windmove-up)
-(global-set-key (kbd "C-c <C-down>") 'windmove-down)
-
 (global-set-key (kbd "C-c M-/") 'comment-region)
 (global-set-key (kbd "s-<backspace>") 'backward-kill-word)
 
-;; Utilities
-(global-set-key (kbd "C-c =") 'prelude-increment-integer-at-point)
-(global-set-key (kbd "C-c _") 'prelude-decrement-integer-at-point)
-
 ;; Ctrl-x r i Useful rectangle binding
 (global-set-key (kbd "C-x r i") 'string-insert-rectangle)
-
-;; Buffer shortcuts
-(global-set-key (kbd "C-x p") 'print-buffer)
 
 ;; Disable annoying key chords
 ;;(key-chord-define-global "uu" nil)
@@ -421,14 +391,6 @@
    ("C-c m t" . mc/mark-sgml-tag-pair)))
 
 ;; Window Management
-(global-set-key (kbd "C-c w s") 'swap-windows)
-(global-set-key (kbd "C-c w r") 'rotate-windows)
-(global-set-key (kbd "C-c w p") 'buf-move-up)
-(global-set-key (kbd "C-c w n") 'buf-move-down)
-(global-set-key (kbd "C-c w b") 'buf-move-left)
-(global-set-key (kbd "C-c w f") 'buf-move-right)
-(global-set-key (kbd "C-c w -") 'shrink-window)
-(global-set-key (kbd "C-c w =") 'enlarge-window)
 (global-set-key (kbd "M-o") 'other-window)
 
 (global-set-key (kbd "M-y") 'browse-kill-ring)
@@ -482,15 +444,6 @@
    ("C-M-]"            . sp-select-next-thing)
    ("M-F"              . sp-forward-symbol)
    ("M-B"              . sp-backward-symbol)
-   ("H-t"              . sp-prefix-tag-object)
-   ("H-p"              . sp-prefix-pair-object)
-   ("H-s c"            . sp-convolute-sexp)
-   ("H-s a"            . sp-absorb-sexp)
-   ("H-s e"            . sp-emit-sexp)
-   ("H-s p"            . sp-add-to-previous-sexp)
-   ("H-s n"            . sp-add-to-next-sexp)
-   ("H-s j"            . sp-join-sexp)
-   ("H-s s"            . sp-split-sexp)
    :map emacs-lisp-mode-map
    (")"                . sp-up-sexp))
   :config
@@ -560,9 +513,3 @@ _v_ariable       _u_ser-option
               (auto-fill-mode)
               (smartparens-mode -1)
               (prelude-off))))
-
-(use-package org-bullets
-  :ensure t
-  :config
-  (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
-  (setq org-hide-emphasis-markers t))
