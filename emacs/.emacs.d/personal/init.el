@@ -1,20 +1,11 @@
-(prelude-require-packages
- '(use-package
-   git-gutter-fringe+
-   powerline
-   indicators
-   unbound
-   dired+
-   rainbow-identifiers
-   ack
-   hydra
-   paradox
-   ggtags))
+(prelude-require-package 'use-package)
 
 (eval-when-compile
   (require 'use-package))
 
 (require 'diminish)
+(require 'bind-key)
+
 (require 'prelude-helm-everywhere)
 
 (setq use-package-always-ensure t)
@@ -22,7 +13,25 @@
 (setq user-email-address "ddeaguiar@gmail.com")
 (setq user-full-name "Daniel De Aguiar")
 
-;; -- Appearance --
+(use-package unbound)
+(use-package dired+)
+(use-package rainbow-identifiers)
+(use-package ack)
+(use-package hydra)
+(use-package paradox)
+(use-package ggtags)
+
+;;; Mode Line
+(use-package powerline
+  :init
+  (setq powerline-arrow-shape 'arrow)
+  :config
+  (powerline-center-theme))
+
+(use-package git-gutter
+  :config
+  (global-git-gutter-mode t)
+  (git-gutter:linum-setup))
 
 ;; Require themes
 (use-package moe-theme
@@ -69,13 +78,6 @@
     (after isearch-repeat-backward-recenter activate)
   (recenter))
 (ad-activate 'isearch-repeat-backward)
-
-;;; Mode Line
-(use-package powerline
-  :init
-  (setq powerline-arrow-shape 'arrow)
-  :config
-  (powerline-center-theme))
 
 ;;; Line Numbers
 (use-package linum
