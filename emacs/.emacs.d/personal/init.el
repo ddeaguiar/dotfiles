@@ -266,6 +266,7 @@
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.boot$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
+             (setq clojure-align-forms-automatically t)
              :config
              (define-clojure-indent
                (defroutes '(:defn))
