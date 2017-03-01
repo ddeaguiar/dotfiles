@@ -25,7 +25,6 @@
 ;; -- Appearance --
 
 ;; Require themes
-(use-package cyberpunk-theme)
 (use-package moe-theme
   :config
   (require 'powerline)
@@ -207,9 +206,7 @@
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-z")  'helm-select-action)
   (setq helm-recentf-fuzzy-match    t
-        helm-M-x-fuzzy-match t
-        helm-grep-default-command "ack -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command "ack -H --no-group --no-color %e %p %f"))
+        helm-M-x-fuzzy-match t))
 
 (use-package projectile
   :diminish (projectile-mode . " ℗")
