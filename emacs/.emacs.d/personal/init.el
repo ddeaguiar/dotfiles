@@ -534,3 +534,25 @@ _v_ariable       _u_ser-option
               (auto-fill-mode)
               (smartparens-mode -1)
               (prelude-off))))
+
+;; TODO: turn this into a minor mode.
+(defun my/git-pair ()
+  "Sets the '--author' argument to the entered pair author."
+  (interactive)
+  (let ((author (read-string "Pair Author (P1 & P2 <pair@example.org>)")))
+    (add-to-list 'magit-commit-arguments (concat "--author=" author))))
+
+(defun my/git-unpair ()
+  "Removes the '--author' commit argument."
+  (interactive)
+  (let ((result ()))
+    (dolist (arg magit-commit-arguments)
+      (when (not (string-match "--author" arg))
+        (push arg result)))
+    (setq magit-commit-arguments result)))
+
+(use-package magit
+  :config
+  (bind-keys
+   ("C-c C-p" . my/git-pair)
+   ("C-c C-o" . my/git-unpair)))
