@@ -539,17 +539,17 @@ _v_ariable       _u_ser-option
 (defun my/git-pair ()
   "Sets the '--author' argument to the entered pair author."
   (interactive)
-  (let ((author (read-string "Pair Author (P1 & P2 <pair@example.org>)")))
-    (add-to-list 'magit-commit-arguments (concat "--author=" author))))
+  (let ((author (read-string "i.e., A U Thor <author@example.com>: ")))
+    (add-to-list 'magit-commit-arguments (concat "--author=" author))
+    (minibuffer-message (concat "Pair author set to '" author "'"))))
 
 (defun my/git-unpair ()
   "Removes the '--author' commit argument."
   (interactive)
-  (let ((result ()))
-    (dolist (arg magit-commit-arguments)
-      (when (not (string-match "--author" arg))
-        (push arg result)))
-    (setq magit-commit-arguments result)))
+  (setq magit-commit-arguments
+        (remove-if (lambda (s) (string-match "--author" s))
+                   magit-commit-arguments))
+  (minibuffer-message "Pair author unset."))
 
 (use-package magit
   :config
