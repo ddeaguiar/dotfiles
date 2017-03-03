@@ -551,8 +551,19 @@ _v_ariable       _u_ser-option
                    magit-commit-arguments))
   (minibuffer-message "Pair author unset."))
 
+(define-minor-mode magit-gc-override-mode
+  "Toggle Magit git-commit override mode.
+   When enabled, allows git-commit overrides to be specified."
+  :init-value nil
+  :lighter " GCO"
+  :keymap (let ((map (make-sparse-keymap)))
+            (define-key map (kbd "C-c C-p") 'my/git-pair)
+            (define-key map (kbd "C-c C-o") 'my/git-unpair)
+            map)
+  :group 'magit-gc-override)
+
+(diminish 'magit-gc-override-mode " æ")
+
 (use-package magit
   :config
-  (bind-keys
-   ("C-c C-p" . my/git-pair)
-   ("C-c C-o" . my/git-unpair)))
+  (add-hook 'magit-mode-hook 'magit-gc-override-mode))
