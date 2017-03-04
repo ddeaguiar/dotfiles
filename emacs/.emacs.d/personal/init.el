@@ -544,7 +544,6 @@ _v_ariable       _u_ser-option
               (smartparens-mode -1)
               (prelude-off))))
 
-;; TODO: turn this into a minor mode.
 (defun my/git-pair ()
   "Sets the '--author' argument to the entered pair author."
   (interactive)
@@ -560,6 +559,7 @@ _v_ariable       _u_ser-option
                    magit-commit-arguments))
   (minibuffer-message "Pair author unset."))
 
+;; TODO: toggle overrides with mode.
 (define-minor-mode magit-gc-override-mode
   "Toggle Magit git-commit override mode.
    When enabled, allows git-commit overrides to be specified."
@@ -572,7 +572,3 @@ _v_ariable       _u_ser-option
   :group 'magit-gc-override)
 
 (diminish 'magit-gc-override-mode " æ")
-
-(use-package magit
-  :config
-  (add-hook 'magit-mode-hook 'magit-gc-override-mode))
