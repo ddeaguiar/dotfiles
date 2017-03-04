@@ -25,7 +25,7 @@
 (use-package key-chord
   :config
   (key-chord-define-global "jj" 'avy-goto-word-1)
-  (key-chord-define-global "jl" 'avy-goto-line)
+  (key-chord-define-global "ll" 'avy-goto-line)
   (key-chord-define-global "jk" 'avy-goto-char-2)
   (key-chord-define-global "JJ" 'crux-switch-to-previous-buffer)
   (key-chord-define-global "yy" 'browse-kill-ring)
