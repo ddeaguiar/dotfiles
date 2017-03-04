@@ -490,8 +490,7 @@
   ("k" hydra-move-splitter-up)
   ("l" hydra-move-splitter-right))
 
-(defhydra hydra-apropos (:color blue
-                                :hint nil)
+(defhydra hydra-apropos (:color blue :hint nil)
   "
 _a_propos        _c_ommand
 _d_ocumentation  _l_ibrary
@@ -506,6 +505,16 @@ _v_ariable       _u_ser-option
   ("e" apropos-value))
 ;; Recommended binding:
 (global-set-key (kbd "C-c H") 'hydra-apropos/body)
+
+(defhydra hydra-find-files (:color blue :hint nil)
+  "
+_i_nit  _l_ein-profile"
+  ("i" crux-find-user-init-file)
+  ("l" (lambda ()
+         (interactive)
+         (find-file-other-window "~/.lein/profiles.clj"))))
+
+(global-set-key (kbd "C-c C-f") 'hydra-find-files/body)
 
 ;; -- Org --
 
