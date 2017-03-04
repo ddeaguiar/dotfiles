@@ -28,6 +28,7 @@
   (key-chord-define-global "jl" 'avy-goto-line)
   (key-chord-define-global "jk" 'avy-goto-char-2)
   (key-chord-define-global "JJ" 'crux-switch-to-previous-buffer)
+  (key-chord-define-global "yy" 'browse-kill-ring)
   (key-chord-mode +1))
 
 ;;; Mode Line
@@ -36,11 +37,6 @@
   (setq powerline-arrow-shape 'arrow)
   :config
   (powerline-center-theme))
-
-(use-package git-gutter
-  :config
-  (global-git-gutter-mode t)
-  (git-gutter:linum-setup))
 
 ;; Require themes
 (use-package moe-theme
@@ -176,8 +172,6 @@
     (setq flyspell-issue-welcome-flag nil)
     (setq-default ispell-program-name "/usr/local/bin/aspell")
     (setq-default ispell-list-command "list")))
-
-;; Window management (ace-window)
 
 (use-package ace-window
   :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
@@ -421,11 +415,7 @@
    ("C-c m t" . mc/mark-sgml-tag-pair)))
 
 ;; Window Management
-(global-set-key (kbd "M-o") 'other-window)
-
-(global-set-key (kbd "M-y") 'browse-kill-ring)
 (global-set-key (kbd "M-p") 'fill-paragraph)
-(define-key prelude-mode-map (kbd "M-o") 'other-window)
 
 ;; Frame Management
 (global-set-key (kbd "s-o") 'other-frame)
