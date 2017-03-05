@@ -224,7 +224,7 @@
   (add-hook 'projectile-after-switch-project-hook 'projectile-direnv-export-variables))
 
 ;; With Prelude I typically want to edit personal/init.el.
-(setq user-init-file load-file-name)
+(setq user-init-file (concat prelude-user-init-file "init.el"))
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -478,41 +478,73 @@
     (sp-local-pair "<" ">")))
 
 ;; hydra
+;; from https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
 (defhydra hydra-zoom (global-map "<f2>")
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 
+(defun splitter-left (arg)
+  "Move window splitter left."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (shrink-window-horizontally arg)
+    (enlarge-window-horizontally arg)))
+
+(defun splitter-right (arg)
+  "Move window splitter right."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'right))
+      (enlarge-window-horizontally arg)
+    (shrink-window-horizontally arg)))
+
+(defun splitter-up (arg)
+  "Move window splitter up."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (enlarge-window arg)
+    (shrink-window arg)))
+
+(defun splitter-down (arg)
+  "Move window splitter down."
+  (interactive "p")
+  (if (let ((windmove-wrap-around))
+        (windmove-find-other-window 'up))
+      (shrink-window arg)
+    (enlarge-window arg)))
+
+;; from https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
 (defhydra hydra-splitter (global-map "C-M-s")
   "splitter"
-  ("h" hydra-move-splitter-left)
-  ("j" hydra-move-splitter-down)
-  ("k" hydra-move-splitter-up)
-  ("l" hydra-move-splitter-right))
+  ("h" splitter-left)
+  ("j" splitter-down)
+  ("k" splitter-up)
+  ("l" splitter-right)
+  ("q" nil))
+
+;(global-set-key  (kbd "C-M-s") 'hydra-splitter/body)
 
 (defhydra hydra-apropos (:color blue :hint nil)
-  "
-_a_propos        _c_ommand
-_d_ocumentation  _l_ibrary
-_v_ariable       _u_ser-option
-^ ^          valu_e_"
-  ("a" apropos)
-  ("d" apropos-documentation)
-  ("v" apropos-variable)
-  ("c" apropos-command)
-  ("l" apropos-library)
-  ("u" apropos-user-option)
-  ("e" apropos-value))
-;; Recommended binding:
+  ("a" apropos "apropos")
+  ("d" apropos-documentation "documentation")
+  ("v" apropos-variable "variable")
+  ("c" apropos-command "command")
+  ("l" apropos-library "library")
+  ("u" apropos-user-option "user-option")
+  ("e" apropos-value "value"))
+
 (global-set-key (kbd "C-c H") 'hydra-apropos/body)
 
+(defun find-lein-profile ()
+  (interactive)
+  (find-file-other-window "~/.lein/profiles.clj"))
+
 (defhydra hydra-find-files (:color blue :hint nil)
-  "
-_i_nit  _l_ein-profile"
-  ("i" crux-find-user-init-file)
-  ("l" (lambda ()
-         (interactive)
-         (find-file-other-window "~/.lein/profiles.clj"))))
+  ("i" crux-find-user-init-file "init")
+  ("l" find-lein-profile "lein profile"))
 
 (global-set-key (kbd "C-c C-f") 'hydra-find-files/body)
 
