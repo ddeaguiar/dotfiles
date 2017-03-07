@@ -546,7 +546,7 @@
   ("i" crux-find-user-init-file "init")
   ("l" find-lein-profile "lein profile"))
 
-(key-chord-define-global "gf" 'hydra-find-files/body)
+(global-set-key (kbd "C-c C-,") 'hydra-find-files/body)
 
 ;; -- Org --
 
