@@ -280,7 +280,8 @@
                (context '(:form))
                (with-link '(:form))
                (with-embedded-coll '(:form))
-               (http-service-client '(:form)))
+               (http-service-client '(:form))
+               (comment '(:form)))
              (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
              (add-hook 'clojure-mode-hook
                        (lambda ()
