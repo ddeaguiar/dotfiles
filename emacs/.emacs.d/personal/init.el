@@ -43,7 +43,7 @@
   :config
   (require 'powerline)
   (moe-dark)
-  (moe-theme-random-color)
+  (moe-theme-set-color 'red)
   (powerline-moe-theme))
 
 ;; Whitespace, Indentation
