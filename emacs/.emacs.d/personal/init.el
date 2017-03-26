@@ -577,7 +577,10 @@
               (prelude-off))))
 
 
-; magit gc overrides
+;; magit gc overrides
+;; Used as a replacement for git pair scripts.
+;; It's nice to see the author override with Magit.
+
 (defvar magit-gc-override-author ""
   "Holds the git commit author override.")
 
