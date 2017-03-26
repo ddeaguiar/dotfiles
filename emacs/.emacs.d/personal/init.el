@@ -617,4 +617,6 @@
          ("C-c C-u" . my/git-remove-author-override)
          ("C-c C-t" . my/git-author-toggle)))
 
+;; Require 'magit-commit otherwise magit-commit-arguments won't be
+;; initialized until you first try to commit something.
 (require 'magit-commit)
