@@ -581,7 +581,8 @@
 ;; Used as a replacement for git pair scripts.
 ;; It's nice to see the author override with Magit.
 
-(defvar magit-gc-override-author ""
+(require 'magit-commit)
+(defvar my/magit-gc-override-author ""
   "Holds the git commit author override so it can be toggled..")
 
 (defun my/git-set-author (author)
@@ -593,8 +594,8 @@
 (defun my/git-override-author ()
   "Activates a git commit author override using the input author."
   (interactive)
-  (let ((author (read-string "i.e., A U Thor <author@example.com>: " magit-gc-override-author)))
-    (setq magit-gc-override-author author)
+  (let ((author (read-string "i.e., A U Thor <author@example.com>: " my/magit-gc-override-author)))
+    (setq my/magit-gc-override-author author)
     (my/git-set-author author)))
 
 (defun my/git-remove-author-override ()
@@ -610,7 +611,7 @@
   (interactive)
   (if (find-if (lambda (s) (string-match "--author" s)) magit-commit-arguments)
     (my/git-remove-author-override)
-    (my/git-set-author magit-gc-override-author)))
+    (my/git-set-author my/magit-gc-override-author)))
 
 (use-package magit
   :bind (("C-c C-p" . my/git-override-author)
