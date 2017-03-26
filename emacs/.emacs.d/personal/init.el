@@ -582,7 +582,7 @@
 ;; It's nice to see the author override with Magit.
 
 (defvar magit-gc-override-author ""
-  "Holds the git commit author override.")
+  "Holds the git commit author override so it can be toggled..")
 
 (defun my/git-set-author (author)
   "Sets the '--author' argument to the input author."
