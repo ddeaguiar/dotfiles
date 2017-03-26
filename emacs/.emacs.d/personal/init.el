@@ -576,22 +576,38 @@
               (smartparens-mode -1)
               (prelude-off))))
 
-(defun my/git-pair ()
-  "Sets the '--author' argument to the entered pair author."
-  (interactive)
-  (let ((author (read-string "i.e., A U Thor <author@example.com>: ")))
-    (add-to-list 'magit-commit-arguments (concat "--author=" author))
-    (minibuffer-message (concat "Pair author set to '" author "'"))))
 
-(defun my/git-unpair ()
+; magit-gc-override-mode
+(defvar magit-gc-override-author ""
+  "Holds the git commit author override.")
+
+(defun my/git-set-author (author)
+  "Sets the '--author' argument to the input author."
+  (when (not (string= "" author))
+    (add-to-list 'magit-commit-arguments (concat "--author=" author))
+    (minibuffer-message (concat "Author overridden with '" author "'"))))
+
+(defun my/git-override-author ()
+  "Activates a git commit author override using the input author."
+  (interactive)
+  (let ((author (read-string "i.e., A U Thor <author@example.com>: " magit-gc-override-author)))
+    (setq magit-gc-override-author author)
+    (my/git-set-author author)))
+
+(defun my/git-remove-author-override ()
   "Removes the '--author' commit argument."
   (interactive)
   (setq magit-commit-arguments
         (remove-if (lambda (s) (string-match "--author" s))
                    magit-commit-arguments))
-  (minibuffer-message "Pair author unset."))
+  (minibuffer-message "Author override removed."))
 
-;; TODO: toggle overrides with mode.
+(defun my/git-author-toggle ()
+  "Toggles the git commit author override."
+  (if (find-if (lambda (s) (string-match "--author" s)) magit-commit-arguments)
+    (my/git-remove-author-override)
+    (my/git-set-author magit-gc-override-author)))
+
 (define-minor-mode magit-gc-override-mode
   "Toggle Magit git-commit override mode.
    When enabled, allows git-commit overrides to be specified."
@@ -601,6 +617,7 @@
             (define-key map (kbd "C-c C-p") 'my/git-pair)
             (define-key map (kbd "C-c C-o") 'my/git-unpair)
             map)
-  :group 'magit-gc-override)
+  :group 'magit-gc-override
+  (my/git-author-toggle))
 
 (diminish 'magit-gc-override-mode " æ")
