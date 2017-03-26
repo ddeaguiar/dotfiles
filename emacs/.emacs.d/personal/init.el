@@ -577,7 +577,7 @@
               (prelude-off))))
 
 
-; magit-gc-override-mode
+; magit gc overrides
 (defvar magit-gc-override-author ""
   "Holds the git commit author override.")
 
@@ -604,20 +604,12 @@
 
 (defun my/git-author-toggle ()
   "Toggles the git commit author override."
+  (interactive)
   (if (find-if (lambda (s) (string-match "--author" s)) magit-commit-arguments)
     (my/git-remove-author-override)
     (my/git-set-author magit-gc-override-author)))
 
-(define-minor-mode magit-gc-override-mode
-  "Toggle Magit git-commit override mode.
-   When enabled, allows git-commit overrides to be specified."
-  :init-value nil
-  :lighter " GCO"
-  :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c C-p") 'my/git-pair)
-            (define-key map (kbd "C-c C-o") 'my/git-unpair)
-            map)
-  :group 'magit-gc-override
-  (my/git-author-toggle))
-
-(diminish 'magit-gc-override-mode " æ")
+(use-package magit
+  :bind (("C-c C-p" . my/git-override-author)
+         ("C-c C-u" . my/git-remove-author-override)
+         ("C-c C-t" . my/git-author-toggle)))
