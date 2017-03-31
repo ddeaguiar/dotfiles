@@ -29,3 +29,6 @@ source /usr/local/bin/aws_zsh_completer.sh
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 eval "$(jenv init -)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
