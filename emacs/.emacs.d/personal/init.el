@@ -60,7 +60,6 @@
 (setq load-prefer-newer t)
 
 ;; General niceties
-(global-prettify-symbols-mode t)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-16"))
 
