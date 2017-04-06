@@ -273,7 +273,6 @@
              (setq clojure-align-forms-automatically t)
              :config
              (define-clojure-indent
-               (defroutes '(:defn))
                (handler '(:form))
                (component '(:form))
                (context '(:form))
@@ -281,7 +280,8 @@
                (with-embedded-coll '(:form))
                (http-service-client '(:form))
                (comment '(:form))
-               (def-specs '(:form)))
+               (def-specs '(:form))
+               (for-all '(:defn)))
              (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
              (add-hook 'clojure-mode-hook
                        (lambda ()
@@ -620,3 +620,6 @@
 ;; Require 'magit-commit otherwise magit-commit-arguments won't be
 ;; initialized until you first try to commit something.
 (require 'magit-commit)
+
+(use-package git-link
+  :bind (("C-c C-g l" . git-link)))
