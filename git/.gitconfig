@@ -1,0 +1,80 @@
+[user]
+	name = Daniel De Aguiar
+	email = ddeaguiar@pointslope.com
+
+[alias]
+	co = checkout
+	st = status
+	br = branch
+	rollback = reset --hard HEAD
+	ci = commit
+	staged = diff --cached
+	sh = !git-sh
+	sr = svn rebase
+	sd = svn dcommit
+	cp = cherry-pick
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	hub = !github
+  mail = send-email --quiet --suppress-cc self
+	bl = blame -w
+	ll = log --oneline --graph --decorate
+  averages = !git-averages
+  stats = !git-stat-summary
+  top = !git-top
+  vendors = !git-vendors
+[apply]
+	whitespace = nowarn
+
+[core]
+  legacyheaders = false
+	autocrlf = input
+	excludesfile = /Users/ddeaguiar/.gitignore_global
+	editor = vim
+	safecrlf = true
+[repack]
+	usedeltabaseoffset = true
+
+[color]
+	ui = auto
+	diff = auto
+	sh = auto
+
+[help]
+	autocorrect = 10
+[push]
+	default = tracking
+[rerere]
+	enabled = 1
+[imap]
+  folder = "[Gmail]/Drafts"
+  host = imaps://imap.gmail.com
+  user = ddeaguiar@pointslope.com
+  port = 993
+  sslverify = false
+
+[sendemail]
+  chainreplyto = false
+  aliasfiletype = mailrc
+  aliasesfile = /Users/ddeaguiar/.mailrc
+  smtpencryption = tls
+  smtpserver = smtp.gmail.com
+  smtpserverport = 587
+  smtpuser = ddeaguiar@pointslope.com
+  confirm = never
+  assume8bitEncoding = UTF-8
+[branch]
+	autosetupmerge = always
+	autosetuprebase = remote
+[commit]
+	template = /Users/ddeaguiar/.git-commit-template
+[mert]
+[merge]
+	tool = opendiff
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[lob]
+	abbrevcommit = true
