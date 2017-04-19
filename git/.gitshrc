@@ -1,8 +1,0 @@
-source ~/.bash_aliases
-alias co="checkout"
-alias ci="commit"
-alias st="status"
-alias rollback="reset --hard HEAD"
-alias br="branch"
-alias gc="gc --auto"
-alias staged="diff --cached"

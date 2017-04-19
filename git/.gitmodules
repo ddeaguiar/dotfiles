@@ -1,6 +1,0 @@
-[submodule ".vim/vundle.git"]
-	path = .vim/vundle.git
-	url = http://github.com/gmarik/vundle.git
-[submodule ".emacs.d"]
-	path = .emacs.d
-	url = git@github.com:ddeaguiar/emacs-starter-kit.git
