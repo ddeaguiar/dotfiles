@@ -13,11 +13,12 @@
  '(org-agenda-files nil)
  '(package-selected-packages
    (quote
-    (git-link key-chord keychord ag with-editor yasnippet aggressive-indent floobits helm-core yaml-mode dockerfile-mode clojure-mode company helm hydra markdown-mode less-css-mode htmlize emmet-mode company-restclient restclient projectile-direnv ace-isearch cljsbuild-mode datomic-snippets clojure-cheatsheet javadoc-lookup clojure-snippets clj-refactor zop-to-char zenburn-theme which-key web-mode volatile-highlights vkill use-package undo-tree unbound smex smartrep smartparens smart-mode-line slime scss-mode rainbow-mode rainbow-identifiers rainbow-delimiters powerline paradox ov operate-on-number multi-term move-text magit json-mode js2-mode inf-ruby indicators imenu-anywhere ido-ubiquitous helm-projectile helm-descbinds helm-ag guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine git-gutter-fringe+ gist ggtags geiser flycheck flx-ido flatland-theme expand-region exec-path-from-shell ensime elisp-slime-nav easy-kill discover-my-major dired+ diff-hl cyberpunk-theme crux company-anaconda cider browse-kill-ring beacon anzu ack ace-window)))
+    (ox-reveal csv-mode git-link key-chord keychord ag with-editor yasnippet aggressive-indent floobits helm-core yaml-mode dockerfile-mode clojure-mode company helm hydra markdown-mode less-css-mode htmlize emmet-mode company-restclient restclient projectile-direnv ace-isearch cljsbuild-mode datomic-snippets clojure-cheatsheet javadoc-lookup clojure-snippets clj-refactor zop-to-char zenburn-theme which-key web-mode volatile-highlights vkill use-package undo-tree unbound smex smartrep smartparens smart-mode-line slime scss-mode rainbow-mode rainbow-identifiers rainbow-delimiters powerline paradox ov operate-on-number multi-term move-text magit json-mode js2-mode inf-ruby indicators imenu-anywhere ido-ubiquitous helm-projectile helm-descbinds helm-ag guru-mode grizzl god-mode gitignore-mode gitconfig-mode git-timemachine git-gutter-fringe+ gist ggtags geiser flycheck flx-ido flatland-theme expand-region exec-path-from-shell ensime elisp-slime-nav easy-kill discover-my-major dired+ diff-hl cyberpunk-theme crux company-anaconda cider browse-kill-ring beacon anzu ack ace-window)))
  '(paradox-github-token t)
  '(safe-local-variable-values
    (quote
-    ((cider-cljs-lein-repl . "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
+    ((cider-inject-dependencies-at-jack-in)
+     (cider-cljs-lein-repl . "(do (use 'figwheel-sidecar.repl-api) (start-figwheel!) (cljs-repl))")
      (projectile-project-type . lein-test))))
  '(vc-annotate-background "#2B2B2B")
  '(vc-annotate-color-map

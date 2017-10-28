@@ -15,13 +15,14 @@
 	cp = cherry-pick
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	hub = !github
-  mail = send-email --quiet --suppress-cc self
+    	mail = send-email --quiet --suppress-cc self
 	bl = blame -w
 	ll = log --oneline --graph --decorate
-  averages = !git-averages
-  stats = !git-stat-summary
-  top = !git-top
-  vendors = !git-vendors
+  	averages = !git-averages
+  	stats = !git-stat-summary
+  	top = !git-top
+  	vendors = !git-vendors
+ 	deleteable = !"git branch -a --merged master | grep -v origin/master"
 [apply]
 	whitespace = nowarn
 

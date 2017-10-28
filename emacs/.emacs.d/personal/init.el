@@ -216,7 +216,9 @@
   :diminish (projectile-mode . " ℗")
   :config
   (setq projectile-enable-caching t)
-  (projectile-global-mode t))
+  (projectile-global-mode t)
+  (add-to-list 'projectile-globally-ignored-directories ".ensime_cache")
+  (add-to-list 'projectile-globally-ignored-directories "project/target"))
 
 (use-package projectile-direnv
   :config
@@ -282,10 +284,11 @@
                (comment '(:form))
                (def-specs '(:form))
                (for-all '(:defn)))
-             (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
-             (add-hook 'clojure-mode-hook
-                       (lambda ()
-                         (unbind-key "C-c C-q" aggressive-indent-mode-map))))
+             ;; (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
+             ;; (add-hook 'clojure-mode-hook
+             ;;           (lambda ()
+             ;;             (unbind-key "C-c C-q" aggressive-indent-mode-map)))
+             )
 
 (use-package cider
              :init
@@ -304,7 +307,10 @@
                    cider-repl-wrap-history t
                    cider-repl-history-size 1000
                    cider-repl-display-help-banner nil
-                   cider-repl-history-file "/tmp/cider-repl.history")
+                   cider-repl-history-file "/tmp/cider-repl.history"
+                   cider-pprint-fn 'puget
+                   cider-inject-dependencies-at-jack-in nil
+                   )
              :config
              (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
              (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
@@ -576,6 +582,8 @@
               (smartparens-mode -1)
               (prelude-off))))
 
+(use-package ox-reveal)
+
 
 ;; magit gc overrides
 ;; Used as a replacement for git pair scripts.
@@ -623,3 +631,9 @@
 
 (use-package git-link
   :bind (("C-c C-g l" . git-link)))
+
+(use-package ensime)
+
+(setq
+ ensime-sbt-command "/usr/local/bin/sbt"
+ sbt:program-name "/usr/local/bin/sbt")
