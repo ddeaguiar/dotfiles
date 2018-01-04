@@ -23,6 +23,8 @@ export HISTSIZE=25000
 export HISTFILE=~/.zsh_history
 export SAVEHIST=10000
 
+export HOMEBREW_NO_ANALYTICS=1
+
 if [[ "$OSTYPE" == darwin* ]]; then
     export BROWSER='open'
 fi
