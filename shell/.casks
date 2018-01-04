@@ -1,4 +1,3 @@
-dropbox
 emacs
 gas-mask
 google-chrome
@@ -6,10 +5,12 @@ gpgtools
 hipchat
 iterm2
 java
+openconnect-gui
 screenhero
 skype
 slack
 superduper
+tunnelblick
 vagrant
 virtualbox
 vlc
