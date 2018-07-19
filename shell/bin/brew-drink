@@ -11,7 +11,3 @@ brew cask list | command diff -u -- $HOME/.casks - | sed '1,5D' | awk '/^\-/' | 
     brew cask install $c
   fi
 done
-
-echo "Installed, but not mixed"
-cat <(brew list | command diff -u -- $HOME/.brews - | sed '1,5D' | awk '/^\+/' | sed 's/\+//')\
-    <(brew cask list | command diff -u -- $HOME/.casks - | sed '1,5D' | awk '/^\+/' | sed 's/\+//') | sort | uniq

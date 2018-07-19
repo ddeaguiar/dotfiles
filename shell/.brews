@@ -1,9 +1,12 @@
 ack
+ant
 aspell
 autoconf
 aws-elasticbeanstalk
 boot-clj
+chromedriver
 clojure
+cmake
 ctags
 direnv
 dirmngr
@@ -21,6 +24,7 @@ git-secrets
 gmp
 gnu-sed
 gnutls
+gperftools
 gpg-agent
 gradle
 graphviz
@@ -30,14 +34,15 @@ icu4c
 jenv
 jpeg
 jq
-leiningen
 libassuan
 libevent
 libffi
 libgcrypt
 libgpg-error
+libidn2
 libksba
 libpng
+libressl
 libtasn1
 libtiff
 libtool
@@ -49,6 +54,7 @@ lnav
 maven
 multimarkdown
 nettle
+nginx
 oniguruma
 openconnect
 openssl
@@ -61,11 +67,11 @@ pkg-config
 planck
 pth
 python
+python@2
 readline
 redis
 rlwrap
 ruby-build
-sbt
 sqlite
 stow
 terraform
@@ -77,4 +83,6 @@ utf8proc
 watch
 webp
 wget
+wrk
+xsv
 xz
