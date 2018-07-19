@@ -637,3 +637,9 @@
 (setq
  ensime-sbt-command "/usr/local/bin/sbt"
  sbt:program-name "/usr/local/bin/sbt")
+
+;; Trust melpa.org cert
+;; See: https://blog.vifortech.com/posts/emacs-tls-fix/
+
+(require 'gnutls)
+(add-to-list 'gnutls-trustfiles "/usr/local/etc/openssl/cert.pem")
