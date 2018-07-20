@@ -61,7 +61,7 @@
 
 ;; General niceties
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-(add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-16"))
+(add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-14"))
 
 (add-hook 'isearch-mode-end-hook 'recenter-top-bottom)
 
