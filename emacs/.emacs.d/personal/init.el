@@ -13,8 +13,6 @@
 (setq user-email-address "ddeaguiar@gmail.com")
 (setq user-full-name "Daniel De Aguiar")
 
-(use-package unbound)
-(use-package dired+)
 (use-package rainbow-identifiers)
 (use-package ack)
 (use-package hydra)
@@ -175,10 +173,6 @@
 (use-package ace-window
   :config (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))
 
-(use-package ace-isearch
-  :config
-  (global-ace-isearch-mode 1))
-
 ;; Enable arrow keys
 (defun disable-guru-mode ()
   (guru-mode -1))
@@ -211,6 +205,12 @@
   (define-key helm-map (kbd "C-z")  'helm-select-action)
   (setq helm-recentf-fuzzy-match    t
         helm-M-x-fuzzy-match t))
+
+(use-package helm-swoop)
+
+(use-package ace-isearch
+  :config
+  (global-ace-isearch-mode 1))
 
 (use-package projectile
   :diminish (projectile-mode . " ℗")
@@ -581,9 +581,6 @@
               (auto-fill-mode)
               (smartparens-mode -1)
               (prelude-off))))
-
-(use-package ox-reveal)
-
 
 ;; magit gc overrides
 ;; Used as a replacement for git pair scripts.

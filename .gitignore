@@ -3,3 +3,4 @@ emacs-external-packs
 vim/.vim/bundle
 credentials.clj*
 lein/.lein/indices/
+shell/bin/lein*

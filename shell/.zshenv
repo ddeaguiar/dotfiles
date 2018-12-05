@@ -25,6 +25,8 @@ export SAVEHIST=10000
 
 export HOMEBREW_NO_ANALYTICS=1
 
+export GPG_TTY=$(tty)
+
 if [[ "$OSTYPE" == darwin* ]]; then
     export BROWSER='open'
 fi
