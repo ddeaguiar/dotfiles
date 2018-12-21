@@ -323,10 +323,7 @@
               (clj-refactor-mode 1)
               (cljr-add-keybindings-with-prefix "C-c C-a"))))
 
-(use-package clojure-snippets)
 (use-package javadoc-lookup)
-(use-package clojure-cheatsheet)
-(use-package datomic-snippets)
 (use-package cljsbuild-mode)
 
 (setq cljr-warn-on-eval nil)
@@ -549,7 +546,12 @@
   (interactive)
   (find-file-other-window "~/.lein/profiles.clj"))
 
+(defun find-deps-edn ()
+  (interactive)
+  (find-file-other-window "~/.clojure/deps.edn"))
+
 (defhydra hydra-find-files (:color blue :hint nil)
+  ("d" find-deps-edn "deps.edn")
   ("i" crux-find-user-init-file "init")
   ("l" find-lein-profile "lein profile"))
 
