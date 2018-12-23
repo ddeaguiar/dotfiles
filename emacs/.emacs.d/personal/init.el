@@ -267,12 +267,35 @@
 
 ;; -- Clojure --
 
+;; C-u M-x inferior-lisp RET lein or clojure RET
+;; from project.clj or deps.edn
+(setq inferior-lisp-program "lein trampoline run -m clojure.main/main")
+
+(defun my/lisp-eval-buffer ()
+  (interactive)
+  (lisp-eval-string (buffer-string)))
+
+(defun my/lisp-describe-source (sym)
+  "Send a command to the inferior Lisp to show source for symbol SYM."
+  (interactive (lisp-symprompt "Source" (lisp-var-at-pt)))
+  (comint-proc-query (inferior-lisp-proc)
+                     (format "(clojure.repl/source %s)\n" sym)))
+
+(setq lisp-describe-sym-command "(clojure.repl/doc %s)\n")
+
 (use-package clojure-mode
              :init
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.boot$"  . clojure-mode))
              (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
              (setq clojure-align-forms-automatically t)
+             :bind
+             (("C-c C-e" . lisp-eval-last-sexp)
+              ("C-c C-r" . lisp-eval-region)
+              ("C-c C-b" . my/lisp-eval-buffer)
+              ("C-c C-d" . lisp-describe-sym)
+              ("C-c C-s" . my/lisp-describe-source)
+              ("C-c C-z" . switch-to-lisp))
              :config
              (define-clojure-indent
                (handler '(:form))
@@ -284,49 +307,9 @@
                (comment '(:form))
                (def-specs '(:form))
                (for-all '(:defn)))
-             ;; (add-hook 'clojure-mode-hook 'aggressive-indent-mode)
-             ;; (add-hook 'clojure-mode-hook
-             ;;           (lambda ()
-             ;;             (unbind-key "C-c C-q" aggressive-indent-mode-map)))
-             )
-
-(use-package cider
-             :init
-             (setq cider-repl-use-pretty-printing t
-                   nrepl-hide-special-buffers t
-                   cider-prefer-local-resources t
-                   nrepl-log-messages t
-                   cider-show-error-buffer 'except-in-repl
-                   cider-repl-pop-to-buffer-on-connect nil
-                   cider-auto-select-error-buffer nil
-                   cider-prompt-save-file-on-load nil
-                   cider-stacktrace-default-filters '(tooling dup)
-                   cider-stacktrace-fill-column 80
-                   nrepl-buffer-name-show-port t
-                   cider-repl-result-prefix ";; => "
-                   cider-repl-wrap-history t
-                   cider-repl-history-size 1000
-                   cider-repl-display-help-banner nil
-                   cider-repl-history-file "/tmp/cider-repl.history"
-                   cider-pprint-fn 'puget
-                   cider-inject-dependencies-at-jack-in nil
-                   )
-             :config
-             (add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
-             (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
-             (advice-add 'cider-find-var :after #'recenter-top-bottom))
-
-(use-package clj-refactor
-  :config
-  (add-hook 'clojure-mode-hook
-            (lambda ()
-              (clj-refactor-mode 1)
-              (cljr-add-keybindings-with-prefix "C-c C-a"))))
+             (add-hook 'clojure-mode-hook 'eldoc-mode))
 
 (use-package javadoc-lookup)
-(use-package cljsbuild-mode)
-
-(setq cljr-warn-on-eval nil)
 
 ;; -- Scheme --
 
@@ -476,7 +459,7 @@
   (show-smartparens-global-mode t)
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
-  (sp-with-modes '(clojure-mode cider-repl-mode)
+  (sp-with-modes '(clojure-mode)
     (sp-local-pair "`" nil :actions nil))
   (sp-with-modes '(html-mode sgml-mode)
     (sp-local-pair "<" ">")))

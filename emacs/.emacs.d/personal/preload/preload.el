@@ -4,8 +4,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (setq package-pinned-packages
-      '(;;(clojure-mode        . "melpa-stable")
-        (cider               . "melpa-stable")
+      '((clojure-mode        . "melpa-stable")
         (company             . "melpa-stable")
         (helm                . "melpa-stable")
         (helm-ag             . "melpa-stable")
