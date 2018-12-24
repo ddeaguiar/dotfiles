@@ -294,6 +294,7 @@
               ("C-c C-r" . lisp-eval-region)
               ("C-c C-b" . my/lisp-eval-buffer)
               ("C-c C-d" . lisp-describe-sym)
+              ("C-c C-j" . javadoc-lookup)
               ("C-c C-s" . my/lisp-describe-source)
               ("C-c C-z" . switch-to-lisp))
              :config
