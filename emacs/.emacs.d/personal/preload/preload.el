@@ -6,6 +6,7 @@
 (setq package-pinned-packages
       '((clojure-mode        . "melpa-stable")
         (company             . "melpa-stable")
+        (direnv              . "melpa-stable")
         (helm                . "melpa-stable")
         (helm-ag             . "melpa-stable")
         (helm-core           . "melpa-stable")

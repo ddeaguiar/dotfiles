@@ -220,9 +220,7 @@
   (add-to-list 'projectile-globally-ignored-directories ".ensime_cache")
   (add-to-list 'projectile-globally-ignored-directories "project/target"))
 
-(use-package projectile-direnv
-  :config
-  (add-hook 'projectile-after-switch-project-hook 'projectile-direnv-export-variables))
+(use-package direnv)
 
 ;; With Prelude I typically want to edit personal/init.el.
 (setq user-init-file (concat prelude-user-init-file "init.el"))
