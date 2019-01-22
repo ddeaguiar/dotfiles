@@ -269,15 +269,44 @@
 ;; from project.clj or deps.edn
 (setq inferior-lisp-program "lein trampoline run -m clojure.main/main")
 
+;; use with caution
+;; large buffers are problematic
+;; Prefer load file instead
 (defun my/lisp-eval-buffer ()
   (interactive)
   (lisp-eval-string (buffer-string)))
+
+;; Originally from Luke
+(defun my/clojure-load-file ()
+  "Send a load-file instruction to Clojure to load the current file"
+  (interactive)
+  (let ((cmd `(do
+                  (load-file, buffer-file-name))))
+    (lisp-eval-string (prin1-to-string cmd))))
 
 (defun my/lisp-describe-source (sym)
   "Send a command to the inferior Lisp to show source for symbol SYM."
   (interactive (lisp-symprompt "Source" (lisp-var-at-pt)))
   (comint-proc-query (inferior-lisp-proc)
                      (format "(clojure.repl/source %s)\n" sym)))
+
+(defun my/clojure-require-reload (sym)
+  "Send a command to the inferior Lisp to reload ns. Defaults to lisp-var-at-pt."
+  (interactive (lisp-symprompt "ns" (lisp-var-at-pt)))
+  (comint-proc-query (inferior-lisp-proc)
+                     (format "(clojure.core/require '%s :reload)\n" sym)))
+
+(defun my/clojure-in-ns (sym)
+  "Send a command to the inferior Lisp to enter ns. Defaults to lisp-var-at-pt"
+  (interactive (lisp-symprompt "ns" (lisp-var-at-pt)))
+  (comint-proc-query (inferior-lisp-proc)
+                     (format "(clojure.core/in-ns '%s)\n" sym)))
+
+(defun my/clojure-run-tests ()
+  "Send a command to the inferior Lisp to run clojure tests."
+  (interactive)
+  (comint-proc-query (inferior-lisp-proc)
+                     "(clojure.test/run-tests)\n"))
 
 (setq lisp-describe-sym-command "(clojure.repl/doc %s)\n")
 
@@ -289,11 +318,15 @@
              (setq clojure-align-forms-automatically t)
              :bind
              (("C-c C-e" . lisp-eval-last-sexp)
-              ("C-c C-r" . lisp-eval-region)
               ("C-c C-b" . my/lisp-eval-buffer)
               ("C-c C-d" . lisp-describe-sym)
               ("C-c C-j" . javadoc-lookup)
+              ("C-c C-l" . my/clojure-load-file)
+              ("C-c C-n" . my/clojure-in-ns)
+              ("C-c C-r" . lisp-eval-region)
               ("C-c C-s" . my/lisp-describe-source)
+              ("C-c C-t" . my/clojure-run-tests)
+              ("C-c C-x" . my/clojure-require-reload)
               ("C-c C-z" . switch-to-lisp))
              :config
              (define-clojure-indent
@@ -458,7 +491,7 @@
   (show-smartparens-global-mode t)
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
-  (sp-with-modes '(clojure-mode)
+  (sp-with-modes '(clojure-mode inferior-lisp-mode)
     (sp-local-pair "`" nil :actions nil))
   (sp-with-modes '(html-mode sgml-mode)
     (sp-local-pair "<" ">")))
@@ -601,10 +634,10 @@
     (my/git-remove-author-override)
     (my/git-set-author my/magit-gc-override-author)))
 
-(use-package magit
-  :bind (("C-c C-p" . my/git-override-author)
-         ("C-c C-u" . my/git-remove-author-override)
-         ("C-c C-t" . my/git-author-toggle)))
+;; (use-package magit
+;;   :bind (("C-c C-p" . my/git-override-author)
+;;         ("C-c C-u" . my/git-remove-author-override)
+;;         ("C-c C-t" . my/git-author-toggle)))
 
 ;; Require 'magit-commit otherwise magit-commit-arguments won't be
 ;; initialized until you first try to commit something.
