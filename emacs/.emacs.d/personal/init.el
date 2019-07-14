@@ -312,8 +312,7 @@
                      "(clojure.test/run-tests)\n"))
 
 (defun my/rebl-inspect ()
-  "Send the previous sexp to the inferior Lisp process.
-Prefix argument means switch to the Lisp buffer afterwards."
+  "Wrap the previous sexp with cognitect.rebl/inspect and send it to the inferior Lisp process."
   (interactive "P")
   (let ((expr (buffer-substring (save-excursion (backward-sexp) (point)) (point))))
     (let ((str (format "(try
