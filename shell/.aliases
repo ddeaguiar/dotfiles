@@ -18,3 +18,5 @@ alias lnav="nocorrect lnav"
 alias es="/Applications/Emacs.app/Contents/MacOS/Emacs --daemon"
 alias e="nocorrect emacsclient -t"
 alias ec="nocorrect ec"
+# See https://stevenharman.net/git-clean-delete-already-merged-branches
+alias git-clean="$ git branch --merged master | grep -v "\* master" | xargs -n 1 git branch -d"

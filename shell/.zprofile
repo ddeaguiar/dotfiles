@@ -19,6 +19,7 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   /bin
+  $HOME/Library/Python/3.7/bin
   $HOME/.rbenv/bin:$PATH
   $HOME/bin
   /usr/local/{bin,sbin}
