@@ -9,19 +9,10 @@
 	rollback = reset --hard HEAD
 	ci = commit
 	staged = diff --cached
-	sh = !git-sh
-	sr = svn rebase
-	sd = svn dcommit
 	cp = cherry-pick
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	hub = !github
-    	mail = send-email --quiet --suppress-cc self
 	bl = blame -w
 	ll = log --oneline --graph --decorate
-  	averages = !git-averages
-  	stats = !git-stat-summary
-  	top = !git-top
-  	vendors = !git-vendors
  	deleteable = !"git branch -a --merged master | grep -v origin/master"
 [apply]
 	whitespace = nowarn
@@ -46,23 +37,6 @@
 	default = tracking
 [rerere]
 	enabled = 1
-[imap]
-  folder = "[Gmail]/Drafts"
-  host = imaps://imap.gmail.com
-  user = ddeaguiar@pointslope.com
-  port = 993
-  sslverify = false
-
-[sendemail]
-  chainreplyto = false
-  aliasfiletype = mailrc
-  aliasesfile = /Users/ddeaguiar/.mailrc
-  smtpencryption = tls
-  smtpserver = smtp.gmail.com
-  smtpserverport = 587
-  smtpuser = ddeaguiar@pointslope.com
-  confirm = never
-  assume8bitEncoding = UTF-8
 [branch]
 	autosetupmerge = always
 	autosetuprebase = remote
