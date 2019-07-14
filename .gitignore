@@ -4,3 +4,4 @@ vim/.vim/bundle
 credentials.clj*
 lein/.lein/indices/
 shell/bin/lein*
+.cpcache

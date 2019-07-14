@@ -1,0 +1,58 @@
+;; The deps.edn file describes the information needed to build a classpath.
+;;
+;; When using the `clojure` or `clj` script, there are several deps.edn files
+;; that are combined:
+;; - install-level
+;; - user level (this file)
+;; - project level (current directory when invoked)
+;;
+;; For all attributes other than :paths, these config files are merged left to right.
+;; Only the last :paths is kept and others are dropped.
+
+{
+  ;; Paths
+  ;;   Directories in the current project to include in the classpath
+
+  ;; :paths ["src"]
+
+  ;; External dependencies
+
+  ;; :deps {
+  ;;   org.clojure/clojure {:mvn/version "1.9.0"}
+  ;; }
+
+  ;; Aliases
+	;;   resolve-deps aliases (-R) affect dependency resolution, options:
+	;;     :extra-deps - specifies extra deps to add to :deps
+	;;     :override-deps - specifies a coordinate to use instead of that in :deps
+	;;     :default-deps - specifies a coordinate to use for a lib if one isn't found
+	;;   make-classpath aliases (-C) affect the classpath generation, options:
+	;;     :extra-paths - vector of additional paths to add to the classpath
+	;;     :classpath-overrides - map of lib to path that overrides the result of resolving deps
+
+  ;; :aliases {
+  ;;   :deps {:extra-deps {org.clojure/tools.deps.alpha {:mvn/version "0.5.442"}}}
+  ;;   :test {:extra-paths ["test"]}
+  ;; }
+ :aliases {:cider-clj {:extra-deps {cider/cider-nrepl {:mvn/version "0.18.0"}}
+                       :main-opts  ["-m" "nrepl.cmdline" "--middleware" "[cider.nrepl/cider-middleware]"]}
+           :1.10.1    {:extra-deps {org.clojure/clojure {:mvn/version "1.10.1"}}}
+           :rebl      {:extra-deps {com.cognitect/repl {:local/root "/Users/ddeaguiar/src/rebl"}}
+                       :main-opts  ["-m" "cognitect.rebl"]}
+           :rebl-jar  {:extra-deps {com.cognitect/repl     {:local/root "/Users/ddeaguiar/REBL/latest/REBL.jar"}
+                                    org.clojure/core.async {:mvn/version "0.4.490"}}
+                       :main-opts  ["-m" "cognitect.rebl"]}
+           :depify    {:extra-deps {depify {:git/url "https://github.com/hagmonk/depify"
+                                            :sha     "04329744872890711dbba8939a16e9987dd33bb3"}}
+                       :main-opts  ["-m" "depify.project"]}
+           ;; - start a Socket REPL on port 50505:
+           :socket    {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
+           :zprint    {:extra-deps {zprint {:mvn/version "0.4.9"}}
+                       :main-opts  ["-m" "zprint.main"]}}
+  ;; Provider attributes
+
+  ;; :mvn/repos {
+  ;;   "central" {:url "https://repo1.maven.org/maven2/"}
+  ;;   "clojars" {:url "https://repo.clojars.org/"}
+  ;; }
+}
