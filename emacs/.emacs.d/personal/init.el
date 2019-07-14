@@ -22,9 +22,9 @@
 ;; I'd rather manage key-chords.
 (use-package key-chord
   :config
-  (key-chord-define-global "jj" 'avy-goto-word-1)
-  (key-chord-define-global "kk" 'avy-goto-line)
-  (key-chord-define-global "jk" 'avy-goto-char-2)
+  ;; (key-chord-define-global "jj" 'avy-goto-word-1)
+  ;; (key-chord-define-global "kk" 'avy-goto-line)
+  ;; (key-chord-define-global "jk" 'avy-goto-char-2)
   (key-chord-define-global "JJ" 'crux-switch-to-previous-buffer)
   (key-chord-define-global "yy" 'browse-kill-ring)
   (key-chord-mode +1))
@@ -265,9 +265,10 @@
 
 ;; -- Clojure --
 
+(require 'clojure-mode)
+
 ;; C-u M-x inferior-lisp RET lein or clojure RET
-;; from project.clj or deps.edn
-(setq inferior-lisp-program "lein trampoline run -m clojure.main/main")
+(setq inferior-lisp-program "nc localhost 50505")
 
 ;; use with caution
 ;; large buffers are problematic
@@ -280,9 +281,9 @@
 (defun my/clojure-load-file ()
   "Send a load-file instruction to Clojure to load the current file"
   (interactive)
-  (let ((cmd `(do
-                  (load-file, buffer-file-name))))
-    (lisp-eval-string (prin1-to-string cmd))))
+  (comint-proc-query (inferior-lisp-proc)
+                     (format "(clojure.core/load-file \"%s\")\n" buffer-file-name))
+)
 
 (defun my/lisp-describe-source (sym)
   "Send a command to the inferior Lisp to show source for symbol SYM."
@@ -290,17 +291,19 @@
   (comint-proc-query (inferior-lisp-proc)
                      (format "(clojure.repl/source %s)\n" sym)))
 
-(defun my/clojure-require-reload (sym)
-  "Send a command to the inferior Lisp to reload ns. Defaults to lisp-var-at-pt."
-  (interactive (lisp-symprompt "ns" (lisp-var-at-pt)))
+(defun my/clojure-in-ns ()
+  "Send a command to the inferior Lisp to enter ns of current file."
+  (interactive)
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/require '%s :reload)\n" sym)))
+                     (format "(clojure.core/in-ns '%s)\n" (clojure-find-ns))))
 
-(defun my/clojure-in-ns (sym)
-  "Send a command to the inferior Lisp to enter ns. Defaults to lisp-var-at-pt"
-  (interactive (lisp-symprompt "ns" (lisp-var-at-pt)))
+(defun my/clojure-spec-describe (sym)
+  "Send a command to the inferior Lisp to describe a spec. Defaults to lisp-var-at-pt"
+  (interactive (lisp-symprompt "spec" (lisp-var-at-pt)))
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/in-ns '%s)\n" sym)))
+                     (format "(require '[clojure.spec.alpha]
+                                       '[clojure.pprint])
+                              (clojure.pprint/pprint (clojure.spec.alpha/describe %s))\n" sym)))
 
 (defun my/clojure-run-tests ()
   "Send a command to the inferior Lisp to run clojure tests."
@@ -308,7 +311,21 @@
   (comint-proc-query (inferior-lisp-proc)
                      "(clojure.test/run-tests)\n"))
 
+(defun my/rebl-inspect ()
+  "Send the previous sexp to the inferior Lisp process.
+Prefix argument means switch to the Lisp buffer afterwards."
+  (interactive "P")
+  (let ((expr (buffer-substring (save-excursion (backward-sexp) (point)) (point))))
+    (let ((str (format "(try
+                           (require 'cognitect.rebl)
+                           (cognitect.rebl/inspect %s)
+                           (catch Exception _))\n" expr)))
+      (comint-send-string (inferior-lisp-proc) str))))
+
 (setq lisp-describe-sym-command "(clojure.repl/doc %s)\n")
+
+;; Make C-i bindable.
+(define-key input-decode-map (kbd "C-i") (kbd "H-i"))
 
 (use-package clojure-mode
              :init
@@ -317,16 +334,19 @@
              (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
              (setq clojure-align-forms-automatically t)
              :bind
-             (("C-c C-e" . lisp-eval-last-sexp)
+             (("C-c C-a" . my/clojure-spec-describe)
+              ("C-c C-c" . inferior-lisp)
               ("C-c C-b" . my/lisp-eval-buffer)
+              ("C-c C-e" . lisp-eval-last-sexp)
+              ("C-c C-f" . lisp-eval-form-and-next)
               ("C-c C-d" . lisp-describe-sym)
+              ("C-c H-i" . my/rebl-inspect)
               ("C-c C-j" . javadoc-lookup)
               ("C-c C-l" . my/clojure-load-file)
               ("C-c C-n" . my/clojure-in-ns)
               ("C-c C-r" . lisp-eval-region)
               ("C-c C-s" . my/lisp-describe-source)
               ("C-c C-t" . my/clojure-run-tests)
-              ("C-c C-x" . my/clojure-require-reload)
               ("C-c C-z" . switch-to-lisp))
              :config
              (define-clojure-indent
@@ -491,7 +511,7 @@
   (show-smartparens-global-mode t)
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
-  (sp-with-modes '(clojure-mode inferior-lisp-mode)
+  (sp-with-modes '(clojure-mode)
     (sp-local-pair "`" nil :actions nil))
   (sp-with-modes '(html-mode sgml-mode)
     (sp-local-pair "<" ">")))
