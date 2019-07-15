@@ -47,7 +47,7 @@
                           :main-opts  ["-m" "depify.project"]}
            ;; - start a Socket REPL on port 50505:
            :socket       {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
-           :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,50505,:accept,cognitect.rebl/-main}"]}
+           :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,60606,:accept,cognitect.rebl/-main}"]}
            :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
            :zprint       {:extra-deps {zprint {:mvn/version "0.4.9"}}
                           :main-opts  ["-m" "zprint.main"]}}

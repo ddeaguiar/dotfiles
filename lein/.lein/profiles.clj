@@ -11,4 +11,4 @@
                 :main         cognitect.rebl}
  :socket       {:jvm-opts ["-Dclojure.server.repl={:port,50505,:accept,clojure.core.server/repl}"]}
  :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
- :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,50505,:accept,cognitect.rebl/-main}"]}}
+ :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,60606,:accept,cognitect.rebl/-main}"]}}
