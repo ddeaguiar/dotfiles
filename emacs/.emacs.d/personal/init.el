@@ -315,7 +315,7 @@
 
 (defun my/rebl-inspect ()
   "Wrap the previous sexp with cognitect.rebl/inspect and send it to the inferior Lisp process."
-  (interactive "P")
+  (interactive)
   (let ((expr (buffer-substring (save-excursion (backward-sexp) (point)) (point))))
     (let ((str (format "(try
                            (require 'cognitect.rebl)
