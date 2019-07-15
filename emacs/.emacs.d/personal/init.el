@@ -303,9 +303,7 @@
   "Send a command to the inferior Lisp to describe a spec. Defaults to lisp-var-at-pt"
   (interactive (lisp-symprompt "spec" (lisp-var-at-pt)))
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(require '[clojure.spec.alpha]
-                                       '[clojure.pprint])
-                              (clojure.pprint/pprint (clojure.spec.alpha/describe %s))\n" sym)))
+                     (format "(clojure.pprint/pprint (clojure.spec.alpha/describe %s))\n" sym)))
 
 (defun my/clojure-run-tests ()
   "Send a command to the inferior Lisp to run clojure tests."
@@ -318,7 +316,6 @@
   (interactive)
   (let ((expr (buffer-substring (save-excursion (backward-sexp) (point)) (point))))
     (let ((str (format "(try
-                           (require 'cognitect.rebl)
                            (cognitect.rebl/inspect %s)
                            (catch Exception _))\n" expr)))
       (comint-send-string (inferior-lisp-proc) str))))
