@@ -89,3 +89,6 @@ sonar-project.properties
 repl-history
 repl-port
 .rebl
+
+# jenv
+.java-version

@@ -270,7 +270,7 @@
 ;; Start a clojure repl with socket repl support
 ;; lein: `lein with-profiles +socket,+rebl-jar run'
 ;; clj: `clj -Asocket:rebl-jar`
-(setq inferior-lisp-program "nc localhost 50505")
+(setq inferior-lisp-program "nc localhost 60606")
 
 ;; use with caution
 ;; large buffers are problematic
