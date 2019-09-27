@@ -533,7 +533,8 @@
 (defhydra hydra-highlight-symbol ()
   "highlight symbol"
   ("h" highlight-symbol "toggle highlight")
-  ("n" highlight-symbol-nav-mode "toggle highlight navigation")
+  ("n" highlight-symbol-next "nav next")
+  ("p" highlight-symbol-prev "nav previous")
   ("r" highlight-symbol-query-replace "query/replace"))
 
 (global-set-key (kbd "C-c C-h") 'hydra-highlight-symbol/body)
