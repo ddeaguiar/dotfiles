@@ -57,6 +57,14 @@
 (setq visible-bell nil)
 (setq load-prefer-newer t)
 
+;; See https://github.com/DarthFennec/highlight-indent-guides
+(use-package highlight-indent-guides
+  :init
+  (setq highlight-indent-guides-method 'column))
+
+;; See https://github.com/nschum/highlight-symbol.el
+(use-package highlight-symbol)
+
 ;; General niceties
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-14"))
@@ -357,7 +365,8 @@
                (comment '(:form))
                (def-specs '(:form))
                (for-all '(:defn)))
-             (add-hook 'clojure-mode-hook 'eldoc-mode))
+             (add-hook 'clojure-mode-hook 'eldoc-mode)
+             (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode))
 
 (use-package javadoc-lookup)
 
@@ -521,6 +530,14 @@
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
 
+(defhydra hydra-highlight-symbol ()
+  "highlight symbol"
+  ("h" highlight-symbol "toggle highlight")
+  ("n" highlight-symbol-nav-mode "toggle highlight navigation")
+  ("r" highlight-symbol-query-replace "query/replace"))
+
+(global-set-key (kbd "C-c C-h") 'hydra-highlight-symbol/body)
+
 (defun splitter-left (arg)
   "Move window splitter left."
   (interactive "p")
@@ -663,12 +680,6 @@
 
 (use-package git-link
   :bind (("C-c C-g l" . git-link)))
-
-(use-package ensime)
-
-(setq
- ensime-sbt-command "/usr/local/bin/sbt"
- sbt:program-name "/usr/local/bin/sbt")
 
 ;; Trust melpa.org cert
 ;; See: https://blog.vifortech.com/posts/emacs-tls-fix/
