@@ -62,9 +62,6 @@
   :init
   (setq highlight-indent-guides-method 'column))
 
-;; See https://github.com/nschum/highlight-symbol.el
-(use-package highlight-symbol)
-
 ;; General niceties
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-to-list 'default-frame-alist '(font . "Sauce Code Powerline-14"))
@@ -366,7 +363,8 @@
                (def-specs '(:form))
                (for-all '(:defn)))
              (add-hook 'clojure-mode-hook 'eldoc-mode)
-             (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode))
+             (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode)
+             (add-hook 'clojure-mode-hook 'hi-lock-mode))
 
 (use-package javadoc-lookup)
 
@@ -529,15 +527,6 @@
   "zoom"
   ("g" text-scale-increase "in")
   ("l" text-scale-decrease "out"))
-
-(defhydra hydra-highlight-symbol ()
-  "highlight symbol"
-  ("h" highlight-symbol "toggle highlight")
-  ("n" highlight-symbol-next "nav next")
-  ("p" highlight-symbol-prev "nav previous")
-  ("r" highlight-symbol-query-replace "query/replace"))
-
-(global-set-key (kbd "C-c C-h") 'hydra-highlight-symbol/body)
 
 (defun splitter-left (arg)
   "Move window splitter left."
