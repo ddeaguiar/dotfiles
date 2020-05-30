@@ -50,7 +50,9 @@
            :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,60606,:accept,cognitect.rebl/-main}"]}
            :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port,40404,:accept,clojure.core.server/io-prepl}"]}
            :zprint       {:extra-deps {zprint {:mvn/version "0.4.9"}}
-                          :main-opts  ["-m" "zprint.main"]}}
+                          :main-opts  ["-m" "zprint.main"]}
+           :ion-dev {:deps      {com.datomic/ion-dev {:mvn/version "0.9.251"}}
+                     :main-opts ["-m" "datomic.ion.dev"]}}
   ;; Provider attributes
 
   ;; :mvn/repos {
