@@ -22,15 +22,7 @@ unsetopt auto_name_dirs
 alias history="fc -l 1"
 source $HOME/.aliases
 
-# aws autocompletion file needs to be sourced
-source /usr/local/bin/aws_zsh_completer.sh
-
 ### rbenv support
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 eval "$(jenv init -)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"

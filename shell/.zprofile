@@ -18,14 +18,16 @@ typeset -gU cdpath fpath mailpath path
 
 # Set the list of directories that Zsh searches for programs.
 path=(
+  /usr/local/{bin,sbin}
   /bin
-  $HOME/Library/Python/3.7/bin
+  $HOME/datomic-cli
+  /usr/local/opt/python/libexec/bin
   $HOME/.rbenv/bin:$PATH
   $HOME/bin
-  /usr/local/{bin,sbin}
   /opt/homebrew-cask/Caskroom/racket/6.1/Racket\ v6.1/bin
   $HOME/datomic-pro/bin
   $HOME/.jenv/bin
+  $HOME/.emacs.d/bin
   $PATH
 )
 

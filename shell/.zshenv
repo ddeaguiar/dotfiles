@@ -27,6 +27,8 @@ export HOMEBREW_NO_ANALYTICS=1
 
 export GPG_TTY=$(tty)
 
+export DERBY_HOME=$HOME/db-derby
+
 if [[ "$OSTYPE" == darwin* ]]; then
     export BROWSER='open'
 fi
@@ -58,5 +60,9 @@ if [ -x /usr/libexec/path_helper ]; then
     eval `/usr/libexec/path_helper -s`
 fi
 
-export NVM_DIR="/Users/ddeaguiar/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/ddeaguiar/.sdkman"
+[[ -s "/Users/ddeaguiar/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/ddeaguiar/.sdkman/bin/sdkman-init.sh"
