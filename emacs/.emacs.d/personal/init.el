@@ -13,6 +13,8 @@
 (setq user-email-address "ddeaguiar@gmail.com")
 (setq user-full-name "Daniel De Aguiar")
 
+(global-set-key (kbd "C-x 5 t") 'toggle-frame-fullscreen)
+
 (use-package rainbow-identifiers)
 (use-package ack)
 (use-package hydra)
@@ -50,7 +52,7 @@
 (setq-default js2-basic-offset 2)
 (setq-default js-indent-level 2)
 (setq-default indent-tabs-mode nil) ;; spaces
-(setq prelude-whitespace t)
+(setq prelude-whitespace nil)
 
 ;; Highlights, Parens
 (setq global-hl-line-mode nil)
@@ -330,6 +332,8 @@
 ;; Make C-i bindable.
 (define-key input-decode-map (kbd "C-i") (kbd "H-i"))
 
+(use-package flycheck-clj-kondo)
+(use-package helm-clojuredocs)
 (use-package clojure-mode
              :init
              (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
@@ -342,7 +346,7 @@
               ("C-c C-b" . my/lisp-eval-buffer)
               ("C-c C-e" . lisp-eval-last-sexp)
               ("C-c C-f" . lisp-eval-form-and-next)
-              ("C-c C-d" . lisp-describe-sym)
+              ("C-c C-d" . helm-clojuredocs-at-point)
               ("C-c H-i" . my/rebl-inspect)
               ("C-c C-j" . javadoc-lookup)
               ("C-c C-l" . my/clojure-load-file)
@@ -367,6 +371,19 @@
              (add-hook 'clojure-mode-hook 'hi-lock-mode))
 
 (use-package javadoc-lookup)
+(javadoc-add-artifacts [org.slf4j slf4j-api 1.7.30]
+                       [ch.qos.logback logback-classic 1.2.3]
+                       [net.logstash.logback logstash-logback-encoder 6.3]
+                       [org.eclipse.jetty jetty-server 9.4.20.v20190813]
+                       [org.eclipse.jetty jetty-servlet 9.4.20.v20190813]
+                       [com.amazonaws aws-java-sdk 1.7.4.2]
+                       [com.amazonaws aws-java-sdk-cloudwatch 1.11.683]
+                       [com.amazonaws aws-java-sdk-s3 1.11.683]
+                       [com.amazonaws aws-java-sdk-batch 1.11.683]
+                       [com.amazonaws aws-xray-recorder-sdk-core 2.5.0]
+                       [com.amazonaws aws-xray-recorder-sdk-aws-sdk 2.5.0]
+                       [com.amazonaws aws-xray-recorder-sdk-sql 2.5.0]
+                       [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0])
 
 ;; -- Scheme --
 
@@ -513,6 +530,7 @@
   :config
   (require 'smartparens-config)
   (smartparens-global-mode t)
+  (smartparens-strict-mode t)
   (show-smartparens-global-mode t)
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
@@ -520,13 +538,6 @@
     (sp-local-pair "`" nil :actions nil))
   (sp-with-modes '(html-mode sgml-mode)
     (sp-local-pair "<" ">")))
-
-;; hydra
-;; from https://github.com/abo-abo/hydra/blob/master/hydra-examples.el
-(defhydra hydra-zoom (global-map "<f2>")
-  "zoom"
-  ("g" text-scale-increase "in")
-  ("l" text-scale-decrease "out"))
 
 (defun splitter-left (arg)
   "Move window splitter left."
@@ -586,12 +597,17 @@
   (interactive)
   (find-file-other-window "~/.lein/profiles.clj"))
 
+(defun find-global-git-ignore ()
+  (interactive)
+  (find-file-other-window "~/.gitignore_global"))
+
 (defun find-deps-edn ()
   (interactive)
   (find-file-other-window "~/.clojure/deps.edn"))
 
 (defhydra hydra-find-files (:color blue :hint nil)
   ("d" find-deps-edn "deps.edn")
+  ("g" find-global-git-ignore ".gitignore_global")
   ("i" crux-find-user-init-file "init")
   ("l" find-lein-profile "lein profile"))
 
