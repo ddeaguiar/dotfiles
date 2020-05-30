@@ -48,21 +48,14 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
-(package! helm
-  :recipe (:host github
-           :repo "emacs-helm/helm")
-  :pin "41242faebb5c16c23fe7e831d4bb2cb3294e074d")
+(package! helm :pin "41242faebb5c16c23fe7e831d4bb2cb3294e074d")
 (package! moe-theme)
 (package! powerline)
 (package! whitespace)
 (package! rainbow-identifiers)
 (package! key-chord)
-(package! clojure-mode
-  :recipe (:host github
-           :repo "clojure-emacs/clojure-mode")
-  :pin "721287c7a756678d5fe8fa0dcb2d8dc846d239a2")
+(package! clojure-mode :pin "721287c7a756678d5fe8fa0dcb2d8dc846d239a2")
 (package! flycheck-clj-kondo)
 (package! helm-clojuredocs)
 (package! javadoc-lookup)
-(package! highlight-indent-guides)
 (package! git-link)
