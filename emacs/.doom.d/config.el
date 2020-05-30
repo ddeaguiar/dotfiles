@@ -36,10 +36,10 @@
 (add-to-list 'default-frame-alist              '(fullscreen . maximized))
 (setq user-full-name "Daniel De Aguiar"
       user-mail-address "ddeaguiar@gmail.com"
-      doom-theme 'moe-theme
-      doom-font (font-spec :family "Iosevka SS09"
-                           :weight 'extralight
-                           :size 16)
+      doom-theme 'doom-tomorrow-night
+      doom-font (font-spec :family "Fira Code"
+                           :weight 'light
+                           :size 14)
       display-line-numbers-type t
       ;; See https://github.com/DarthFennec/highlight-indent-guides
       highlight-indent-guides-method 'column
@@ -64,18 +64,6 @@
 (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
 
 ;; package configs
-;;
-(use-package! powerline
-  :init
-  (setq powerline-arrow-shape 'arrow)
-  :config
-  (powerline-center-theme))
-
-(require 'powerline)
-(use-package! moe-theme
-  :config
-  (moe-dark)
-  (moe-theme-set-color 'green))
 
 (use-package! helm
   :bind

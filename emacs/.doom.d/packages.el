@@ -49,8 +49,6 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 (package! helm :pin "41242faebb5c16c23fe7e831d4bb2cb3294e074d")
-(package! moe-theme)
-(package! powerline)
 (package! whitespace)
 (package! rainbow-identifiers)
 (package! key-chord)
