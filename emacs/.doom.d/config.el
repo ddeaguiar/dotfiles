@@ -65,27 +65,6 @@
 
 ;; package configs
 
-(use-package! helm
-  :bind
-  (("C-c h i" . helm-imenu)
-   ("C-c h I" . helm-imenu-in-all-buffers)
-   ("C-c h o" . swiper-helm))
-  :config
-  (helm-autoresize-mode t)
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (define-key helm-map (kbd "C-z")  'helm-select-action)
-  (setq helm-recentf-fuzzy-match t
-        helm-autoresize-max-height 0
-        helm-autoresize-min-height 40
-        helm-mode-fuzzy-match t
-        helm-candidate-number-limit 100
-        helm-display-header-line t
-        helm-split-window-in-side-p nil
-        helm-move-to-line-cycle-in-source nil
-        helm-ff-search-library-in-sexp t
-        helm-scroll-amount 8
-        helm-echo-input-in-header-line nil))
-
 (use-package! projectile
   :config
   (setq projectile-enable-caching t)
@@ -194,7 +173,7 @@
       "C-c C-b" #'my/lisp-eval-buffer
       "C-c C-e" #'lisp-eval-last-sexp
       "C-c C-f" #'lisp-eval-form-and-next
-      "C-c C-d" #'helm-clojuredocs-at-point
+      "C-c C-d" #'ivy-clojuredocs-at-point
       "C-c H-i" #'my/rebl-inspect
       "C-c C-j" #'javadoc-lookup
       "C-c C-l" #'my/clojure-load-file
