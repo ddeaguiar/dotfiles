@@ -133,8 +133,7 @@
   "Send a load-file instruction to Clojure to load the current file"
   (interactive)
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/load-file \"%s\")\n" buffer-file-name)))
-
+                     (format "(clojure.core/load-file \"%s\")\n" (buffer-file-name))))
 (defun my/clojure-in-ns ()
   "Send a command to the inferior Lisp to enter ns of current file."
   (interactive)
