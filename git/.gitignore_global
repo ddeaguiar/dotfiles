@@ -92,3 +92,6 @@ repl-port
 
 # jenv
 .java-version
+
+# lsp
+.lsp

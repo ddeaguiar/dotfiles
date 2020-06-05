@@ -50,6 +50,7 @@
        spell             ; tasing you for misspelling mispelling
 
        :tools
+       (lsp +peek)
        (eval +overlay)     ; run code, run (also, repls)
        lookup              ; navigate your code and its documentation
        magit             ; a git porcelain for Emacs

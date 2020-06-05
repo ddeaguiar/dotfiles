@@ -56,6 +56,12 @@
       "\e[1;9C" [M-right]
       "\e[1;9D" [M-left])
 
+(map! :map general-override-mode-map
+      [remap imenu] #'lsp-ui-imenu)
+
+(map! :map ivy-minibuffer-map
+      "C-l" #'ivy-backward-kill-word)
+
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 
 ;; Automatically tail log files
@@ -91,6 +97,23 @@
   (add-hook 'web-mode-hook  'personal/web-mode-hook)
   (add-hook 'web-mode-hook 'personal/disable-smartparens))
 
+(use-package! lsp-mode
+  :config
+  (dolist (m '(clojure-mode
+               clojurec-mode
+               clojurescript-mode
+               clojurex-mode))
+     (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
+  (setq lsp-enable-indentation nil
+        lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
+
+(use-package! lsp-ui
+ :hook (lsp-mode . lsp-ui-mode)
+ :config
+ (setq lsp-ui-doc-max-height 20
+        lsp-ui-doc-max-width 75))
+
+
 ;; -- Clojure --
 
 ;; Start a clojure repl with socket repl support
@@ -110,14 +133,7 @@
   "Send a load-file instruction to Clojure to load the current file"
   (interactive)
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/load-file \"%s\")\n" buffer-file-name))
-)
-
-(defun my/lisp-describe-source (sym)
-  "Send a command to the inferior Lisp to show source for symbol SYM."
-  (interactive (lisp-symprompt "Source" (lisp-var-at-pt)))
-  (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.repl/source %s)\n" sym)))
+                     (format "(clojure.core/load-file \"%s\")\n" buffer-file-name)))
 
 (defun my/clojure-in-ns ()
   "Send a command to the inferior Lisp to enter ns of current file."
@@ -165,23 +181,27 @@
     (for-all '(:defn)))
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode)
-  (add-hook 'clojure-mode-hook 'hi-lock-mode))
+  (add-hook 'clojure-mode-hook 'hi-lock-mode)
+  (add-hook 'clojure-mode-hook 'lsp-mode))
 
-(map! :map clojure-mode-map
-      "C-c C-a" #'my/clojure-spec-describe
-      "C-c C-c" #'inferior-lisp
-      "C-c C-b" #'my/lisp-eval-buffer
-      "C-c C-e" #'lisp-eval-last-sexp
-      "C-c C-f" #'lisp-eval-form-and-next
-      "C-c C-d" #'ivy-clojuredocs-at-point
-      "C-c H-i" #'my/rebl-inspect
-      "C-c C-j" #'javadoc-lookup
-      "C-c C-l" #'my/clojure-load-file
-      "C-c C-n" #'my/clojure-in-ns
-      "C-c C-r" #'lisp-eval-region
-      "C-c C-s" #'my/lisp-describe-source
-      "C-c C-t" #'my/clojure-run-tests
-      "C-c C-z" #'switch-to-lisp)
+(map! :map (clojure-mode-map inferior-lisp-mode-map)
+      :localleader
+      (:prefix ("c" . "clojure")
+       "a" #'my/clojure-spec-describe
+       "b" #'my/lisp-eval-buffer
+       "c" #'inferior-lisp
+       "d" #'lsp-ui-doc-glance
+       "D" #'ivy-clojuredocs-at-point
+       "e" #'lisp-eval-last-sexp
+       "E" #'lisp-eval-form-and-next
+       "i" #'my/rebl-inspect
+       "j" #'javadoc-lookup
+       "l" #'my/clojure-load-file
+       "n" #'my/clojure-in-ns
+       "r" #'lisp-eval-region
+       "s" #'lsp-ivy-workspace-symbol
+       "t" #'my/clojure-run-tests
+       "z" #'switch-to-lisp))
 
 (javadoc-add-artifacts [org.slf4j slf4j-api 1.7.30]
                        [ch.qos.logback logback-classic 1.2.3]
