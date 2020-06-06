@@ -1,44 +1,11 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;; General Config
 
-;; Here are some additional functions/macros that could help you configure Doom:
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
-;; they are implemented.
-;;
-;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
-;; are the three important ones:
-;;
-;; + `doom-font'
-;; + `doom-variable-pitch-font'
-;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;;
-;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
-;; font string. You generally only need these two:
-;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
-;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
 (add-to-list 'default-frame-alist              '(fullscreen . maximized))
 (setq user-full-name "Daniel De Aguiar"
       user-mail-address "ddeaguiar@gmail.com"
       doom-theme 'doom-tomorrow-night
       doom-font (font-spec :family "Fira Code"
-                           :weight 'light
+                           :weight 'regular
                            :size 14)
       display-line-numbers-type t
       ;; See https://github.com/DarthFennec/highlight-indent-guides
@@ -54,24 +21,20 @@
     (interactive)
     (just-one-space -1))
 
-(map! "C-x 5 t" #'toggle-frame-fullscreen
-      "C-x g"   #'magit-status
-      "C-c M-/" #'comment-region
-      "M-%"     #'anzu-query-replace
-      "C-M-%"   #'anzu-query-replace-regexp
+(map! "C-x g"   #'magit-status
       "M-\\"    #'my/delete-horizontal-space
       "M-SPC"   #'my/just-one-space
-      ;;Fix keybindings under iTerm2
-      "\e[1;9A" [M-up]
-      "\e[1;9B" [M-down]
-      "\e[1;9C" [M-right]
-      "\e[1;9D" [M-left])
+      :leader (:prefix "c" "/" #'comment-region
+               :prefix "s" (:prefix "r"
+                            "r" #'anzu-query-replace
+                            "e" #'anzu-query-replace-regexp))
+      :localleader "l" #'git-link)
 
 (map! :map general-override-mode-map
       [remap imenu] #'lsp-ui-imenu)
 
-(map! :map ivy-minibuffer-map
-      "C-l" #'ivy-backward-kill-word)
+(after! ivy (map! :map ivy-minibuffer-map
+                  "C-l" #'ivy-backward-kill-word))
 
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-hook! 'prog-mode-hook 'smartparens-strict-mode)
@@ -79,10 +42,17 @@
 
 ;; Automatically tail log files
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
+
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
 (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
 
-;; package configs
+
+;;; Package Configs
+
+(use-package! treemacs
+  :config
+  (treemacs-follow-mode 1)
+  (treemacs-tag-follow-mode 1))
 
 (use-package! projectile
   :config
@@ -105,8 +75,8 @@
  (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
 
-
-;; -- Clojure --
+
+;;;  Clojure
 
 ;; Start a clojure repl with socket repl support
 ;; lein: `lein with-profiles +socket,+rebl-jar run'
@@ -162,6 +132,7 @@
   (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
   (setq clojure-align-forms-automatically t)
   :config
+  (require 'flycheck-clj-kondo)
   (define-clojure-indent
     (handler '(:form))
     (component '(:form))
@@ -270,34 +241,8 @@
               (auto-fill-mode)
               (smartparens-mode -1))))
 
-(defhydra hydra-apropos (:color blue :hint nil)
-  ("a" apropos "apropos")
-  ("d" apropos-documentation "documentation")
-  ("v" apropos-variable "variable")
-  ("c" apropos-command "command")
-  ("l" apropos-library "library")
-  ("u" apropos-user-option "user-option")
-  ("e" apropos-value "value"))
-
-(defun find-lein-profile ()
-  (interactive)
-  (find-file-other-window "~/.lein/profiles.clj"))
-
-(defun find-global-git-ignore ()
-  (interactive)
-  (find-file-other-window "~/.gitignore_global"))
-
-(defun find-deps-edn ()
-  (interactive)
-  (find-file-other-window "~/.clojure/deps.edn"))
-
-(defhydra hydra-find-files (:color blue :hint nil)
-  ("d" find-deps-edn "deps.edn")
-  ("g" find-global-git-ignore ".gitignore_global")
-  ("l" find-lein-profile "lein profile"))
-
-(global-set-key (kbd "C-c l h") 'hydra-apropos/body)
-(global-set-key (kbd "C-c l ,") 'hydra-find-files/body)
+
+;;; Magit
 
 ;; magit gc overrides
 ;; Used as a replacement for git pair scripts.
@@ -334,10 +279,45 @@
     (my/git-remove-author-override)
     (my/git-set-author my/magit-gc-override-author)))
 
-(use-package! git-link
-  :bind (("C-c C-g l" . git-link)))
-
 ;; (use-package magit
 ;;   :bind (("C-c C-p" . my/git-override-author)
 ;;         ("C-c C-u" . my/git-remove-author-override)
 ;;         ("C-c C-t" . my/git-author-toggle)))
+
+
+;;; Hydras
+
+(defhydra hydra-apropos (:color blue :hint nil)
+  ("a" apropos "apropos")
+  ("d" apropos-documentation "documentation")
+  ("v" apropos-variable "variable")
+  ("c" apropos-command "command")
+  ("l" apropos-library "library")
+  ("u" apropos-user-option "user-option")
+  ("e" apropos-value "value"))
+
+(defun find-lein-profile ()
+  (interactive)
+  (find-file-other-window "~/.lein/profiles.clj"))
+
+(defun find-global-git-ignore ()
+  (interactive)
+  (find-file-other-window "~/.gitignore_global"))
+
+(defun find-deps-edn ()
+  (interactive)
+  (find-file-other-window "~/.clojure/deps.edn"))
+
+(defhydra hydra-find-files (:color blue :hint nil)
+  ("d" find-deps-edn "deps.edn")
+  ("g" find-global-git-ignore ".gitignore_global")
+  ("l" find-lein-profile "lein profile"))
+
+(map! :map general-override-mode-map
+      :leader
+      (:prefix "f"
+       :desc "private global config"
+       "a" #'hydra-find-files/body))
+
+(after! counsel (map! :map general-override-mode-map
+                      [remap apropos] #'hydra-apropos/body))

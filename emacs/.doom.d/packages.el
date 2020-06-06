@@ -55,4 +55,4 @@
 (package! ivy-clojuredocs)
 (package! javadoc-lookup)
 (package! git-link)
-(package! lsp-treemacs)
+(package! flycheck-clj-kondo)
