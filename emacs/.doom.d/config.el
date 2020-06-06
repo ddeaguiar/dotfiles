@@ -39,9 +39,6 @@
 (map! :map general-override-mode-map
       [remap imenu] #'lsp-ui-imenu)
 
-(after! ivy (map! :map ivy-minibuffer-map
-                  "C-l" #'ivy-backward-kill-word))
-
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-hook! 'prog-mode-hook 'smartparens-strict-mode)
 (add-hook! 'prog-mode-hook 'lsp-ui-mode)
@@ -52,7 +49,11 @@
 
 ;;; Package Configs
 
+(after! ivy (map! :map ivy-minibuffer-map
+                  "C-l" #'ivy-backward-kill-word))
+
 (use-package! treemacs
+  :defer t
   :config
   (treemacs-follow-mode 1)
   (treemacs-tag-follow-mode 1))
@@ -63,6 +64,7 @@
   (add-to-list 'projectile-globally-ignored-directories "project/target"))
 
 (use-package! lsp-mode
+  :defer t
   :config
   (dolist (m '(clojure-mode
                clojurec-mode
@@ -73,9 +75,9 @@
         lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
 
 (use-package! lsp-ui
- :hook (lsp-mode . lsp-ui-mode)
- :config
- (setq lsp-ui-doc-max-height 20
+  :defer t
+  :config
+  (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
 
 ;;;  Clojure
@@ -128,6 +130,7 @@
 (setq lisp-describe-sym-command "(clojure.repl/doc %s)\n")
 
 (use-package! clojure-mode
+  :defer t
   :init
   (add-to-list 'auto-mode-alist '("\\.clj(x|s)?$"  . clojure-mode))
   (add-to-list 'auto-mode-alist '("\\.boot$"  . clojure-mode))
@@ -167,19 +170,20 @@
        "t" #'my/clojure-run-tests
        "z" #'switch-to-lisp))
 
-(javadoc-add-artifacts [org.slf4j slf4j-api 1.7.30]
-                       [ch.qos.logback logback-classic 1.2.3]
-                       [net.logstash.logback logstash-logback-encoder 6.3]
-                       [org.eclipse.jetty jetty-server 9.4.20.v20190813]
-                       [org.eclipse.jetty jetty-servlet 9.4.20.v20190813]
-                       [com.amazonaws aws-java-sdk 1.7.4.2]
-                       [com.amazonaws aws-java-sdk-cloudwatch 1.11.683]
-                       [com.amazonaws aws-java-sdk-s3 1.11.683]
-                       [com.amazonaws aws-java-sdk-batch 1.11.683]
-                       [com.amazonaws aws-xray-recorder-sdk-core 2.5.0]
-                       [com.amazonaws aws-xray-recorder-sdk-aws-sdk 2.5.0]
-                       [com.amazonaws aws-xray-recorder-sdk-sql 2.5.0]
-                       [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0])
+(after! clojure-mode
+  (javadoc-add-artifacts [org.slf4j slf4j-api 1.7.30]
+                         [ch.qos.logback logback-classic 1.2.3]
+                         [net.logstash.logback logstash-logback-encoder 6.3]
+                         [org.eclipse.jetty jetty-server 9.4.20.v20190813]
+                         [org.eclipse.jetty jetty-servlet 9.4.20.v20190813]
+                         [com.amazonaws aws-java-sdk 1.7.4.2]
+                         [com.amazonaws aws-java-sdk-cloudwatch 1.11.683]
+                         [com.amazonaws aws-java-sdk-s3 1.11.683]
+                         [com.amazonaws aws-java-sdk-batch 1.11.683]
+                         [com.amazonaws aws-xray-recorder-sdk-core 2.5.0]
+                         [com.amazonaws aws-xray-recorder-sdk-aws-sdk 2.5.0]
+                         [com.amazonaws aws-xray-recorder-sdk-sql 2.5.0]
+                         [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0]))
 
 (use-package! smartparens
   :config
@@ -220,6 +224,7 @@
    "M-B"              #'sp-backward-symbol))
 
 (use-package! org
+  :defer t
   :init
   ;; Export
   (setq org-html-validation-link nil
