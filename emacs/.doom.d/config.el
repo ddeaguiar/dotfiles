@@ -45,12 +45,12 @@
       highlight-indent-guides-method 'column
       backup-directory-alist '(("." . "~/.emacs.backups")))
 
-(defun me/delete-horizontal-space ()
+(defun my/delete-horizontal-space ()
     (interactive)
     (just-one-space -1)
     (sp-backward-delete-char))
 
-(defun me/just-one-space ()
+(defun my/just-one-space ()
     (interactive)
     (just-one-space -1))
 
@@ -59,8 +59,8 @@
       "C-c M-/" #'comment-region
       "M-%"     #'anzu-query-replace
       "C-M-%"   #'anzu-query-replace-regexp
-      "M-\\"    #'me/delete-horizontal-space
-      "M-SPC"   #'me/just-one-space
+      "M-\\"    #'my/delete-horizontal-space
+      "M-SPC"   #'my/just-one-space
       ;;Fix keybindings under iTerm2
       "\e[1;9A" [M-up]
       "\e[1;9B" [M-down]
@@ -75,6 +75,7 @@
 
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-hook! 'prog-mode-hook 'smartparens-strict-mode)
+(add-hook! 'prog-mode-hook 'lsp-ui-mode)
 
 ;; Automatically tail log files
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))

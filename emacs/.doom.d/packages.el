@@ -52,7 +52,6 @@
 (package! rainbow-identifiers)
 (package! key-chord)
 (package! clojure-mode :pin "721287c7a756678d5fe8fa0dcb2d8dc846d239a2")
-(package! flycheck-clj-kondo)
 (package! ivy-clojuredocs)
 (package! javadoc-lookup)
 (package! git-link)
