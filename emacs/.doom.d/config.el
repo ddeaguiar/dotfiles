@@ -21,9 +21,15 @@
     (interactive)
     (just-one-space -1))
 
+(defun my/forward-page ()
+  (interactive)
+  (forward-page)
+  (recenter 'top))
+
 (map! "C-x g"   #'magit-status
       "M-\\"    #'my/delete-horizontal-space
       "M-SPC"   #'my/just-one-space
+      [remap forward-page] #'my/forward-page
       :leader (:prefix "c" "/" #'comment-region
                :prefix "s" (:prefix "r"
                             "r" #'anzu-query-replace
@@ -42,10 +48,7 @@
 
 ;; Automatically tail log files
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
-
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
-(add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
-
 
 ;;; Package Configs
 
@@ -74,7 +77,6 @@
  :config
  (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
-
 
 ;;;  Clojure
 
@@ -178,14 +180,13 @@
                        [com.amazonaws aws-xray-recorder-sdk-aws-sdk 2.5.0]
                        [com.amazonaws aws-xray-recorder-sdk-sql 2.5.0]
                        [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0])
-
+
 (use-package! smartparens
   :config
   ;; undo doom config
   ;; https://github.com/hlissner/doom-emacs/blob/develop/modules/config/default/config.el#L100-L104
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
   (sp-local-pair 'clojure-mode "`" nil :actions nil)
-  (sp-local-pair sp-lisp-modes "(" ")" :unless nil)
   (dolist (brace '("(" "{" "["))
     (sp-pair brace nil :post-handlers nil :unless nil))
   (map! :map smartparens-mode-map
@@ -217,7 +218,7 @@
    "C-M-]"            #'sp-select-next-thing
    "M-F"              #'sp-forward-symbol
    "M-B"              #'sp-backward-symbol))
-
+
 (use-package! org
   :init
   ;; Export
@@ -240,7 +241,6 @@
               (flyspell-mode)
               (auto-fill-mode)
               (smartparens-mode -1))))
-
 
 ;;; Magit
 
