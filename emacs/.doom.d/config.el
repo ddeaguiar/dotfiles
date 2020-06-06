@@ -45,11 +45,22 @@
       highlight-indent-guides-method 'column
       backup-directory-alist '(("." . "~/.emacs.backups")))
 
+(defun me/delete-horizontal-space ()
+    (interactive)
+    (just-one-space -1)
+    (sp-backward-delete-char))
+
+(defun me/just-one-space ()
+    (interactive)
+    (just-one-space -1))
+
 (map! "C-x 5 t" #'toggle-frame-fullscreen
       "C-x g"   #'magit-status
       "C-c M-/" #'comment-region
       "M-%"     #'anzu-query-replace
       "C-M-%"   #'anzu-query-replace-regexp
+      "M-\\"    #'me/delete-horizontal-space
+      "M-SPC"   #'me/just-one-space
       ;;Fix keybindings under iTerm2
       "\e[1;9A" [M-up]
       "\e[1;9B" [M-down]
@@ -63,6 +74,7 @@
       "C-l" #'ivy-backward-kill-word)
 
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
+(add-hook! 'prog-mode-hook 'smartparens-strict-mode)
 
 ;; Automatically tail log files
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
@@ -75,27 +87,6 @@
   :config
   (setq projectile-enable-caching t)
   (add-to-list 'projectile-globally-ignored-directories "project/target"))
-
-(use-package! web-mode
-  :init
-  (progn
-    (defun personal/disable-smartparens ()
-      (smartparens-mode 0))
-    (defun personal/sp-web-mode-is-code-context (id action context)
-      (when (and (eq action 'insert)
-                 (not (or (get-text-property (point) 'part-side)
-                          (get-text-property (point) 'block-side))))
-        t))
-    (defun personal/web-mode-hook ()
-      "Hooks for Web mode."
-      (setq web-mode-markup-indent-offset 2
-            web-mode-css-indent-offset 2
-            web-mode-code-indent-offset 2
-            web-mode-enable-auto-pairing t)
-      (add-to-list 'sp-ignore-modes-list 'web-mode)))
-  :config
-  (add-hook 'web-mode-hook  'personal/web-mode-hook)
-  (add-hook 'web-mode-hook 'personal/disable-smartparens))
 
 (use-package! lsp-mode
   :config
@@ -217,61 +208,43 @@
                        [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0])
 
 (use-package! smartparens
-  :diminish (smartparens-mode . " (Sm)")
   :config
-  (defun personal/delete-horizontal-space ()
-    (interactive)
-    (just-one-space -1)
-    (sp-backward-delete-char))
-  (defun personal/just-one-space ()
-    (interactive)
-    (just-one-space -1))
-  (bind-keys
-   ("M-\\"             . personal/delete-horizontal-space)
-   ("M-SPC"            . personal/just-one-space)
-   :map smartparens-mode-map
-   ("C-k"              . sp-kill-hybrid-sexp)
-   ("C-M-f"            . sp-forward-sexp)
-   ("C-M-b"            . sp-backward-sexp)
-   ("C-M-d"            . sp-down-sexp)
-   ("C-M-a"            . sp-backward-down-sexp)
-   ("C-S-a"            . sp-beginning-of-sexp)
-   ("C-S-d"            . sp-end-of-sexp)
-   ("C-M-e"            . sp-up-sexp)
-   ("C-M-u"            . sp-backward-up-sexp)
-   ("C-M-t"            . sp-transpose-sexp)
-   ("C-M-n"            . sp-next-sexp)
-   ("C-M-p"            . sp-previous-sexp)
-   ("C-M-k"            . sp-kill-sexp)
-   ("C-M-w"            . sp-copy-sexp)
-   ("M-<delete>"       . sp-unwrap-sexp)
-   ("M-<backspace>"    . sp-backward-unwrap-sexp)
-   ("C-<right>"        . sp-forward-slurp-sexp)
-   ("C-<left>"         . sp-forward-barf-sexp)
-   ("C-M-<left>"       . sp-backward-slurp-sexp)
-   ("C-M-<right>"      . sp-backward-barf-sexp)
-   ("M-D"              . sp-splice-sexp)
-   ("C-M-<delete>"     . sp-splice-sexp-killing-forward)
-   ("C-M-<backspace>"  . sp-splice-sexp-killing-backward)
-   ("C-S-<backspace>"  . sp-splice-sexp-killing-around)
-   ("C-]"              . sp-select-next-thing-exchange)
-   ("C-<left_bracket>" . sp-select-previous-thing)
-   ("C-M-]"            . sp-select-next-thing)
-   ("M-F"              . sp-forward-symbol)
-   ("M-B"              . sp-backward-symbol)
-   :map emacs-lisp-mode-map
-   (")"                . sp-up-sexp))
-  :config
-  (require 'smartparens-config)
-  (smartparens-global-mode t)
-  (smartparens-strict-mode t)
-  (show-smartparens-global-mode t)
+  ;; undo doom config
+  ;; https://github.com/hlissner/doom-emacs/blob/develop/modules/config/default/config.el#L100-L104
   (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
-  (sp-local-pair 'web-mode "<" nil :when '(personal/sp-web-mode-is-code-context))
-  (sp-with-modes '(clojure-mode)
-    (sp-local-pair "`" nil :actions nil))
-  (sp-with-modes '(html-mode sgml-mode)
-    (sp-local-pair "<" ">")))
+  (sp-local-pair 'clojure-mode "`" nil :actions nil)
+  (sp-local-pair sp-lisp-modes "(" ")" :unless nil)
+  (dolist (brace '("(" "{" "["))
+    (sp-pair brace nil :post-handlers nil :unless nil))
+  (map! :map smartparens-mode-map
+   "C-M-f"            #'sp-forward-sexp
+   "C-M-b"            #'sp-backward-sexp
+   "C-M-d"            #'sp-down-sexp
+   "C-M-a"            #'sp-backward-down-sexp
+   "C-S-a"            #'sp-beginning-of-sexp
+   "C-S-d"            #'sp-end-of-sexp
+   "C-M-e"            #'sp-up-sexp
+   "C-M-u"            #'sp-backward-up-sexp
+   "C-M-t"            #'sp-transpose-sexp
+   "C-M-n"            #'sp-next-sexp
+   "C-M-p"            #'sp-previous-sexp
+   "C-M-k"            #'sp-kill-sexp
+   "C-M-w"            #'sp-copy-sexp
+   "M-<delete>"       #'sp-unwrap-sexp
+   "M-<backspace>"    #'sp-backward-unwrap-sexp
+   "C-<right>"        #'sp-forward-slurp-sexp
+   "C-<left>"         #'sp-forward-barf-sexp
+   "C-M-<left>"       #'sp-backward-slurp-sexp
+   "C-M-<right>"      #'sp-backward-barf-sexp
+   "M-D"              #'sp-splice-sexp
+   "C-M-<delete>"     #'sp-splice-sexp-killing-forward
+   "C-M-<backspace>"  #'sp-splice-sexp-killing-backward
+   "C-S-<backspace>"  #'sp-splice-sexp-killing-around
+   "C-]"              #'sp-select-next-thing-exchange
+   "C-<left_bracket>" #'sp-select-previous-thing
+   "C-M-]"            #'sp-select-next-thing
+   "M-F"              #'sp-forward-symbol
+   "M-B"              #'sp-backward-symbol))
 
 (use-package! org
   :init
