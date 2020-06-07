@@ -36,8 +36,7 @@
                             "e" #'anzu-query-replace-regexp))
       :localleader "l" #'git-link)
 
-(map! :map general-override-mode-map
-      [remap imenu] #'lsp-ui-imenu)
+(map! [remap imenu] #'lsp-ui-imenu)
 
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-hook! 'prog-mode-hook 'smartparens-strict-mode)
@@ -104,8 +103,7 @@ Example value:
   :defer t
   :config
   (setq javadoc-lookup-cache-dir "~/.javadoc-lookup-cache")
-  (map! :map general-override-mode-map
-      :localleader
+  (map! :localleader
      :desc "init javadoc-lookup" "j" #'my/init-javadoc-lookup)
   :after-call clojure-mode-hook)
 
@@ -166,6 +164,31 @@ Example value:
   (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
   (setq clojure-align-forms-automatically t)
   :config
+  (map! :map clojure-mode-map
+        ;; TODO: I don't know why :leader causes the key bindings to
+        ;; be added to the general-override-mode-map
+        ;;
+        ;; While `C-c C-[k]` would require fewer keystrokes,
+        ;; the organization provided by the prefix `C-c C-c` is, for me, worth
+        ;; the additional keystroke cost plus it places the Clojure keybindings
+        ;; adjacent to the clj-refactor bindings (`C-c C-r`) in the mini buffer.
+        :prefix doom-leader-alt-key
+        (:prefix ("C-c" . "clojure")
+         "a" #'my/clojure-spec-describe
+         "b" #'my/lisp-eval-buffer
+         "c" #'inferior-lisp
+         "d" #'lsp-ui-doc-glance
+         "D" #'ivy-clojuredocs-at-point
+         "e" #'lisp-eval-last-sexp
+         "E" #'lisp-eval-form-and-next
+         "i" #'my/rebl-inspect
+         "j" #'javadoc-lookup
+         "l" #'my/clojure-load-file
+         "n" #'my/clojure-in-ns
+         "r" #'lisp-eval-region
+         "s" #'lsp-ivy-workspace-symbol
+         "t" #'my/clojure-run-tests
+         "z" #'switch-to-lisp))
   (require 'flycheck-clj-kondo)
   (define-clojure-indent
     (handler '(:form))
@@ -180,24 +203,6 @@ Example value:
   (add-hook 'clojure-mode-hook 'hi-lock-mode)
   (add-hook 'clojure-mode-hook 'lsp-mode))
 
-(map! :map (clojure-mode-map inferior-lisp-mode-map)
-      :localleader
-      (:prefix ("c" . "clojure")
-       "a" #'my/clojure-spec-describe
-       "b" #'my/lisp-eval-buffer
-       "c" #'inferior-lisp
-       "d" #'lsp-ui-doc-glance
-       "D" #'ivy-clojuredocs-at-point
-       "e" #'lisp-eval-last-sexp
-       "E" #'lisp-eval-form-and-next
-       "i" #'my/rebl-inspect
-       "j" #'javadoc-lookup
-       "l" #'my/clojure-load-file
-       "n" #'my/clojure-in-ns
-       "r" #'lisp-eval-region
-       "s" #'lsp-ivy-workspace-symbol
-       "t" #'my/clojure-run-tests
-       "z" #'switch-to-lisp))
 
 (use-package! smartparens
   :config
@@ -332,11 +337,9 @@ Example value:
   ("g" find-global-git-ignore ".gitignore_global")
   ("l" find-lein-profile "lein profile"))
 
-(map! :map general-override-mode-map
-      :leader
+(map! :leader
       (:prefix "f"
        :desc "private global config"
        "a" #'hydra-find-files/body))
 
-(after! counsel (map! :map general-override-mode-map
-                      [remap apropos] #'hydra-apropos/body))
+(after! counsel (map! [remap apropos] #'hydra-apropos/body))
