@@ -80,6 +80,36 @@
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
 
+;;; javadoc-lookup
+(defcustom javadoc-lookup-artifacts nil
+  "List of java artifacts to load.
+Intended to be used with `dir-locals-file'.
+
+Example value:
+((prog-mode
+ (javadoc-lookup-artifacts [\"org.slf4j\" \"slf4j-api\" \"1.7.30\"]
+                           [\"ch.qos.logback\" \"logback-classic\" \"1.2.3\"])))"
+  :type '(alist :value-type (symbol symbol symbol)))
+
+(defun my/init-javadoc-lookup ()
+  (interactive)
+  (if javadoc-lookup-artifacts
+      (progn
+          (dolist (artifact javadoc-lookup-artifacts)
+            (javadoc-add-artifacts artifact))
+        (message "Done loading artifacts."))
+      (message "No artifacts to load. Did you set javadoc-lookup-artifacts?")))
+
+(use-package! javadoc-lookup
+  :defer t
+  :config
+  (setq javadoc-lookup-cache-dir "~/.javadoc-lookup-cache")
+  (map! :map general-override-mode-map
+      :localleader
+     :desc "init javadoc-lookup" "j" #'my/init-javadoc-lookup)
+  :after-call clojure-mode-hook)
+
+
 ;;;  Clojure
 
 ;; Start a clojure repl with socket repl support
@@ -169,21 +199,6 @@
        "s" #'lsp-ivy-workspace-symbol
        "t" #'my/clojure-run-tests
        "z" #'switch-to-lisp))
-
-(after! clojure-mode
-  (javadoc-add-artifacts [org.slf4j slf4j-api 1.7.30]
-                         [ch.qos.logback logback-classic 1.2.3]
-                         [net.logstash.logback logstash-logback-encoder 6.3]
-                         [org.eclipse.jetty jetty-server 9.4.20.v20190813]
-                         [org.eclipse.jetty jetty-servlet 9.4.20.v20190813]
-                         [com.amazonaws aws-java-sdk 1.7.4.2]
-                         [com.amazonaws aws-java-sdk-cloudwatch 1.11.683]
-                         [com.amazonaws aws-java-sdk-s3 1.11.683]
-                         [com.amazonaws aws-java-sdk-batch 1.11.683]
-                         [com.amazonaws aws-xray-recorder-sdk-core 2.5.0]
-                         [com.amazonaws aws-xray-recorder-sdk-aws-sdk 2.5.0]
-                         [com.amazonaws aws-xray-recorder-sdk-sql 2.5.0]
-                         [com.amazonaws aws-xray-recorder-sdk-apache-http 2.5.0]))
 
 (use-package! smartparens
   :config
