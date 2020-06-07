@@ -80,7 +80,7 @@
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
 
-;;; javadoc-lookup
+;;; Javadocs lookup
 (defcustom javadoc-lookup-artifacts nil
   "List of java artifacts to load.
 Intended to be used with `dir-locals-file'.
@@ -108,7 +108,6 @@ Example value:
       :localleader
      :desc "init javadoc-lookup" "j" #'my/init-javadoc-lookup)
   :after-call clojure-mode-hook)
-
 
 ;;;  Clojure
 
