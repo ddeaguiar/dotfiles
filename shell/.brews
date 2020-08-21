@@ -3,14 +3,14 @@ ant
 aspell
 autoconf
 aws-elasticbeanstalk
-boot-clj
 clojure
+clojure-lsp
 cmake
 ctags
 direnv
 dirmngr
 dos2unix
-emacs
+emacs-plus
 entr
 fontconfig
 freetype

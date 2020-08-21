@@ -26,6 +26,18 @@
   (forward-page)
   (recenter 'top))
 
+(defvar my/imenu-index-alist-no-sub-lists?
+  nil
+  "Whether the imenu-index-alist contains sub-lists")
+
+(defun experimental/imenup-toggle-sort ()
+  (interactive)
+  (call-interactively 'imenup-toggle-sort)
+  (setq imenu--index-alist (imenu--split-submenus (imenu--make-index-alist t)))
+  (when (and my/imenu-index-alist-no-sub-lists? imenu-sort-function)
+    (message "sorting top level")
+    (setq imenu--index-alist (sort imenu--index-alist imenu-sort-function))))
+
 (map! "C-x g"   #'magit-status
       "M-\\"    #'my/delete-horizontal-space
       "M-SPC"   #'my/just-one-space
@@ -34,22 +46,29 @@
                :prefix "s" (:prefix "r"
                             "r" #'anzu-query-replace
                             "e" #'anzu-query-replace-regexp))
-      :localleader "l" #'git-link)
+      :localleader
+      "l" #'git-link
+      "t" #'experimental/imenup-toggle-sort)
 
 (map! [remap imenu] #'lsp-ui-imenu)
 
 (add-hook! 'prog-mode-hook 'rainbow-identifiers-mode)
 (add-hook! 'prog-mode-hook 'smartparens-strict-mode)
 (add-hook! 'prog-mode-hook 'lsp-ui-mode)
+(add-hook! 'prog-mode-hook (lambda () (setq my/imenu-index-alist-no-sub-lists? nil)))
 
 ;; Automatically tail log files
 (add-to-list 'auto-mode-alist '("\\.log\\'" . auto-revert-tail-mode))
 (add-to-list 'auto-mode-alist '("\\.http$" . restclient-mode))
+
 
 ;;; Package Configs
 
-(after! ivy (map! :map ivy-minibuffer-map
-                  "C-l" #'ivy-backward-kill-word))
+(use-package! ivy
+  :config
+  (setq ivy-extra-directories nil)
+  (map! :map ivy-minibuffer-map
+        "C-l" #'ivy-backward-delete-char))
 
 (use-package! treemacs
   :defer t
@@ -201,7 +220,8 @@ Example value:
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode)
   (add-hook 'clojure-mode-hook 'hi-lock-mode)
-  (add-hook 'clojure-mode-hook 'lsp-mode))
+  (add-hook 'clojure-mode-hook 'lsp-mode)
+  (add-hook 'clojure-mode-hook (lambda () (setq my/imenu-index-alist-no-sub-lists? t))))
 
 
 (use-package! smartparens
