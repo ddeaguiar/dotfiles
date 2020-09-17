@@ -12,6 +12,10 @@
       highlight-indent-guides-method 'column
       backup-directory-alist '(("." . "~/.emacs.backups")))
 
+(setq mac-command-modifier 'meta) ; make cmd key do Meta
+(setq mac-option-modifier 'super) ; make opt key do Super
+(setq mac-control-modifier 'control) ; make Control key do Control
+
 (defun my/delete-horizontal-space ()
     (interactive)
     (just-one-space -1)
@@ -88,8 +92,9 @@
                clojurec-mode
                clojurescript-mode
                clojurex-mode))
-     (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
+    (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
   (setq lsp-enable-indentation nil
+        lsp-auto-guess-root t
         lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
 
 (use-package! lsp-ui
