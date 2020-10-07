@@ -40,14 +40,14 @@
            :rebl         {:extra-deps {com.cognitect/rebl     {:mvn/version "0.9.240"}
                                        org.clojure/core.async {:mvn/version "0.4.490"}}
                           :main-opts  ["-m" "cognitect.rebl"]}
-           :depify       {:extra-deps {depify {:git/url "https://github.com/hagmonk/depify"
+           :depify       {:extra-deps {depify/depify {:git/url "https://github.com/hagmonk/depify"
                                                :sha     "04329744872890711dbba8939a16e9987dd33bb3"}}
                           :main-opts  ["-m" "depify.project"]}
            ;; - start a Socket REPL on port 50505:
-           :socket       {:jvm-opts ["-Dclojure.server.repl={:port,60606,:accept,clojure.core.server/repl}"]}
-           :socket-rebl  {:jvm-opts ["-Dclojure.server.rebl={:port,60606,:accept,cognitect.rebl/-main}"]}
-           :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port,60606,:accept,clojure.core.server/io-prepl}"]}
-           :zprint       {:extra-deps {zprint {:mvn/version "0.4.9"}}
+           :socket       {:jvm-opts ["-Dclojure.server.repl={:port 60606 :accept clojure.core.server/repl}"]}
+           :socket-rebl  {:jvm-opts ["-Dclojure.server.repl={:port 60606 :accept cognitect.rebl/-main}"]}
+           :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port 60606 :accept clojure.core.server/io-prepl}"]}
+           :zprint       {:extra-deps {zprint/zprint {:mvn/version "0.4.9"}}
                           :main-opts  ["-m" "zprint.main"]}
            :ion-dev {:deps      {com.datomic/ion-dev {:mvn/version "0.9.251"}}
                      :main-opts ["-m" "datomic.ion.dev"]}}
