@@ -1,0 +1,30 @@
+add_newline = false
+
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$docker_context\
+$dart\
+$custom\
+$java\
+$env_var\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$character\
+"""
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+[package]
+disabled = true
+
+[status]
+disabled = false
