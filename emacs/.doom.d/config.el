@@ -290,6 +290,16 @@ Example value:
               (flyspell-mode)
               (auto-fill-mode)
               (smartparens-mode -1))))
+
+(after! org
+  (progn
+    (org-babel-do-load-languages
+     'org-babel-load-languages
+     '((clojure . t)
+       (dot . t)
+       (java . t)
+       (plantuml . t)
+       (shell . t)))))
 
 ;;; Magit
 
