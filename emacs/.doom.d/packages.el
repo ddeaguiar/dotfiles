@@ -56,6 +56,7 @@
 (package! javadoc-lookup)
 (package! git-link)
 (package! flycheck-clj-kondo)
+(package! company-lsp)
 ;; Experimental
 (package! imenu-plus
   :recipe (:host github :repo "ddeaguiar/imenu-plus"

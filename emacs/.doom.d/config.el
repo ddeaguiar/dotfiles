@@ -93,6 +93,7 @@
                clojurescript-mode
                clojurex-mode))
     (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
+  (require 'company-lsp)
   (setq lsp-enable-indentation nil
         lsp-auto-guess-root t
         lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
@@ -102,6 +103,11 @@
   :config
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
+
+(use-package! company-lsp
+  :defer t
+  :config
+  (push 'company-lsp company-backends))
 
 ;;; Javadocs lookup
 (defcustom javadoc-lookup-artifacts nil
