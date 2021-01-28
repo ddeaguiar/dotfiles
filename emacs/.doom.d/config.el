@@ -88,14 +88,11 @@
 (use-package! lsp-mode
   :defer t
   :config
-  (dolist (m '(clojure-mode
-               clojurec-mode
-               clojurescript-mode
-               clojurex-mode))
-    (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
   (setq lsp-enable-indentation nil
         lsp-auto-guess-root t
-        lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
+        lsp-diagnostic-package :none
+        lsp-enable-snippet nil
+        lsp-file-watch-threshold 2000))
 
 (use-package! lsp-ui
   :defer t
@@ -201,6 +198,27 @@ Example value:
   (add-to-list 'auto-mode-alist '("\\.edn$"  . clojure-mode))
   (setq clojure-align-forms-automatically t)
   :config
+  (when (featurep! :tools lsp)
+        (add-hook! '(clojure-mode-local-vars-hook
+                 clojurec-mode-local-vars-hook
+                 clojurescript-mode-local-vars-hook)
+      (defun +clojure-disable-lsp-indentation-h ()
+        (setq-local lsp-enable-indentation nil))
+      #'lsp!)
+      (after! lsp-clojure
+      (dolist (m '(clojure-mode
+                   clojurec-mode
+                   clojurescript-mode
+                   clojurex-mode))
+        (add-to-list 'lsp-language-id-configuration (cons m "clojure")))
+
+      (dolist (dir '("[/\\\\]\\.clj-kondo\\'"
+                     "[/\\\\]\\.cp-cache\\'"
+                     "[/\\\\]\\.lsp\\'"
+                     "[/\\\\]\\.shadow-cljs\\'"
+                     "[/\\\\]\\target\\'"))
+        (push dir lsp-file-watch-ignored))))
+  
   (map! :map clojure-mode-map
         ;; TODO: I don't know why :leader causes the key bindings to
         ;; be added to the general-override-mode-map
