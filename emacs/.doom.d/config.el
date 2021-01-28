@@ -93,7 +93,6 @@
                clojurescript-mode
                clojurex-mode))
     (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
-  (require 'company-lsp)
   (setq lsp-enable-indentation nil
         lsp-auto-guess-root t
         lsp-clojure-server-command '("bash" "-c" "clojure-lsp")))
@@ -103,11 +102,6 @@
   :config
   (setq lsp-ui-doc-max-height 20
         lsp-ui-doc-max-width 75))
-
-(use-package! company-lsp
-  :defer t
-  :config
-  (push 'company-lsp company-backends))
 
 ;;; Javadocs lookup
 (defcustom javadoc-lookup-artifacts nil
@@ -143,6 +137,19 @@ Example value:
 ;; lein: `lein with-profiles +socket,+rebl-jar run'
 ;; clj: `clj -Asocket:rebl-jar`
 (setq inferior-lisp-program "nc localhost 60606")
+
+(defun my/read-file-as-string (path)
+    (with-temp-buffer
+      (insert-file-contents path)
+      (buffer-string)))
+
+(defun my/clojure-socket-repl-connect ()
+  (interactive)
+  (let ((path (expand-file-name (concat (projectile-project-root) ".shadow-cljs/socket-repl.port"))))
+      (when (file-exists-p path)
+        (let ((port (my/read-file-as-string path)))
+          (message (format "Connecting to socket repl at port %s" port))
+          (inferior-lisp (format "nc localhost %s" port))))))
 
 ;; use with caution
 ;; large buffers are problematic
@@ -206,7 +213,7 @@ Example value:
         (:prefix ("C-c" . "clojure")
          "a" #'my/clojure-spec-describe
          "b" #'my/lisp-eval-buffer
-         "c" #'inferior-lisp
+         "c" #'my/clojure-socket-repl-connect
          "d" #'lsp-ui-doc-glance
          "D" #'ivy-clojuredocs-at-point
          "e" #'lisp-eval-last-sexp
@@ -233,7 +240,6 @@ Example value:
   (add-hook 'clojure-mode-hook 'hi-lock-mode)
   (add-hook 'clojure-mode-hook 'lsp-mode)
   (add-hook 'clojure-mode-hook (lambda () (setq my/imenu-index-alist-no-sub-lists? t))))
-
 
 (use-package! smartparens
   :config
