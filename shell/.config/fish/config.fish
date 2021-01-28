@@ -5,6 +5,10 @@ set PATH $HOME/datomic-cli $HOME/bin $HOME/datomic-pro/bin $HOME/.jenv/bin $HOME
 
 status --is-interactive; and source (jenv  init -|psub)
 
+if test -f $HOME/.nurc
+   bass source $HOME/.nurc
+end
+
 alias rf="rm -rf"
 alias lrb="lein with-profiles +rebl,+socket-rebl,+socket-prepl repl"
 alias lsb="lein with-profiles +socket,+socket-prepl repl"
