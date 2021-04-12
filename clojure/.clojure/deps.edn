@@ -43,10 +43,22 @@
            :depify       {:extra-deps {depify/depify {:git/url "https://github.com/hagmonk/depify"
                                                :sha     "04329744872890711dbba8939a16e9987dd33bb3"}}
                           :main-opts  ["-m" "depify.project"]}
-           ;; - start a Socket REPL on port 50505:
-           :socket       {:jvm-opts ["-Dclojure.server.repl={:port 60606 :accept clojure.core.server/repl}"]}
-           :socket-rebl  {:jvm-opts ["-Dclojure.server.repl={:port 60606 :accept cognitect.rebl/-main}"]}
-           :socket-prepl {:jvm-opts ["-Dclojure.server.io-prepl={:port 60606 :accept clojure.core.server/io-prepl}"]}
+           ;; - start a Socket REPL on port 60606:
+           :socket {:exec-fn   clojure.core.server/start-server
+                    :exec-args {:name          "repl-server"
+                                :port          60606
+                                :accept        clojure.core.server/repl
+                                :server-daemon false}}
+           :socket-rebl {:exec-fn   clojure.core.server/start-server
+                         :exec-args {:name          "rebl-server"
+                                     :port          60606
+                                     :accept        cognitect.rebl/-main
+                                     :server-daemon false}}
+           :socket-prepl {:exec-fn   clojure.core.server/start-server
+                          :exec-args {:name          "prepl-server"
+                                      :port          60606
+                                      :accept        clojure.core.server/io-prepl
+                                      :server-daemon false}}
            :zprint       {:extra-deps {zprint/zprint {:mvn/version "0.4.9"}}
                           :main-opts  ["-m" "zprint.main"]}
            :ion-dev {:deps      {com.datomic/ion-dev {:mvn/version "0.9.251"}}
