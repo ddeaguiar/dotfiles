@@ -89,8 +89,10 @@
   :defer t
   :config
   (setq lsp-enable-indentation nil
+        lsp-enable-file-watchers nil
         lsp-auto-guess-root t
-        lsp-diagnostic-package :none
+        lsp-diagnostic-provider :none
+        lsp-lens-enable t
         lsp-enable-snippet nil
         lsp-file-watch-threshold 2000))
 
@@ -129,24 +131,40 @@ Example value:
   :after-call clojure-mode-hook)
 
 ;;;  Clojure
+(defcustom clojure-socket-repl-port "60606"
+  "Clojure socket repl port"
+  :type 'string)
 
 ;; Start a clojure repl with socket repl support
 ;; lein: `lein with-profiles +socket,+rebl-jar run'
 ;; clj: `clj -Asocket:rebl-jar`
-(setq inferior-lisp-program "nc localhost 60606")
+(setq inferior-lisp-program (format "nc localhost %s" clojure-socket-repl-port))
 
 (defun my/read-file-as-string (path)
     (with-temp-buffer
       (insert-file-contents path)
       (buffer-string)))
 
+(defun my/port-open-p (port)
+  "Returns t if the given port is in use, nil otherwise."
+  (= 0 (call-process "lsof" nil nil nil "-P" "-i"
+                     (concat "TCP:" port))))
+
 (defun my/clojure-socket-repl-connect ()
   (interactive)
   (let ((path (expand-file-name (concat (projectile-project-root) ".shadow-cljs/socket-repl.port"))))
-      (when (file-exists-p path)
-        (let ((port (my/read-file-as-string path)))
-          (message (format "Connecting to socket repl at port %s" port))
-          (inferior-lisp (format "nc localhost %s" port))))))
+    (cond
+     ((file-exists-p path)
+      (let ((port (my/read-file-as-string path)))
+        (message (format "Connecting to socket repl at port %s" port))
+        (inferior-lisp (format "nc localhost %s" port))))
+     ((my/port-open-p clojure-socket-repl-port)
+      (message (format "Connecting to socket repl at port %s" clojure-socket-repl-port))
+      (inferior-lisp (format "nc localhost %s" clojure-socket-repl-port)))
+     (t
+      (let ((port (read-string "port number: ")))
+        (message (format "Connecting to socket repl at port %s" port))
+        (inferior-lisp (format "nc localhost %s" port)))))))
 
 ;; use with caution
 ;; large buffers are problematic
@@ -160,18 +178,20 @@ Example value:
   "Send a load-file instruction to Clojure to load the current file"
   (interactive)
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/load-file \"%s\")\n" (buffer-file-name))))
+                     (format "(do (clojure.core/load-file \"%s\") nil)\n" (buffer-file-name))))
+
 (defun my/clojure-in-ns ()
   "Send a command to the inferior Lisp to enter ns of current file."
   (interactive)
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.core/in-ns '%s)\n" (clojure-find-ns))))
+                     (format "(in-ns '%s)\n" (clojure-find-ns))))
 
 (defun my/clojure-spec-describe (sym)
   "Send a command to the inferior Lisp to describe a spec. Defaults to lisp-var-at-pt"
   (interactive (lisp-symprompt "spec" (lisp-var-at-pt)))
   (comint-proc-query (inferior-lisp-proc)
-                     (format "(clojure.pprint/pprint (clojure.spec.alpha/describe %s))\n" sym)))
+                     (format "(do (newline)
+                                 (clojure.pprint/pprint (clojure.spec.alpha/describe %s)))\n" sym)))
 
 (defun my/clojure-run-tests ()
   "Send a command to the inferior Lisp to run clojure tests."
@@ -188,6 +208,23 @@ Example value:
                            (catch Exception _))\n" expr)))
       (comint-send-string (inferior-lisp-proc) str))))
 
+(defun my/pretty-print ()
+  "Pretty print the last repl output"
+  (interactive)
+  (comint-proc-query (inferior-lisp-proc)
+                     "(do (newline)
+                          (clojure.pprint/pprint *1))\n"))
+
+;; lifted from inf-clojure
+(defun my/clear-repl-buffer ()
+  "Clear the REPL buffer."
+  (interactive)
+  (with-current-buffer (if (derived-mode-p 'inferior-clojure-mode)
+                           (current-buffer)
+                         "*inferior-lisp*")
+    (let ((comint-buffer-maximum-size 0))
+      (comint-truncate-buffer))))
+
 (setq lisp-describe-sym-command "(clojure.repl/doc %s)\n")
 
 (use-package! clojure-mode
@@ -199,13 +236,13 @@ Example value:
   (setq clojure-align-forms-automatically t)
   :config
   (when (featurep! :tools lsp)
-        (add-hook! '(clojure-mode-local-vars-hook
+    (add-hook! '(clojure-mode-local-vars-hook
                  clojurec-mode-local-vars-hook
                  clojurescript-mode-local-vars-hook)
       (defun +clojure-disable-lsp-indentation-h ()
         (setq-local lsp-enable-indentation nil))
       #'lsp!)
-      (after! lsp-clojure
+    (after! lsp-clojure
       (dolist (m '(clojure-mode
                    clojurec-mode
                    clojurescript-mode
@@ -217,7 +254,7 @@ Example value:
                      "[/\\\\]\\.lsp\\'"
                      "[/\\\\]\\.shadow-cljs\\'"
                      "[/\\\\]\\target\\'"))
-        (push dir lsp-file-watch-ignored))))
+        (add-to-list 'lsp-file-watch-ignored dir))))
   
   (map! :map clojure-mode-map
         ;; TODO: I don't know why :leader causes the key bindings to
@@ -240,10 +277,12 @@ Example value:
          "j" #'javadoc-lookup
          "l" #'my/clojure-load-file
          "n" #'my/clojure-in-ns
+         "p" #'my/pretty-print
          "r" #'lisp-eval-region
-         "s" #'lsp-ivy-workspace-symbol
+         "s" #'lsp-ivy-workspace-symbol ;; clojure-lsp does not support this.
          "t" #'my/clojure-run-tests
-         "z" #'switch-to-lisp))
+         "z" #'switch-to-lisp
+         "," #'my/clear-repl-buffer))
   (require 'flycheck-clj-kondo)
   (define-clojure-indent
     (handler '(:form))
@@ -256,8 +295,15 @@ Example value:
   (add-hook 'clojure-mode-hook 'eldoc-mode)
   (add-hook 'clojure-mode-hook 'highlight-indent-guides-mode)
   (add-hook 'clojure-mode-hook 'hi-lock-mode)
-  (add-hook 'clojure-mode-hook 'lsp-mode)
   (add-hook 'clojure-mode-hook (lambda () (setq my/imenu-index-alist-no-sub-lists? t))))
+
+;;
+;; Needs figuring out...
+;; (map! :after clojure-mode
+;;       :map 'inferior-lisp-mode-map
+;;       [C-c C-c] nil
+;;       :map 'comint-mode-map
+;;       [C-c C-c] nil)
 
 (use-package! smartparens
   :config
@@ -267,6 +313,7 @@ Example value:
   (sp-local-pair 'clojure-mode "`" nil :actions nil)
   (dolist (brace '("(" "{" "["))
     (sp-pair brace nil :post-handlers nil :unless nil))
+
   (map! :map smartparens-mode-map
    "C-M-f"            #'sp-forward-sexp
    "C-M-b"            #'sp-backward-sexp

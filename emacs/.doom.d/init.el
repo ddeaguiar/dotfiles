@@ -26,8 +26,8 @@
        modeline          ; snazzy, Atom-inspired modeline, plus API
        nav-flash         ; blink cursor line after big motions
        ophints           ; highlight the region an operation acts on
-       (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       treemacs          ; a project drawer, like neotree but cooler
+       (popup +defaults) ; tame sudden yet inevitable temporary windows
+       (treemacs +lsp)   ; a project drawer, like neotree but cooler
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
        (window-select +numbers) ; visually switch windows
@@ -42,31 +42,31 @@
        :emacs
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
-       undo              ; persistent, smarter undo for your inevitable mistakes
+       (undo +tree)      ; persistent, smarter undo for your inevitable mistakes
        vc                ; version-control and Emacs, sitting in a tree
 
        :checkers
-       syntax              ; tasing you for every semicolon you forget
+       syntax            ; tasing you for every semicolon you forget
        spell             ; tasing you for misspelling mispelling
 
        :tools
        (lsp +peek)
-       (eval +overlay)     ; run code, run (also, repls)
-       lookup              ; navigate your code and its documentation
+       (eval +overlay)   ; run code, run (also, repls)
+       (lookup +docsets) ; navigate your code and its documentation
        magit             ; a git porcelain for Emacs
 
        :lang
        emacs-lisp        ; drown in parentheses
-       json              ; At least it ain't XML
-       ;;(java +meghanada) ; the poster child for carpal tunnel syndrome
-       javascript        ; all(hope(abandon(ye(who(enter(here))))))
+       (json +lsp)       ; At least it ain't XML
+       (java +lsp)
+       (javascript +lsp) ; all(hope(abandon(ye(who(enter(here))))))
        markdown          ; writing docs for people to ignore
        org               ; organize your plain life in plain text
        rest              ; Emacs as a REST client
        (ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       sh                ; she sells {ba,z,fi}sh shells on the C xor
-       web               ; the tubes
-       yaml              ; JSON, but readable
+       (sh +fish +lsp)   ; she sells {ba,z,fi}sh shells on the C xor
+       (web +lsp)        ; the tubes
+       (yaml +lsp)       ; JSON, but readable
 
        :config
        (default +bindings +smartparens))
