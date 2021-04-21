@@ -177,14 +177,14 @@ Example value:
 (defun my/clojure-load-file ()
   "Send a load-file instruction to Clojure to load the current file"
   (interactive)
-  (comint-proc-query (inferior-lisp-proc)
-                     (format "(do (clojure.core/load-file \"%s\") nil)\n" (buffer-file-name))))
+  (comint-send-string (inferior-lisp-proc)
+                      (format "(do (clojure.core/load-file \"%s\") nil)\n" (buffer-file-name))))
 
 (defun my/clojure-in-ns ()
   "Send a command to the inferior Lisp to enter ns of current file."
   (interactive)
-  (comint-proc-query (inferior-lisp-proc)
-                     (format "(in-ns '%s)\n" (clojure-find-ns))))
+  (comint-send-string (inferior-lisp-proc)
+                      (format "(in-ns '%s)\n" (clojure-find-ns))))
 
 (defun my/clojure-spec-describe (sym)
   "Send a command to the inferior Lisp to describe a spec. Defaults to lisp-var-at-pt"
